@@ -26,6 +26,9 @@ set number
 set lbr
 set ai
 set si
+set expandtab
+set tabstop=2                                                                                                        
+set shiftwidth=2
 set backspace=indent,eol,start
 
 "mkdir ~/.vim/bundle/ && cd ~/.vim/bundle
@@ -88,17 +91,18 @@ filetype plugin indent on    " required
 
 " <BS> -> Backspace
 "
-nnoremap <C-a> :NERDTreeToggle<CR>
-nnoremap <C-q> :q!<CR>
-nnoremap <C-w> :wq<CR>
-nnoremap <C-s> :w<CR>
+nnoremap <C-a> :NERDTreeToggle<CR> :NERDTreeRefreshRoot<CR>
+"nnoremap <C-q> :q!<CR>
+"nnoremap <C-w> :wq<CR>
+"nnoremap <C-s> :w<CR>
 " Map save in isert mode
-inoremap <C-a> <C-o>:NERDTreeToggle<CR>
-inoremap <C-q> <C-o>:q!<CR>
-inoremap <C-w> <C-o>:wq<CR>
-inoremap <C-s> <C-o>:w<CR>
+inoremap <C-a> <C-o>:NERDTreeToggle<CR> :NERDTreeRefreshRoot<CR>
+"inoremap <C-q> <C-o>:q!<CR>
+"inoremap <C-w> <C-o>:wq<CR>
+"inoremap <C-s> <C-o>:w<CR>
 
 colorscheme dracula
+let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 
 let g:javascript_plugin_jsdoc = 1
@@ -117,4 +121,4 @@ let g:javascript_conceal_super                = "Ω"
 let g:javascript_conceal_arrow_function       = "⇒"
 let g:javascript_conceal_noarg_arrow_function = "□"
 let g:javascript_conceal_underscore_arrow_function = "□"
-set conceallevel=1
+set conceallevel=0
