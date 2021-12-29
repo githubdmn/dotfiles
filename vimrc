@@ -91,12 +91,12 @@ filetype plugin indent on    " required
 
 " <BS> -> Backspace
 "
-nnoremap <C-a> :NERDTreeToggle<CR> :NERDTreeRefreshRoot<CR>
+nnoremap <C-a> :NERDTreeRefreshRoot<CR>:NERDTreeToggle<CR> 
 "nnoremap <C-q> :q!<CR>
 "nnoremap <C-w> :wq<CR>
 "nnoremap <C-s> :w<CR>
 " Map save in isert mode
-inoremap <C-a> <C-o>:NERDTreeToggle<CR> :NERDTreeRefreshRoot<CR>
+inoremap <C-a> <C-o> :NERDTreeRefreshRoot<CR>:NERDTreeToggle<CR>
 "inoremap <C-q> <C-o>:q!<CR>
 "inoremap <C-w> <C-o>:wq<CR>
 "inoremap <C-s> <C-o>:w<CR>
