@@ -8,7 +8,7 @@ upgrade() {
 
 build_essential() { sudo apt install build-essential -y; }
 curl() { sudo apt install curl -y; }
-apt-transport-https() { sudo apt install apt-transport-https -y;}
+apt_transport_https() { sudo apt install apt-transport-https -y;}
 git() { sudo apt install git -y; }
 ssh() { sudo apt install ssh -y; }
 nano() { sudo apt install nano -y; }
@@ -18,7 +18,7 @@ neovim() { sudo apt install neovim -y; }
 nvm() {
 	wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash;	
 }
-oh-my-bash() {
+ohmybash() {
 	bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)";
 }
 vlc() { sudo apt install vlc -y; }
@@ -33,7 +33,7 @@ dropbox() { wget -O ~/ - "https://www.dropbox.com/download?plat=lnx.x86_64" | ta
 upgrade
 build_essential
 curl
-apt-transport-https 
+apt_transport_https 
 git
 ssh
 nano
@@ -41,7 +41,7 @@ tmux
 vim
 neovim
 nvm
-oh-my-bash
+ohmybash
 vlc
 brave
 dropbox
