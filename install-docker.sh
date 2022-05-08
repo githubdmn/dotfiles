@@ -13,6 +13,6 @@ sudo apt install \
        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose  docker-compose-plugin docker-ce-rootless-extras
 sudo docker run hello-world
 
