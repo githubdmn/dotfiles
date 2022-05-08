@@ -29,6 +29,9 @@ brave() {
 	sudo apt install brave-browser;
 }
 dropbox() { wget -O ~/ - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -; }
+vscode () {
+	wget -O ~/Downloads https://code.visualstudio.com/sha/download?build=stable&os=linux-x64 | tar xzf -;
+}
 
 upgrade
 build_essential
