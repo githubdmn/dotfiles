@@ -26,3 +26,17 @@ echo \
 ### 5. Verify that Docker Engine is installed correctly by running the hello-world image.
 
   sudo docker run hello-world
+
+### 6. run docker rootless
+Use systemctl --user to manage the lifecycle of the daemon:
+ systemctl --user start docker
+
+To launch the daemon on system startup, enable the systemd service and lingering:
+  systemctl --user enable docker
+  sudo loginctl enable-linger $(whoami)
+
+  docker context use rootless
+OR
+  export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+THEN
+  docker ps
