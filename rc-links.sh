@@ -2,16 +2,16 @@
 #!/bin/bash
 
 function create_links () {
-	sudo ln -sv /Users/private/dotfiles/nanorc /Users/private/.nanorc;
-	sudo ln -sv /Users/private/dotfiles/vimrc /Users/private/.vimrc;
-	sudo ln -sv /Users/private/dotfiles/zshrc /Users/private/.zshrc;
+	sudo ln -sv /Users/damjan/dotfiles/nanorc /Users/damjan/.nanorc;
+	sudo ln -sv /Users/damjan/dotfiles/vimrc /Users/damjan/.vimrc;
+	sudo ln -sv /Users/damjan/dotfiles/zshrc /Users/damjan/.zshrc;
 } 
 
 
 function remove_files() {
-	sudo rm -rv /Users/private/.nanorc;
-	sudo rm -rv /Users/private/.vimrc;
-	sudo rm -rv /Users/private/.zshrc
+	sudo rm -rv /Users/damjan/.nanorc;
+	sudo rm -rv /Users/damjan/.vimrc;
+	sudo rm -rv /Users/damjan/.zshrc
 }
 
 
