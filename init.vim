@@ -100,8 +100,6 @@ let NERDTreeShowHidden=1
 
 "colorscheme base16-default-dark
 "colorscheme onehalf 
-"set background=light
-"set background=dark
-set background=light
+set background=dark
 colorscheme PaperColor
 

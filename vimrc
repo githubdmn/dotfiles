@@ -27,7 +27,7 @@ set lbr
 set ai
 set si
 set expandtab
-set tabstop=2                                                                                                        
+set tabstop=2
 set shiftwidth=2
 set backspace=indent,eol,start
 
@@ -109,9 +109,7 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 "colorscheme dracula
 "colorscheme base16-default-dark
 "colorscheme onehalf 
-"set background=light
-"set background=dark
-set background=light
+set background=dark
 colorscheme PaperColor
 
 
