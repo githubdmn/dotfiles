@@ -1,42 +1,31 @@
-set history=1000
-syntax enable 
+"neovim settings
+syntax enable
 set wrap
 set cursorline
 set cursorcolumn
 set ruler
 set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M\%p')}\ %5l,%-6(%c%V%)\ %P%)
-"show incomplite commands
 set showcmd
-"show completion tab as a menue
 set wildmenu
-"shows line of minimum lines from the top
+set wildmode=longest,list
 set scrolloff=5
-"highlight search
 set hlsearch
-"inrement search
 set incsearch
-"ignore uppercase or lowercase 
 set ignorecase
 set smartcase
 set noswapfile
-"show line numbers
 set number
-"set backup
-"set bex=_backup
 set lbr
+set cc=80
 set ai
 set si
 set expandtab
-set tabstop=2                                                                                                        
+set tabstop=2
 set shiftwidth=2
 set backspace=indent,eol,start
-
-"mkdir ~/.vim/bundle/ && cd ~/.vim/bundle
-"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-set nocompatible              "be iMproved, required
-filetype off                  "required
-"set the runtime path to include Vundle and initialize
+set clipboard+=unnamedplus
+set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
@@ -106,7 +95,9 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 "inoremap <C-w> <C-o>:wq<CR>
 "inoremap <C-s> <C-o>:w<CR>
 
-"colorscheme dracula
+let g:NERDTreeWinPos = "right"
+let NERDTreeShowHidden=1
+
 "colorscheme base16-default-dark
 "colorscheme onehalf 
 "set background=light
@@ -114,24 +105,3 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 set background=light
 colorscheme PaperColor
 
-
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=1
-
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_this                 = "@"
-let g:javascript_conceal_return               = "⇚"
-let g:javascript_conceal_undefined            = "¿"
-let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
-let g:javascript_conceal_super                = "Ω"
-let g:javascript_conceal_arrow_function       = "⇒"
-let g:javascript_conceal_noarg_arrow_function = "□"
-let g:javascript_conceal_underscore_arrow_function = "□"
-set conceallevel=0
