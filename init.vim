@@ -37,10 +37,10 @@ call plug#begin("~/.vim/plugged")
   " Plugin Section
   Plug 'preservim/nerdtree'
   Plug 'eslint/eslint'
- Plug 'myhere/vim-nodejs-complete'
+  Plug 'myhere/vim-nodejs-complete'
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
-  Plug 'fatih/vim-go'
+ "Plug 'fatih/vim-go'
   Plug 'c.vim'
   Plug 'ray-x/go.nvim'
   Plug 'dracula/vim',{'name': 'dracula'} 
