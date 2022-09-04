@@ -15,7 +15,7 @@ set incsearch
 set ignorecase
 set smartcase
 set noswapfile
-set number
+"set number
 set linebreak
 set signcolumn=yes
 set colorcolumn=80
@@ -105,3 +105,22 @@ let NERDTreeShowHidden=1
 set background=dark
 colorscheme PaperColor
 
+"show line numbers                                                              
+ "set number                                                                     
+ " turn hybrid line numbers on                                                   
+ ":set number relativenumber                                                     
+                                                                                  
+ " turn hybrid line numbers off                                                  
+  ":set nonumber norelativenumber                                                 
+                                                                                  
+  " toggle hybrid line numbers                                                    
+  "set number! relativenumber!                                                    
+                                                                                  
+  set number                                                                      
+                                                                                  
+  augroup numbertoggle                                                            
+    autocmd!                                                                      
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+  augroup END                                                                     
+         
