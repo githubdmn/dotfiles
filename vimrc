@@ -19,8 +19,27 @@ set incsearch
 set ignorecase
 set smartcase
 set noswapfile
+
 "show line numbers
+"set number
+" turn hybrid line numbers on
+":set number relativenumber
+
+" turn hybrid line numbers off
+":set nonumber norelativenumber
+
+" toggle hybrid line numbers
+"set number! relativenumber!
+
 set number
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+
+
 "set backup
 "set bex=_backup
 set lbr
