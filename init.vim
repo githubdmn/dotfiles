@@ -58,8 +58,9 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 
+"set background=dark
 "colorscheme base16-default-dark
-""colorscheme onehalf 
-set background=dark
-colorscheme PaperColor
+"colorscheme onehalfdark 
+"colorscheme onehalflight 
+"colorscheme dracula
 
