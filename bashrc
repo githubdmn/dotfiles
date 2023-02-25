@@ -112,6 +112,7 @@ alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user
 alias dmnhtec="git config user.email \"damjan.ivanovic@htecgroup.com\" && git config user.name \"dmnhtec\""
 alias sqlite="./.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
+alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
