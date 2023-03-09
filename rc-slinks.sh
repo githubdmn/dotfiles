@@ -5,9 +5,9 @@ user=dmn
 function create_links () {
 	sudo ln -sv ${HOME}/dotfiles/nanorc ${HOME}/.nanorc;
 	sudo ln -sv ${HOME}/dotfiles/vimrc ${HOME}/.vimrc;
-	sudo ln -sv ${HOME}/bashrc ${HOME}/.bashrc;
-	sudo ln -sv ${HOME}/tmux.conf ${HOME}/.tmux.conf;
-	sudo ln -sv ${HOME}/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc;
+	sudo ln -sv ${HOME}/dotfiles/bashrc ${HOME}/.bashrc;
+	sudo ln -sv ${HOME}/dotfiles/tmux.conf ${HOME}/.tmux.conf;
+	sudo ln -sv ${HOME}/dotfiles/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc;
 } 
 
 
