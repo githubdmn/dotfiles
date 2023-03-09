@@ -1,20 +1,22 @@
 #!/bin/bash
 
+user=dmn
+
 function create_links () {
-	sudo ln -sv /home/dmn/dotfiles/nanorc /home/dmn/.nanorc;
-	sudo ln -sv /home/dmn/dotfiles/vimrc /home/dmn/.vimrc;
-	sudo ln -sv /home/dmn/dotfiles/bashrc /home/dmn/.bashrc;
-	sudo ln -sv /home/dmn/dotfiles/tmux.conf /home/dmn/.tmux.conf;
-	sudo ln -sv /home/dmn/dotfiles/terminalrc /home/dmn/.config/xfce4/terminal/terminalrc;
+	sudo ln -sv ${HOME}/dotfiles/nanorc ${HOME}/.nanorc;
+	sudo ln -sv ${HOME}/dotfiles/vimrc ${HOME}/.vimrc;
+	sudo ln -sv ${HOME}/bashrc ${HOME}/.bashrc;
+	sudo ln -sv ${HOME}/tmux.conf ${HOME}/.tmux.conf;
+	sudo ln -sv ${HOME}/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc;
 } 
 
 
 function remove_files() {
-	sudo rm -rv /home/dmn/.nanorc;
-	sudo rm -rv /home/dmn/.vimrc;
-	sudo rm -rv /home/dmn/.bashrc;
-	sudo rm -rv /home/dmn/.tmux.conf;
-	sudo rm -rv /home/dmn/.config/xfce4/terminal/terminalrc;
+	sudo rm -rv ${HOME}/.nanorc;
+	sudo rm -rv ${HOME}/.vimrc;
+	sudo rm -rv ${HOME}/.bashrc;
+	sudo rm -rv ${HOME}/.tmux.conf;
+	sudo rm -rv ${HOME}/.config/xfce4/terminal/terminalrc;
 }
 
 
