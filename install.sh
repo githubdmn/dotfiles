@@ -32,6 +32,7 @@ dropbox() { wget -O ~/ - "https://www.dropbox.com/download?plat=lnx.x86_64" | ta
 vscode () {
 	wget -O ~/Downloads https://code.visualstudio.com/sha/download?build=stable&os=linux-x64 | tar xzf -;
 }
+ffmpeg(){ sudo apt install ffmpeg; }
 
 upgrade
 build_essential
