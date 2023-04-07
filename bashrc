@@ -113,6 +113,7 @@ alias dmnhtec="git config user.email \"damjan.ivanovic@htecgroup.com\" && git co
 alias sqlite="./.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
+alias py="python3"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
