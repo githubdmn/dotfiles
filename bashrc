@@ -11,8 +11,8 @@ fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-#OSH_THEME="font"
-OSH_THEME="90210"
+OSH_THEME="font"
+#OSH_THEME="90210"
 #OSH_THEME="brainy"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
