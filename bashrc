@@ -1,13 +1,13 @@
 # Path to your oh-my-bash installation.
 export OSH=/home/dmn/.oh-my-bash
 
-if command -v tmux &> /dev/null \
-	&& [ -n "$PS1" ] \
-	&& [[ ! "$TERM" =~ screen ]] \
-	&& [[ ! "$TERM" =~ tmux ]] \
-	&& [ -z "$TMUX" ]; then
-  exec tmux
-fi
+# if command -v tmux &> /dev/null \
+# 	&& [ -n "$PS1" ] \
+# 	&& [[ ! "$TERM" =~ screen ]] \
+# 	&& [[ ! "$TERM" =~ tmux ]] \
+# 	&& [ -z "$TMUX" ]; then
+#   exec tmux
+# fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
