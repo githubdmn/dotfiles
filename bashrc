@@ -11,8 +11,8 @@ export OSH=/home/dmn/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="font"
-#OSH_THEME="90210"
+#OSH_THEME="font"
+OSH_THEME="90210"
 #OSH_THEME="brainy"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -109,7 +109,6 @@ source $OSH/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
-alias dmnhtec="git config user.email \"damjan.ivanovic@htecgroup.com\" && git config user.name \"dmnhtec\""
 alias sqlite="./.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
@@ -120,3 +119,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="${PATH}:$HOME/go/bin"
+export PATH="${PATH}:$HOME/jdk/bin"
+alias javal="${HOME}/jdk/bin/java"
