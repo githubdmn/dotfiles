@@ -5,6 +5,7 @@ upgrade() {
 		update;
 		sudo apt full-upgrade -y; 
 }
+autoremove() { sudo apt autoremove -y; }
 
 build_essential() { sudo apt install build-essential -y; }
 curl() { sudo apt install curl -y; }
@@ -49,4 +50,6 @@ ohmybash
 vlc
 brave
 dropbox
+ffmpeg
 upgrade
+autoremove
