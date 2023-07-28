@@ -30,6 +30,7 @@ set expandtab
 set tabstop=2                                                                                                        
 set shiftwidth=2
 set backspace=indent,eol,start
+set autoread
 
 "mkdir ~/.vim/bundle/ && cd ~/.vim/bundle
 "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
