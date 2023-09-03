@@ -1,6 +1,6 @@
 [Configuration]
 Name=Dracula
-FontName=Noto Mono Bold 10
+FontName=Ubuntu Mono 14
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
@@ -13,7 +13,7 @@ MiscMenubarDefault=FALSE
 MiscMouseAutohide=TRUE
 MiscMouseWheelZoom=TRUE
 MiscToolbarDefault=FALSE
-MiscConfirmClose=TRUE
+MiscConfirmClose=FALSE
 MiscCycleTabs=TRUE
 MiscTabCloseButtons=TRUE
 MiscTabCloseMiddleClick=FALSE
@@ -33,7 +33,6 @@ DropdownAlwaysShowTabs=FALSE
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 ColorForeground=#000000
 ColorBackground=#ffffff
-ColorPalette=rgb(0,0,0);rgb(255,117,117);rgb(113,250,113);rgb(170,85,0);rgb(87,87,255);rgb(255,85,255);rgb(0,170,170);rgb(82,82,82);rgb(85,85,85);rgb(255,85,85);rgb(61,172,61);rgb(255,255,85);rgb(85,85,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
-ColorBoldIsBright=FALSE
+ColorPalette=rgb(0,0,0);rgb(170,0,0);rgb(0,170,0);rgb(170,85,0);rgb(22,22,94);rgb(170,0,170);rgb(0,170,170);rgb(170,170,170);rgb(151,151,151);rgb(255,85,85);rgb(7,88,7);rgb(255,255,85);rgb(85,85,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
 ColorUseTheme=TRUE
 
