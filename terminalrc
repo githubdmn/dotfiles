@@ -1,6 +1,6 @@
 [Configuration]
 Name=Dracula
-FontName=Ubuntu Mono 14
+FontName=Monospace Bold 14
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
@@ -31,8 +31,13 @@ MiscShowUnsafePasteDialog=TRUE
 ScrollingUnlimited=TRUE
 DropdownAlwaysShowTabs=FALSE
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
-ColorForeground=#000000
-ColorBackground=#ffffff
-ColorPalette=rgb(0,0,0);rgb(170,0,0);rgb(0,170,0);rgb(170,85,0);rgb(22,22,94);rgb(170,0,170);rgb(0,170,170);rgb(170,170,170);rgb(151,151,151);rgb(255,85,85);rgb(7,88,7);rgb(255,255,85);rgb(85,85,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
-ColorUseTheme=TRUE
+ColorPalette=#000000;#aa0000;#44aa44;#aa5500;#0039aa;#aa22aa;#1a92aa;#aaaaaa;#777777;#ff8787;#4ce64c;#ded82c;#295fcc;#cc58cc;#4ccce6;#ffffff
+ColorForeground=#b7b7b7
+ColorBackground=#131926
+ColorCursor=#0f4999
+ColorSelection=#163b59
+ColorSelectionUseDefault=FALSE
+ColorBold=#ffffff
+ColorBoldUseDefault=FALSE
+TabActivityColor=#0f4999
 
