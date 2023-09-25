@@ -1,6 +1,6 @@
 [Configuration]
 Name=Dracula
-FontName=Monospace Bold 14
+FontName=DejaVu Sans Mono Bold 13
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
