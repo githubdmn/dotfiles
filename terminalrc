@@ -33,11 +33,12 @@ DropdownAlwaysShowTabs=FALSE
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 ColorPalette=#000000;#aa0000;#44aa44;#aa5500;#0039aa;#aa22aa;#1a92aa;#aaaaaa;#777777;#ff8787;#4ce64c;#ded82c;#295fcc;#cc58cc;#4ccce6;#ffffff
 ColorForeground=#b7b7b7
-ColorBackground=#131926
+ColorBackground=#013104bb5999
 ColorCursor=#0f4999
-ColorSelection=#163b59
-ColorSelectionUseDefault=FALSE
 ColorBold=#ffffff
 ColorBoldUseDefault=FALSE
 TabActivityColor=#0f4999
+ColorSelection=#163b59
+ColorSelectionUseDefault=FALSE
+ColorUseTheme=TRUE
 
