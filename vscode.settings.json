@@ -1,68 +1,76 @@
-
 {
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "editor.autoIndent": "brackets",
-  "python.linting.enabled": true,
   "debug.node.autoAttach": "off",
   "terminal.integrated.cursorStyle": "underline",
   "workbench.panel.defaultLocation": "right", //"right",
   // Enable usage data and errors to be sent to a Microsoft online service.
-  "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
   // Number of editors shown in the Open Editors pane.
   "explorer.openEditors.visible": 0,
   "git.autofetch": true,
-  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontSize": 11,
   "workbench.statusBar.visible": true,
   "window.menuBarVisibility": "toggle",
   "workbench.editor.tabCloseButton": "off",
-  "workbench.activityBar.visible": false,
-  "breadcrumbs.enabled": true,
+  "breadcrumbs.enabled": false,
   "editor.formatOnPaste": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Dracula",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.value": 5,
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.iconTheme": "vscode-icons",
   "explorer.confirmDelete": false,
-  "tabnine.experimentalAutoImports": true,
   "vsicons.dontShowNewVersionMessage": true,
-  "editor.tabSize": 2,
+  "editor.tabSize": 5,
   "editor.insertSpaces": false,
   "security.workspace.trust.untrustedFiles": "open",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.sideBar.location": "right",
-  "[javascriptreact]": {
+  "eslint.format.enable": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.formatOnSave": true,
-  "git.confirmSync": false,
-  "redhat.telemetry.enabled": false,
-  "csharp.inlayHints.parameters.enabled": true,
-  "csharp.inlayHints.parameters.forObjectCreationParameters": true,
-  "csharp.inlayHints.parameters.forLiteralParameters": true,
-  "csharp.inlayHints.parameters.forIndexerParameters": true,
-  "omnisharp.sdkPath": "/home/dmn/dotnet",
-  "editor.fontFamily": "'Deja Vu Sans Mono Book'",
-  "editor.fontSize": 15,
-  "[jsonc]": {
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "javascript.format.semicolons": "remove",
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.rulers": [
-    {
-      "column": 80, // spacing of 1st column from left
-      "color": "#ff9900" // orange, Go Vols!
-    },
-    100, // 2nd ruler with no color option
-    {
-      "column": 120, // third ruler
-      "color": "#9f0af5" // purple, go Pirates!
-    }
-  ]
+  // "typescript.preferences.quoteStyle": "single",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "remote.SSH.enableRemoteCommand": true,
+  "remote.SSH.remoteServerListenOnSocket": true,
+  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.suppressWindowsSshWarning": true,
+  "remote.SSH.configFile": "/home/dmn/.ssh/config",
+  "git.confirmSync": false,
+  "settingsSync.ignoredSettings": [
+    "application.shellEnvironmentResolutionTimeout"
+],
+  "workbench.sideBar.location": "right",
+  "editor.fontFamily": "'Droid Sans Mono Bold', 'monospace bold', monospace, 'Droid Sans Mono'",
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontWeight": "bold",
+  "workbench.activityBar.location": "hidden"
 }
