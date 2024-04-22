@@ -20,7 +20,7 @@ set linenumbers
 set constantshow
 set softwrap
 set atblanks
-set smooth
+# set smooth
 set suspend
 
 ## Use auto-indentation.
@@ -71,7 +71,7 @@ set historylog
 set matchbrackets "(<[{)>]}"
 
 ## Use the blank line below the titlebar as extra editing space.
- set morespace
+# set morespace
 
 ## Enable mouse support, if available for your system.  When enabled,
 ## mouse clicks can be used to place the cursor, set the mark (with a
@@ -147,7 +147,7 @@ set regexp
  set smarthome
 
 ## Use smooth scrolling as the default.
- set smooth
+#  set smooth
 
 ## Use this spelling checker instead of the internal one.  This option
 ## does not properly have a default value.
