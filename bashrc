@@ -109,7 +109,7 @@ source $OSH/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
-alias sqlite="./.sqlite/sqlite3"
+alias sqlite="$HOME/.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 alias py="python3"
