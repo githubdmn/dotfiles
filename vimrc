@@ -4,7 +4,7 @@ set wrap
 set cursorline
 set cursorcolumn
 set ruler
-set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M\%p')}\ %5l,%-6(%c%V%)\ %P%)
+set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M %p')}\ %5l,%-6(%c%V%)\ %P)
 "show incomplite commands
 set showcmd
 "show completion tab as a menue
@@ -103,7 +103,7 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 "inoremap <C-w> <C-o>:wq<CR>
 "inoremap <C-s> <C-o>:w<CR>
 
-colorscheme dracula
+"colorscheme dracula
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 
