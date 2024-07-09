@@ -14,10 +14,8 @@ export OSH=/home/dmn/.oh-my-bash
 #OSH_THEME="font"
 #OSH_THEME="90210"
 #OSH_THEME="brainy"
-#OSH_THEME="brunton"
-#OSH_THEME="cupcake"
-OSH_THEME="luan"
-#OSH_THEME="powebash10k"
+OSH_THEME="lambda"
+#OSH_THEME="luan"
 #
 #
 # Uncomment the following line to use case-sensitive completion.
@@ -117,10 +115,9 @@ source $OSH/oh-my-bash.sh
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
 alias sqlite="$HOME/.sqlite/sqlite3"
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
-alias sqlite="./.sqlite/sqlite3"
+alias sqlite="${HOME}/.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
-alias py="python3"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

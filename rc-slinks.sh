@@ -19,6 +19,11 @@ function remove_files() {
 	sudo rm -rv ${HOME}/.config/xfce4/terminal/terminalrc;
 }
 
+function prepare_terminal_theme() {
+	sudo mkdir -p ${HOME}/.local/share/xfce4/terminal/colorschemes
+	sudo cp -v ${HOME}/dotfiles/catppuccin/* ${HOME}/.local/share/xfce4/terminal/colorschemes
+}
 
 remove_files;
+prepare_terminal_theme;
 create_links;
