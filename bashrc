@@ -113,7 +113,6 @@ source $OSH/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
-alias sqlite="$HOME/.sqlite/sqlite3"
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
 alias sqlite="${HOME}/.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
@@ -123,6 +122,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="${PATH}:$HOME/go/bin"
-export PATH="${PATH}:$HOME/jdk/bin"
+export PATH="${PATH}:${HOME}/go/bin/"
+export PATH="${PATH}:${HOME}/jdk/bin/"
 alias javal="${HOME}/jdk/bin/java"
+alias javacl="${HOME}/jdk/bin/java"
