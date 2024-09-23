@@ -124,5 +124,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="${PATH}:${HOME}/go/bin/"
 export PATH="${PATH}:${HOME}/jdk/bin/"
+export PATH="${PATH}:${HOME}/gradle/bin/"
 alias javal="${HOME}/jdk/bin/java"
 alias javacl="${HOME}/jdk/bin/java"

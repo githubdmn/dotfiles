@@ -20,7 +20,7 @@ set ignorecase
 set smartcase
 set noswapfile
 "show line numbers
-set number
+set number relativenumber
 "set backup
 "set bex=_backup
 set lbr
