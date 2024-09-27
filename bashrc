@@ -127,3 +127,13 @@ export PATH="${PATH}:${HOME}/jdk/bin/"
 export PATH="${PATH}:${HOME}/gradle/bin/"
 alias javal="${HOME}/jdk/bin/java"
 alias javacl="${HOME}/jdk/bin/java"
+
+
+nvimbash() {
+  touch "$1" && chmod +x "$1" && vim "$1"
+}
+
+nanobash() {
+  touch "$1" && chmod +x "$1" && nano "$1"
+}
+
