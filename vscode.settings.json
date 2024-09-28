@@ -8,16 +8,13 @@
   // Enable usage data and errors to be sent to a Microsoft online service.
   "telemetry.telemetryLevel": "off",
   // Number of editors shown in the Open Editors pane.
-  "explorer.openEditors.visible": 0,
+  "explorer.openEditors.visible": 1,
   "git.autofetch": true,
-  "terminal.integrated.fontSize": 11,
   "workbench.statusBar.visible": true,
   "window.menuBarVisibility": "toggle",
   "workbench.editor.tabCloseButton": "off",
-  "breadcrumbs.enabled": false,
   "editor.formatOnPaste": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Dracula",
   "workbench.editor.limit.enabled": true,
   "workbench.editor.limit.value": 5,
   "editor.suggestSelection": "first",
@@ -54,10 +51,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["javascript", "typescript"],
-  "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "remote.SSH.enableRemoteCommand": true,
   "remote.SSH.remoteServerListenOnSocket": true,
@@ -67,10 +63,29 @@
   "git.confirmSync": false,
   "settingsSync.ignoredSettings": [
     "application.shellEnvironmentResolutionTimeout"
-],
-  "workbench.sideBar.location": "right",
-  "editor.fontFamily": "'Droid Sans Mono Bold', 'monospace bold', monospace, 'Droid Sans Mono'",
+  ],
+
   "terminal.integrated.fontFamily": "monospace",
   "terminal.integrated.fontWeight": "bold",
-  "workbench.activityBar.location": "hidden"
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "editor.fontVariations": false,
+  "prettier.trailingComma": "es5",
+  "scm.showIncomingChanges": "always",
+  "scm.showOutgoingChanges": "always",
+  "workbench.editor.showTabs": "none",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "terminal.integrated.fontSize": 11,
+  "editor.inlineSuggest.suppressSuggestions": true,
+  "workbench.editorAssociations": {
+    "*.sql": "default"
+  },
+  "editor.fontWeight": "bold",
+  "editor.fontFamily": " monospace, 'Droid Sans Mono Bold', 'monospace bold', monospace, 'Droid Sans Mono'",
+  "git.enableSmartCommit": true,
+  "workbench.settings.applyToAllProfiles": ["editor.fontFamily"],
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.sideBar.location": "right"
 }
