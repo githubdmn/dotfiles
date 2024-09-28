@@ -308,14 +308,14 @@ install_tmux
 install_vim
 install_neovim
 install_nvm
-install_ohmybash
 install_vlc
 install_brave
-install_dropbox
+# install_dropbox
 install_ffmpeg
 install_sqlite
 install_go
-# install_java    # Installs OpenJDK 21+35
+install_java    # Installs OpenJDK 21+35
 # install_java 17 30  # Installs OpenJDK 17+30
+install_ohmybash
 upgrade
 autoremove
