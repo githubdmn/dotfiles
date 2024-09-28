@@ -114,7 +114,6 @@ source $OSH/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
-alias sqlite="${HOME}/.sqlite/sqlite3"
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 
@@ -133,3 +132,6 @@ nanobash() {
   touch "$1" && chmod +x "$1" && nano "$1"
 }
 
+export JAVA_HOME=${HOME}/jdk-21
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$HOME/sqlite
