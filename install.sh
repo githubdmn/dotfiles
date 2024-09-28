@@ -153,7 +153,7 @@ install_brave() {
 install_dropbox() {
   if ! command -v dropbox &> /dev/null; then
     echo "Installing Dropbox..."
-    wget -O ~/ - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -;
+    wget -O ~/ - "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2024.04.17_amd64.deb" | tar xzf -;
   else
     echo "Dropbox is already installed."
   fi
@@ -180,7 +180,8 @@ install_ffmpeg() {
 install_sqlite() {
   # Set the base URL and file name
   sqlite_url="https://www.sqlite.org/2024"
-  file_name="sqlite-tools-linux-x64-3460100.zip"
+  file_name="sqlite-tools-linux-x64-3460100"
+  file_extension="zip"
 
   # Check if SQLite is already installed
   if command -v sqlite3 &> /dev/null; then
@@ -189,17 +190,18 @@ install_sqlite() {
     echo "Installing SQLite..."
 
     # Download SQLite
-    wget "${sqlite_url}/${file_name}" -O "$file_name"
+    wget "${sqlite_url}/${file_name}.${file_extension}" -O "${file_name}.${file_extension}"
 
     # Create a specific directory for SQLite
     mkdir -p "$HOME/sqlite"
 
     # Unzip the downloaded file into the directory
-    unzip "$file_name" -d "$HOME/sqlite"
+    unzip "${file_name}.${file_extension}" -d "$HOME/sqlite"
 
+    
     # Add SQLite to the PATH if it's not already there
-    if ! grep -q 'export PATH=$PATH:$HOME/sqlite/sqlite-tools-linux-x64-3460100' ~/.bashrc; then
-      echo 'export PATH=$PATH:$HOME/sqlite/sqlite-tools-linux-x64-3460100' >> ~/.bashrc
+    if ! grep -q "export PATH=\$PATH:\$HOME/sqlite/${file_name}" ~/.bashrc; then
+      echo "export PATH=\$PATH:\$HOME/sqlite/${file_name}" >> ~/.bashrc
     fi
 
     # Reload the .bashrc to apply changes
@@ -209,7 +211,6 @@ install_sqlite() {
     sqlite3 --version
   fi
 }
-
 
 
 install_go() {
