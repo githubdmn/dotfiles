@@ -123,11 +123,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="${PATH}:${HOME}/go/bin/"
-export PATH="${PATH}:${HOME}/jdk/bin/"
 export PATH="${PATH}:${HOME}/gradle/bin/"
-alias javal="${HOME}/jdk/bin/java"
-alias javacl="${HOME}/jdk/bin/java"
-
 
 nvimbash() {
   touch "$1" && chmod +x "$1" && vim "$1"
