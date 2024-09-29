@@ -339,6 +339,46 @@ install_docker_debian() {
   echo "Docker has been installed successfully on your Debian system."
 }
 
+install_gradle() {
+  # Set the version and direct download URL for Gradle
+  version=${1:-8.10.2}
+  gradle_url="https://services.gradle.org/distributions/gradle-${version}-all.zip"
+  
+  # Define the local installation directory for Gradle
+  install_dir="$HOME/gradle/gradle-${version}"
+
+  # Check if Gradle is already installed locally and verify version
+  if [ -d "$install_dir" ]; then
+    echo "Gradle version $version is already installed locally in $install_dir."
+    return
+  fi
+
+  echo "Installing Gradle version $version locally..."
+
+  # Download Gradle from the direct URL
+  wget "$gradle_url" -O gradle-${version}-all.zip
+
+  # Create the local Gradle directory and unzip the package there
+  mkdir -p "$install_dir"
+  unzip gradle-${version}-all.zip -d "$HOME/gradle"
+
+  # Add Gradle to the PATH in .bashrc if it's not already there
+  if ! grep -q 'export PATH=$PATH:$HOME/gradle/gradle-' ~/.bashrc; then
+    echo "export PATH=\$PATH:\$HOME/gradle/gradle-${version}/bin" >> ~/.bashrc
+  fi
+
+  # Reload .bashrc to apply the changes immediately
+  source ~/.bashrc
+
+  # Verify the installation
+  gradle -v
+
+  # Clean up the downloaded zip file
+  rm gradle-${version}-all.zip
+
+  echo "Gradle version $version installed successfully in $install_dir."
+}
+
 
 upgrade
 install_build_essential
@@ -357,9 +397,9 @@ install_brave
 install_ffmpeg
 install_sqlite
 install_go
-install_java    # Installs OpenJDK 21+35
-# install_java 17 30  # Installs OpenJDK 17+30
+install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
+install_gradle
 install_ohmybash
 upgrade
 autoremove

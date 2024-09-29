@@ -135,3 +135,4 @@ nanobash() {
 export JAVA_HOME=${HOME}/jdk-21
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/sqlite
+export PATH=$PATH:$HOME/gradle/gradle-8.10.2/bin
