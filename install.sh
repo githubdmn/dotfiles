@@ -297,6 +297,48 @@ install_java() {
   java -version
 }
 
+install_docker_debian() {
+  # Remove older versions of Docker and related packages if they exist
+  echo "Removing older versions of Docker and related packages..."
+  for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do 
+    if dpkg -l | grep -q $pkg; then
+      sudo apt-get remove -y $pkg
+      echo "$pkg removed."
+    fi
+  done
+
+  # Update package list and install necessary packages
+  echo "Updating package list and installing dependencies..."
+  sudo apt-get update
+  sudo apt-get install -y ca-certificates curl
+
+  # Add Docker's official GPG key
+  echo "Adding Docker's official GPG key..."
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+  # Add Docker's repository to Apt sources
+  echo "Adding Docker repository to sources list..."
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  # Update the package list again with Docker repo
+  sudo apt-get update
+
+  # Install Docker components
+  echo "Installing Docker..."
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # Verify Docker installation
+  echo "Verifying Docker installation by running hello-world container..."
+  sudo docker run hello-world
+
+  # Print success message
+  echo "Docker has been installed successfully on your Debian system."
+}
+
 
 upgrade
 install_build_essential
@@ -317,6 +359,7 @@ install_sqlite
 install_go
 install_java    # Installs OpenJDK 21+35
 # install_java 17 30  # Installs OpenJDK 17+30
+# install_docker_debian
 install_ohmybash
 upgrade
 autoremove
