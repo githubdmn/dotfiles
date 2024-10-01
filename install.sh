@@ -451,9 +451,9 @@ install_brave
 install_ffmpeg
 install_sqlite
 install_go
-#install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+# install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
-#install_gradle
+# install_gradle
 install_sdkman
 install_sdks
 install_ohmybash
