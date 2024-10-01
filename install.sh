@@ -382,9 +382,16 @@ install_gradle() {
 install_sdkman() {
   # Update package list and install necessary packages
   sudo apt install zip
-  # Check if SDKMAN is already installed
-  if command -v sdk &> /dev/null; then
+   # Check if SDKMAN is installed by looking for the initialization script
+  if [ -f "$HOME/.sdkman/bin/sdkman-init.sh" ]; then
     echo "SDKMAN is already installed."
+    
+    # Source SDKMAN if not already sourced
+    if ! command -v sdk &> /dev/null; then
+      echo "Sourcing SDKMAN..."
+      source "$HOME/.sdkman/bin/sdkman-init.sh"
+    fi
+    
     sdk version
     return
   fi
