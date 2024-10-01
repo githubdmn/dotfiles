@@ -117,22 +117,26 @@ alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user
 alias upgrade="~/dotfiles/upgrade.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="${PATH}:${HOME}/go/bin/"
-export PATH="${PATH}:${HOME}/gradle/bin/"
-
 nvimbash() {
-  touch "$1" && chmod +x "$1" && vim "$1"
+  touch "$1" && chmod +x "$1" && nvim "$1"
 }
 
 nanobash() {
   touch "$1" && chmod +x "$1" && nano "$1"
 }
 
-export JAVA_HOME=${HOME}/jdk-21
-export PATH=$PATH:$JAVA_HOME/bin
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export PATH=$PATH:$HOME/sqlite
-export PATH=$PATH:$HOME/gradle/gradle-8.10.2/bin
+export PATH="${PATH}:${HOME}/go/bin/"
+# export PATH="${PATH}:${HOME}/gradle/bin/"
+# export JAVA_HOME=${HOME}/jdk-21
+# export PATH=$PATH:$JAVA_HOME/bin
+# export PATH=$PATH:$HOME/gradle/gradle-8.10.2/bin
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

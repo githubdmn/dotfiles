@@ -379,6 +379,53 @@ install_gradle() {
   echo "Gradle version $version installed successfully in $install_dir."
 }
 
+install_sdkman() {
+  # Update package list and install necessary packages
+  sudo apt install zip
+  # Check if SDKMAN is already installed
+  if command -v sdk &> /dev/null; then
+    echo "SDKMAN is already installed."
+    sdk version
+    return
+  fi
+
+  # Install SDKMAN using curl
+  echo "Installing SDKMAN..."
+  if curl -s "https://get.sdkman.io" | bash; then
+    echo "SDKMAN installed successfully."
+  else
+    echo "SDKMAN installation failed."
+    return 1
+  fi
+
+  # Source SDKMAN into the current shell session
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+  # Check and print the SDKMAN version
+  sdk version
+}
+
+install_sdks() {
+   # Install Java (default version)
+   echo "Installing Java..."
+   sdk install java 21-open || { echo "Failed to install Java"; return 1; }
+   echo "Java installed successfully."
+
+   # Install Kotlin
+   echo "Installing Kotlin..."
+   sdk install kotlin || { echo "Failed to install Kotlin"; return 1; }
+   echo "Kotlin installed successfully."
+
+   # Install Gradle
+   echo "Installing Gradle..."
+   sdk install gradle || { echo "Failed to install Gradle"; return 1; }
+   echo "Gradle installed successfully."
+
+   # Check versions of all installed SDKs
+   echo "Installed SDK versions:"
+   sdk current java && sdk current kotlin && sdk current gradle
+}
+
 
 upgrade
 install_build_essential
@@ -397,9 +444,11 @@ install_brave
 install_ffmpeg
 install_sqlite
 install_go
-install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+#install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
-install_gradle
+#install_gradle
+install_sdkman
+install_sdks
 install_ohmybash
 upgrade
 autoremove
