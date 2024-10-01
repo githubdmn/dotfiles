@@ -408,7 +408,7 @@ install_sdkman() {
 install_sdks() {
    # Install Java (default version)
    echo "Installing Java..."
-   sdk install java 21-open || { echo "Failed to install Java"; return 1; }
+   sdk install java || { echo "Failed to install Java"; return 1; }
    echo "Java installed successfully."
 
    # Install Kotlin
