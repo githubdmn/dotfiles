@@ -112,13 +112,36 @@ install_neovim() {
 
 
 install_nvm() {
-  if ! command -v nvm &> /dev/null; then
-    echo "Installing nvm..."
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash;
-  else
+  version=${1:-0.40.1}  # Default nvm version is set to 0.40.1
+  NVM_DIR="$HOME/.nvm"
+
+  # Check if nvm is installed by looking for the initialization script
+  if [ -s "$NVM_DIR/nvm.sh" ]; then
     echo "nvm is already installed."
+  else
+    echo "Installing nvm..."
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v${version}/install.sh | bash
+
+    # Source nvm to the current shell session
+    export NVM_DIR="$HOME/.nvm"
+    # Check if the nvm.sh script exists before sourcing
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+      . "$NVM_DIR/nvm.sh"  # This loads nvm
+      echo "nvm installed successfully."
+    else
+      echo "nvm installation failed."
+      return 1
+    fi
+  fi
+
+  # Check if nvim is installed
+  if command -v nvim &> /dev/null; then
+    echo "nvim is already installed."
+  else
+    echo "nvim is not installed."
   fi
 }
+
 
 install_ohmybash() {
   if [ ! -d "$HOME/.oh-my-bash" ]; then
