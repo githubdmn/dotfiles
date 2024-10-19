@@ -142,3 +142,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 alias javaCompile="find src -name "*.java" | xargs javac -d bin"
 
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"

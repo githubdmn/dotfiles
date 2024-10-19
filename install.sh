@@ -159,8 +159,7 @@ install_deno() {
     if ! command -v deno &> /dev/null; then
       export DENO_INSTALL="$HOME/.deno"
       export PATH="$DENO_INSTALL/bin:$PATH"
-      echo 'export DENO_INSTALL="$HOME/.deno"' >> ~/.bashrc
-      echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
+      echo -e 'export DENO_INSTALL="$HOME/.deno"\nexport PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
       source ~/.bashrc
       echo "Deno added to PATH."
     fi
