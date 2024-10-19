@@ -140,3 +140,5 @@ export PATH="${PATH}:${HOME}/go/bin/"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+alias javaCompile="find src -name "*.java" | xargs javac -d bin"
+

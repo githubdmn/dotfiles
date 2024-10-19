@@ -142,6 +142,36 @@ install_nvm() {
   fi
 }
 
+install_deno() {
+  # Check if Deno is already installed
+  if command -v deno &> /dev/null; then
+    echo "Deno is already installed."
+    deno --version
+    return
+  fi
+
+  # Install Deno using the official install script
+  echo "Installing Deno..."
+  if curl -fsSL https://deno.land/install.sh | sh; then
+    echo "Deno installed successfully."
+
+    # Add Deno to the system PATH if it wasn't automatically added
+    if ! command -v deno &> /dev/null; then
+      export DENO_INSTALL="$HOME/.deno"
+      export PATH="$DENO_INSTALL/bin:$PATH"
+      echo 'export DENO_INSTALL="$HOME/.deno"' >> ~/.bashrc
+      echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
+      source ~/.bashrc
+      echo "Deno added to PATH."
+    fi
+
+    # Verify installation
+    deno --version
+  else
+    echo "Failed to install Deno."
+    return 1
+  fi
+}
 
 install_ohmybash() {
   if [ ! -d "$HOME/.oh-my-bash" ]; then
@@ -468,6 +498,7 @@ install_tmux
 install_vim
 install_neovim
 install_nvm
+install_deno
 install_vlc
 install_brave
 # install_dropbox
