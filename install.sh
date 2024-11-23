@@ -10,7 +10,7 @@ autoremove() { sudo apt autoremove -y; }
 install_build_essential() {
   if ! dpkg -l | grep -q build-essential; then
     echo "Installing build-essential..."
-    sudo apt install build-essential -y;
+    sudo apt install build-essential gdb -y;
   else
     echo "build-essential is already installed."
   fi
