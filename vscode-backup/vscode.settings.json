@@ -1,0 +1,323 @@
+{
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.autoIndent": "brackets",
+  "debug.node.autoAttach": "off",
+  "terminal.integrated.cursorStyle": "underline",
+  "workbench.panel.defaultLocation": "right", //"right",
+  // Enable usage data and errors to be sent to a Microsoft online service.
+  "telemetry.telemetryLevel": "off",
+  // Number of editors shown in the Open Editors pane.
+  "explorer.openEditors.visible": 1,
+  "git.autofetch": true,
+  "workbench.statusBar.visible": true,
+  "window.menuBarVisibility": "toggle",
+  "workbench.editor.tabCloseButton": "off",
+  "editor.formatOnPaste": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 5,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.iconTheme": "vscode-icons",
+  "explorer.confirmDelete": false,
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.tabSize": 5,
+  "editor.insertSpaces": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.format.enable": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "javascript.format.semicolons": "remove",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // "typescript.preferences.quoteStyle": "single",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "editor.formatOnType": true,
+  "remote.SSH.enableRemoteCommand": true,
+  "remote.SSH.remoteServerListenOnSocket": true,
+  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.suppressWindowsSshWarning": true,
+  "remote.SSH.configFile": "/home/dmn/.ssh/config",
+  "git.confirmSync": false,
+  "settingsSync.ignoredSettings": [
+    "application.shellEnvironmentResolutionTimeout"
+  ],
+
+  "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold',  monospace, 'Droid Sans Mono'",
+  "terminal.integrated.fontWeight": "bold",
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "editor.fontVariations": false,
+  "prettier.trailingComma": "es5",
+  "scm.showIncomingChanges": "always",
+  "scm.showOutgoingChanges": "always",
+  "workbench.editor.showTabs": "none",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "terminal.integrated.fontSize": 11,
+  "editor.inlineSuggest.suppressSuggestions": true,
+  "workbench.editorAssociations": {
+    "*.sql": "default"
+  },
+  "editor.fontWeight": "bold",
+  "editor.fontFamily": " monospace, 'Droid Sans Mono Bold', 'monospace bold', monospace, 'Droid Sans Mono'",
+  "git.enableSmartCommit": true,
+  "workbench.settings.applyToAllProfiles": ["editor.fontFamily"],
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.sideBar.location": "right",
+  "deno.enable": true,
+  "editor.formatOnSave": true,
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "workbench.panel.showLabels": false,
+  "editor.linkedEditing": true,
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#00FF0010"
+    },
+    {
+      "column": 100,
+      "color": "#BDB76B15"
+    },
+    {
+      "column": 120,
+      "color": "#FA807219"
+    }
+  ],
+  "editor.unicodeHighlight.includeComments": true,
+  "workbench.colorCustomizations": {
+    "[Default Dark Modern]": {
+      "tab.activeBorderTop": "#00FF00",
+      "tab.unfocusedActiveBorderTop": "#00FF0088",
+      "textCodeBlock.background": "#00000055"
+    },
+    "editor.wordHighlightStrongBorder": "#FF6347",
+    "editor.wordHighlightBorder": "#FFD700",
+    "editor.selectionHighlightBorder": "#A9A9A9"
+  },
+  "workbench.editor.revealIfOpen": true,
+  "workbench.tree.indent": 20,
+  "files.eol": "\n",
+  "[bat]": {
+    "files.eol": "\r\n"
+  },
+  "emmet.variables": {
+    "lang": "en"
+  },
+  "cSpell.diagnosticLevel": "Hint",
+  "trailing-spaces.backgroundColor": "rgba(255,0,0,0.1)",
+  "trailing-spaces.includeEmptyLines": false,
+  "terminal.integrated.tabs.hideCondition": "never",
+  "terminal.integrated.enablePersistentSessions": false,
+  "java.autobuild.enabled": true,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.detectJdksAtStart": false,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.dependency.packagePresentation": "hierarchical",
+  "java.maxConcurrentBuilds": 14,
+  "java.sources.organizeImports.staticStarThreshold": 1,
+  "terminal.integrated.profiles.windows": {
+    "JavaSE-1.8 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Program Files\\Java\\jdk1.8.0_25\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_25"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-11 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\11\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\11"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\17\\bin;${env:PATH}",
+        "JAVA_HOME": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\17"
+      },
+      "path": "cmd"
+    },
+    "JavaSE-21 LTS": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\21\\bin;${env:PATH}",
+        "JAVA_TOOL_OPTIONS": "-Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8",
+        "JAVA_HOME": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\21"
+      },
+      "path": "cmd",
+      "args": ["/k", "chcp", "65001"]
+    },
+    "JavaSE-23": {
+      "overrideName": true,
+      "env": {
+        "PATH": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest\\bin;${env:PATH}",
+        "JAVA_TOOL_OPTIONS": "-Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8",
+        "JAVA_HOME": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest"
+      },
+      "path": "cmd",
+      "args": ["/k", "chcp", "65001"]
+    }
+  },
+  "terminal.integrated.automationProfile.windows": {
+    "path": "cmd"
+  },
+  "java.test.config": {
+    "vmArgs": ["-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8"]
+  },
+  "terminal.integrated.defaultProfile.windows": "JavaSE-23",
+  "terminal.integrated.env.windows": {
+    "JAVA_HOME": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest",
+    "PATH": "C:\\Users\\damjan.ivanovic\\AppData\\Roaming\\Code\\User\\globalStorage\\pleiades.java-extension-pack-jdk\\java\\latest\\bin;${env:PATH}"
+  },
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
+    }
+  ],
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/8"
+    },
+    {
+      "name": "JavaSE-11",
+      "path": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/11"
+    },
+    {
+      "name": "JavaSE-17",
+      "path": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/17"
+    },
+    {
+      "name": "JavaSE-21",
+      "path": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
+    },
+    {
+      "name": "JavaSE-23",
+      "path": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest",
+      "default": true
+    }
+  ],
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "env": {
+        "JAVA_HOME": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
+      },
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-1.8 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/8"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-11 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/11"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-17 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/17"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-21 LTS": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    },
+    "JavaSE-23": {
+      "overrideName": true,
+      "env": {
+        "JAVA_HOME": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/java/latest"
+      },
+      "path": "bash",
+      "args": [
+        "--rcfile",
+        "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/.bashrc"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "JavaSE-21 LTS",
+  "java.import.gradle.java.home": "/home/dmn/.sdkman/candidates/java/21.0.5-tem",
+  "maven.executable.path": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/maven/latest/bin/mvn",
+  "java.import.gradle.home": "/home/dmn/.config/Code/User/globalStorage/pleiades.java-extension-pack-jdk/gradle/latest",
+  "files.associations": {
+    "*.ts": "typescript"
+  },
+  "diffEditor.maxComputationTime": 0,
+  "java.completion.favoriteStaticMembers": [
+    " org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*",
+    "org.mockito.BDDMockito.*",
+    "org.junit.Assert.*",
+    "org.junit.Assume.*",
+    "org.junit.jupiter.api.Assertions.*",
+    "org.junit.jupiter.api.Assumptions.*",
+    "org.junit.jupiter.api.DynamicContainer.*",
+    "org.junit.jupiter.api.DynamicTest.*",
+    "org.mockito.Mockito.*",
+    "org.mockito.ArgumentMatchers.*",
+    "org.mockito.Answers.*"
+  ],
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
+}
