@@ -10,6 +10,8 @@ function create_links() {
 	ln -sv ${HOME}/dotfiles/bashrc ${HOME}/.bashrc
 	ln -sv ${HOME}/dotfiles/tmux.conf ${HOME}/.tmux.conf
 	ln -sv ${HOME}/dotfiles/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
+	ln -sv ${HOME}/dotfiles/xfce4-panel/netload-7.rc ${HOME}/.config/xfce4/panel/netload-7.rc
+	ln -sv ${HOME}/dotfiles/xfce4-panel/xfce4-clipman-actions.xml ${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml
 
 	# Ensure that your custom lambda.theme.sh is used, even after git pull
 	echo "Ensuring custom theme is used..."
@@ -31,6 +33,7 @@ function remove_files() {
 	rm -rv ${HOME}/.bashrc
 	rm -rv ${HOME}/.tmux.conf
 	rm -rv ${HOME}/.config/xfce4/terminal/terminalrc
+	rm -rv ${HOME}/.config/xfce4/panel
 }
 
 function prepare_terminal_theme() {
