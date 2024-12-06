@@ -25,7 +25,23 @@ install_curl() {
   fi
 }
 
-apt_transport_https() {
+install_wget() {
+  echo "Checking if wget is installed..."
+  
+  # Check if wget is available
+  if ! command -v wget &> /dev/null; then
+    echo "wget is not installed. Installing wget..."
+    sudo apt update && sudo apt install wget -y || {
+      echo "Failed to install wget!"
+      return 1
+    }
+    echo "wget successfully installed."
+  else
+    echo "wget is already installed."
+  fi
+}
+
+install_transport_https() {
   if ! dpkg -l | grep -q apt-transport-https; then
     echo "Installing apt-transport-https..."
     sudo apt install apt-transport-https -y
@@ -680,7 +696,8 @@ EOF
 upgrade
 install_build_essential
 install_curl
-apt_transport_https
+install_wget
+install_transport_https
 install_git
 install_ssh
 install_nano
