@@ -51,3 +51,6 @@ generate_rsa_key() {
     return 1
   fi
 }
+
+
+generate_rsa_key 
