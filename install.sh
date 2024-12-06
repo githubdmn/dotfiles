@@ -25,6 +25,23 @@ install_curl() {
   fi
 }
 
+install_wget() {
+  echo "Checking if wget is installed..."
+  
+  # Check if wget is available
+  if ! command -v wget &> /dev/null; then
+    echo "wget is not installed. Installing wget..."
+    sudo apt update && sudo apt install wget -y || {
+      echo "Failed to install wget!"
+      return 1
+    }
+    echo "wget successfully installed."
+  else
+    echo "wget is already installed."
+  fi
+}
+
+
 apt_transport_https() {
   if ! dpkg -l | grep -q apt-transport-https; then
     echo "Installing apt-transport-https..."
@@ -680,6 +697,7 @@ EOF
 upgrade
 install_build_essential
 install_curl
+install_wget
 apt_transport_https
 install_git
 install_ssh
@@ -689,8 +707,8 @@ install_vim
 install_neovim
 install_nvm
 install_deno
-install_vlc
-install_brave
+# install_vlc
+# install_brave
 # install_dropbox
 install_ffmpeg
 install_sqlite
