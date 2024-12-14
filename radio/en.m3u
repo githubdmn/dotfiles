@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTVLCOPT:network-caching=1000
+http://radio.talkradio.co.uk/stream?awparams=platform:ts-web&amsparams=playerid:ts-web
+https://timesradio.wireless.radio/stream
+https://stream-06.aiir.com/clcb6m0k9shvv
+https://listen-gbnews.sharp-stream.com/gbnews.mp3
+https://stream.audioxi.com/NT?aw_0_req.gdp=true&aw_0_1_st.interests=News,Technology

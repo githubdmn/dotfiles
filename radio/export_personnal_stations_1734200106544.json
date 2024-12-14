@@ -1,0 +1,140 @@
+{
+  "stations": {
+    "17313206852050": {
+      "name": "17313206852050",
+      "title": "TalkRadio",
+      "slogan": "",
+      "url": "https://talk.tv/play/talkradio",
+      "streams": {
+        "0": "http://radio.talkradio.co.uk/stream?awparams=platform:ts-web&amsparams=playerid:ts-web"
+      },
+      "image": "https://talk.tv/play/_next/image?url=https%3A%2F%2Fassets.wireless.radio%2Fimages%2Fuwp-station-logos%2Ftalkradio.png&w=96&q=75",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313207917981": {
+      "name": "17313207917981",
+      "title": "TimesRadio",
+      "slogan": "",
+      "url": "https://talk.tv/play/timesradio",
+      "streams": {
+        "0": "https://timesradio.wireless.radio/stream?aw_0_1st.platform=website&aw_0_1st.playerid=wireless-website"
+      },
+      "image": "https://talk.tv/play/_next/image?url=https%3A%2F%2Fassets.wireless.radio%2Fimages%2Fuwp-station-logos%2Ftimesradio.png&w=96&q=75",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17309665652153": {
+      "name": "17309665652153",
+      "title": "News Radio UK",
+      "slogan": "",
+      "url": "https://newsradiouk.co.uk/player/",
+      "streams": {
+        "0": "https://stream-06.aiir.com/clcb6m0k9shvv"
+      },
+      "image": "https://newsradiouk.co.uk/wp-content/uploads/2022/04/News-Radio-HD-1.png",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313209471012": {
+      "name": "17313209471012",
+      "title": "GB News",
+      "slogan": "",
+      "url": "http://tun.in/sfBN8",
+      "streams": {
+        "0": "https://listen-gbnews.sharp-stream.com/gbnews.mp3"
+      },
+      "image": "https://assets.rbl.ms/53853640/origin.png?width=284&height=102",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313211340123": {
+      "name": "17313211340123",
+      "title": "Newstalk Ireland",
+      "slogan": "",
+      "url": "https://www.goloudplayer.com/radio/newstalk",
+      "streams": {
+        "0": "https://stream.audioxi.com/NT?aw_0_req.gdp=true&aw_0_1_st.interests=News,Technology"
+      },
+      "image": "https://img.resized.co/shuffle/eyJkYXRhIjoie1widXJsXCI6XCJodHRwczovL21lZGlhLmdvbG91ZG5vdy5jb20vdXBsb2Fkcy8xNjgyMzQyNzA4L05ULU5ldy1QdWJsaXNoZXItNTEyLnBuZ1wiLFwid2lkdGhcIjpcIjEyMFwiLFwiaGVpZ2h0XCI6XCIxMjBcIixcImRlZmF1bHRcIjpcImh0dHBzOi8vd3d3MS5nb2xvdWRub3cuY29tL2ltYWdlcy9sb2dvLnN2Z1wifSIsImhhc2giOiJhMWNjOTU0MjQ2M2UwY2Y1YjZlMTNmOGE0NDhlNTFkZjAyYzQzYzQxIn0=/NT-New-Publisher-512.png",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313213035164": {
+      "name": "17313213035164",
+      "title": "Sputnik Serbia",
+      "slogan": "",
+      "url": "https://sputnikportal.rs/",
+      "streams": {
+        "0": "https://icecast-rian.cdnvideo.ru/voicesrb"
+      },
+      "image": "https://cdn1.img.sputnikportal.rs/i/logo/logo.svg",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313214650975": {
+      "name": "17313214650975",
+      "title": "LBC",
+      "slogan": "Leading Britain's Conversation",
+      "url": "https://www.lbc.co.uk/",
+      "streams": {
+        "0": "https://media-the.musicradio.com/LBCUK?amsparams=playerid:UKRP"
+      },
+      "image": "https://herald.musicradio.com/media/bfe81d2f-36a7-4578-ac80-ac03ee1c0a1b.png",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    },
+    "17313216177586": {
+      "name": "17313216177586",
+      "title": "BBC Radio 4 extra",
+      "slogan": "",
+      "url": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_four_extra",
+      "streams": {
+        "0": "https://as-dash-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/dash/bbc_radio_four_extra-audio=*.m4s"
+      },
+      "image": "https://sounds.files.bbci.co.uk/3.7.0/networks/bbc_radio_four_extra/colour_default.svg",
+      "category": "",
+      "lang": "",
+      "locale": "",
+      "source": "",
+      "_userStation": true,
+      "_hidden": false,
+      "_currentStreamName": "0"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+#EXTM3U
+#EXTINF:21600,bbc_radio_four_extra.mpd
+#EXTVLCOPT:network-caching=1000
+https://a.files.bbci.co.uk/ms6/live/3441A116-B12E-4D2F-ACA8-C1984642FA4B/audio/simulcast/dash/nonuk/pc_hd_abr_v2/cfs/bbc_radio_four_extra.mpd
