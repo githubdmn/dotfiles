@@ -42,6 +42,12 @@ function prepare_terminal_theme() {
 	cp -v ${HOME}/dotfiles/catppuccin/* ${HOME}/.local/share/xfce4/terminal/colorschemes
 }
 
+function prepare_mousepad_theme() {
+	echo "Setting up mousepad theme..."
+	mkdir -p ${HOME}/.local/share/gtksourceview-4/styles
+	cp -v ${HOME}/dotfiles/mousepad-themes/* ${HOME}/.local/share/gtksourceview-4/styles
+}
+
 #!/bin/bash
 
 function link_autostart_entries() {
@@ -77,5 +83,6 @@ function link_autostart_entries() {
 
 remove_files
 prepare_terminal_theme
+prepare_mousepad_theme
 create_links
 link_autostart_entries

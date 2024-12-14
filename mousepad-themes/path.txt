@@ -1,0 +1,1 @@
+/home/${USER}/.local/share/gtksourceview-4/styles/
