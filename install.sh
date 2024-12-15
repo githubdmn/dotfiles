@@ -694,31 +694,31 @@ EOF
 }
 
 upgrade
-install_build_essential
-install_curl
-install_wget
-install_transport_https
-install_git
-install_ssh
-install_nano
-install_tmux
-install_vim
-install_neovim
-install_nvm
-install_deno
-install_vlc
-install_brave
+# install_build_essential
+# install_curl
+# install_wget
+# install_transport_https
+# install_git
+# install_ssh
+# install_nano
+# install_tmux
+# install_vim
+# install_neovim
+# install_nvm
+# install_deno
+# install_vlc
+# install_brave
 # install_dropbox
-install_ffmpeg
-install_sqlite
-install_go
+# install_ffmpeg
+# install_sqlite
+# install_go
 # install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
 # install_gradle
-install_sdkman
-install_sdks
-install_ohmybash
-# install_dropbox_headless
+# install_sdkman
+# install_sdks
+# install_ohmybash
+install_dropbox_headless
 # install_mega_client
 # install_vscode_headless
 upgrade
