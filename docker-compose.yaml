@@ -1,0 +1,23 @@
+# version: '3.8'
+
+services:
+  debian-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: debian-cli-container
+    tty: true      # Allocates a terminal for interactive use
+    stdin_open: true # Keeps the container open for interaction
+    volumes:
+      - ./devuser:/home/devuser  # Bind mount a local directory to the container's /workspace
+    environment:
+      - DEBIAN_CLI=noninteractive  # Prevents interactive prompts during installation
+    networks:
+      - debian_network
+    ports:
+      # - "5000:5000" # Expose port 5000 from the container to 5000 on the host
+      - "5173:5173"   # Expose port 5173 from the container to 5173 on the host
+
+networks:
+  debian_network:
+    driver: bridge

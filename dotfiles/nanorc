@@ -21,7 +21,7 @@ set constantshow
 set softwrap
 set atblanks
 # set smooth
-set suspend
+# set suspend
 
 ## Use auto-indentation.
 set autoindent
@@ -155,7 +155,7 @@ set regexp
 set speller "aspell -x -c"
 
 ## Allow nano to be suspended.
-set suspend
+# set suspend
 
 ## Use this tab size instead of the default; it must be greater than 0.
 set tabsize 2
@@ -235,7 +235,7 @@ include "/usr/share/nano/html.nanorc"
 include "/usr/share/nano/tex.nanorc"
 
 ## Quoted emails (under e.g. mutt)
-include "/usr/share/nano/mutt.nanorc"
+# include "/usr/share/nano/mutt.nanorc"
 
 ## Patch files
 include "/usr/share/nano/patch.nanorc"
@@ -262,7 +262,7 @@ include "/usr/share/nano/ruby.nanorc"
 include "/usr/share/nano/java.nanorc"
 
 ## JS
-include "/usr/share/nano/js.nanorc"
+# include "/usr/share/nano/js.nanorc"
 
 ## Assembler
 include "/usr/share/nano/asm.nanorc"

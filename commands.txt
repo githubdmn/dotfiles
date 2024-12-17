@@ -1,3 +1,0 @@
-$ls -laX
-$date +"%A %B %d %H:%M"
-$date +"%A %B %d %R"

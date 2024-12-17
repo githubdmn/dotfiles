@@ -1,13 +1,11 @@
-# Path to your oh-my-bash installation.
-export OSH=/home/dmn/.oh-my-bash
+# Enable the subsequent settings only in interactive sessions
+case $- in
+  *i*) ;;
+    *) return;;
+esac
 
-# if command -v tmux &> /dev/null \
-# 	&& [ -n "$PS1" ] \
-# 	&& [[ ! "$TERM" =~ screen ]] \
-# 	&& [[ ! "$TERM" =~ tmux ]] \
-# 	&& [ -z "$TMUX" ]; then
-#   exec tmux
-# fi
+# Path to your oh-my-bash installation.
+export OSH='/home/devuser/.oh-my-bash'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -16,14 +14,16 @@ export OSH=/home/dmn/.oh-my-bash
 #OSH_THEME="brainy"
 OSH_THEME="lambda"
 #OSH_THEME="luan"
-#
-#
+
+# If you set OSH_THEME to "random", you can ignore themes you don't like.
+# OMB_THEME_RANDOM_IGNORED=("powerbash10k" "wanelo")
+
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# OMB_CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# OMB_HYPHEN_SENSITIVE="false"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -48,13 +48,40 @@ OSH_THEME="lambda"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment the following line if you don't want the repository to be considered dirty
+# if there are untracked files.
+# SCM_GIT_DISABLE_UNTRACKED_DIRTY="true"
+
+# Uncomment the following line if you want to completely ignore the presence
+# of untracked files in the repository.
+# SCM_GIT_IGNORE_UNTRACKED="true"
+
 # Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# stamp shown in the history command output.  One of the following values can
+# be used to specify the timestamp format.
+# * 'mm/dd/yyyy'     # mm/dd/yyyy + time
+# * 'dd.mm.yyyy'     # dd.mm.yyyy + time
+# * 'yyyy-mm-dd'     # yyyy-mm-dd + time
+# * '[mm/dd/yyyy]'   # [mm/dd/yyyy] + [time] with colors
+# * '[dd.mm.yyyy]'   # [dd.mm.yyyy] + [time] with colors
+# * '[yyyy-mm-dd]'   # [yyyy-mm-dd] + [time] with colors
+# If not set, the default value is 'yyyy-mm-dd'.
+# HIST_STAMPS='yyyy-mm-dd'
+
+# Uncomment the following line if you do not want OMB to overwrite the existing
+# aliases by the default OMB aliases defined in lib/*.sh
+# OMB_DEFAULT_ALIASES="check"
 
 # Would you like to use another custom folder than $OSH/custom?
 # OSH_CUSTOM=/path/to/new-custom-folder
+
+# To disable the uses of "sudo" by oh-my-bash, please set "false" to
+# this variable.  The default behavior for the empty value is "true".
+OMB_USE_SUDO=true
+
+# To enable/disable display of Python virtualenv and condaenv
+# OMB_PROMPT_SHOW_PYTHON_VENV=true  # enable
+# OMB_PROMPT_SHOW_PYTHON_VENV=false # disable
 
 # Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
 # Custom completions may be added to ~/.oh-my-bash/custom/completions/
@@ -71,7 +98,7 @@ completions=(
 # Example format: aliases=(vagrant composer git-avh)
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
- # general
+  general
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -83,7 +110,14 @@ plugins=(
   bashmarks
 )
 
-source $OSH/oh-my-bash.sh
+# Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
+# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
+# Example format:
+#  if [ "$DISPLAY" ] || [ "$SSH" ]; then
+#      plugins+=(tmux-autoattach)
+#  fi
+
+source "$OSH"/oh-my-bash.sh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -115,8 +149,6 @@ source $OSH/oh-my-bash.sh
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
 alias upgrade="~/dotfiles/upgrade.sh"
-alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
-
 nvimbash() {
   touch "$1" && chmod +x "$1" && nvim "$1"
 }
@@ -124,25 +156,16 @@ nvimbash() {
 nanobash() {
   touch "$1" && chmod +x "$1" && nano "$1"
 }
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 export PATH=$PATH:$HOME/sqlite
 export PATH="${PATH}:${HOME}/go/bin/"
-# export PATH="${PATH}:${HOME}/gradle/bin/"
-# export JAVA_HOME=${HOME}/jdk-21
-# export PATH=$PATH:$JAVA_HOME/bin
-# export PATH=$PATH:$HOME/gradle/gradle-8.10.2/bin
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-alias javaCompile="find src -name "*.java" | xargs javac -d bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completionalias javaCompile="find src -name "*.java" | xargs javac -d bin"
 
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/bin:$PATH"export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
