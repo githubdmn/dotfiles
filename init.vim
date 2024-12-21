@@ -3,7 +3,7 @@
 " \"${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim
 " --create-dirs \
 "         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-"         
+"
 syntax enable
 set wrap
 set guicursor=n-v-c:block-Cursor
@@ -50,25 +50,29 @@ call plug#begin("~/.vim/plugged")
  "Plug 'fatih/vim-go'
   Plug 'c.vim'
   Plug 'ray-x/go.nvim'
-  Plug 'dracula/vim',{'name': 'dracula'} 
+  Plug 'dracula/vim',{'name': 'dracula'}
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
   Plug 'chriskempson/base16-vim'
   Plug 'gosukiwi/vim-atom-dark'
   Plug 'NLKNguyen/papercolor-theme'
+  Plug 'b4b4r07/vim-sqlfmt'
  
 call plug#end()
 
 "Config Section
-filetype plugin indent on  
+filetype plugin indent on
 nnoremap <C-a> :NERDTreeRefreshRoot<CR>:NERDTreeToggle<CR>
 inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 
+let g:sqlfmt_command = "sqlformat"
+let g:sqlfmt_options = "-r -k upper"
+
 "set background=dark
 "colorscheme base16-default-dark
-"colorscheme onehalfdark 
-"colorscheme onehalflight 
+"colorscheme onehalfdark
+"colorscheme onehalflight
 "colorscheme dracula
 
 
