@@ -23,7 +23,7 @@
 	SOFTWARE.
 -->
 
-<style-scheme id="dracula" _name="Dracula" version="1.0">
+<style-scheme id="dracula-2" _name="Dracula-2" version="1.0">
   <author>Alvin Septiano</author>
   <_description>Dracula color scheme</_description>
   
@@ -44,10 +44,11 @@
 	<color name="white" value="#ffffff"/>
 	<color name="bone-white" value="#f8f8f0"/>
 	<color name="weird-gray" value="#909194"/>
+	<color name="tmpOne" value="#baefff"/>
 
   <!-- Global Settings -->
   <style name="text"                        foreground="white" background="background"/>
-  <style name="selection"                   foreground="cyan" background="current-line"/>
+  <style name="selection"                   foreground="tmpOne" background="current-line"/>
   <style name="cursor"                      foreground="bone-white"/>
   <style name="secondary-cursor"            foreground="white"/>
   <style name="selection-unfocused"         foreground="background" background="white"/>
