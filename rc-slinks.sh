@@ -45,44 +45,43 @@ function prepare_terminal_theme() {
 function prepare_mousepad_theme() {
 	echo "Setting up mousepad theme..."
 	mkdir -p ${HOME}/.local/share/gtksourceview-4/styles
-	cp -v ${HOME}/dotfiles/mousepad-themes/* ${HOME}/.local/share/gtksourceview-4/styles
+	ln -s -v ${HOME}/dotfiles/mousepad-themes/* ${HOME}/.local/share/gtksourceview-4/styles/
 }
 
 #!/bin/bash
 
 function link_autostart_entries() {
-  echo "Linking autostart .desktop files..."
+	echo "Linking autostart .desktop files..."
 
-  # Source directory containing the .desktop files
-  local source_dir="${HOME}/dotfiles/config/autostart"
-  # Destination directory for autostart files
-  local dest_dir="${HOME}/.config/autostart"
+	# Source directory containing the .desktop files
+	local source_dir="${HOME}/dotfiles/config/autostart"
+	# Destination directory for autostart files
+	local dest_dir="${HOME}/.config/autostart"
 
-  # Ensure the destination directory exists
-  mkdir -p "$dest_dir"
+	# Ensure the destination directory exists
+	mkdir -p "$dest_dir"
 
-  # Check if the source directory exists
-  if [ ! -d "$source_dir" ]; then
-    echo "Source directory '$source_dir' does not exist. Please check the path."
-    return 1
-  fi
+	# Check if the source directory exists
+	if [ ! -d "$source_dir" ]; then
+		echo "Source directory '$source_dir' does not exist. Please check the path."
+		return 1
+	fi
 
-  # Iterate over all .desktop files in the source directory
-  for file in "$source_dir"/*.desktop; do
-    # Check if there are any .desktop files
-    if [ -e "$file" ]; then
-      # Create a symbolic link in the destination directory
-      ln -sfv "$file" "$dest_dir/"
-    else
-      echo "No .desktop files found in '$source_dir'."
-    fi
-  done
+	# Iterate over all .desktop files in the source directory
+	for file in "$source_dir"/*.desktop; do
+		# Check if there are any .desktop files
+		if [ -e "$file" ]; then
+			# Create a symbolic link in the destination directory
+			ln -sfv "$file" "$dest_dir/"
+		else
+			echo "No .desktop files found in '$source_dir'."
+		fi
+	done
 
-  echo "Autostart .desktop files linked successfully."
+	echo "Autostart .desktop files linked successfully."
 }
 
 remove_files
 prepare_terminal_theme
 prepare_mousepad_theme
 create_links
-link_autostart_entries
