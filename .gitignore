@@ -1,1 +1,5 @@
+debian/devuser/.*
 debian/devuser/github/
+debian/devuser/go/
+debian/devuser/sqlite/
+

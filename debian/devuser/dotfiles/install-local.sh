@@ -63,6 +63,7 @@ install_ohmybash() {
   else
     echo "oh-my-bash is already installed."
   fi
+  exit
 }
 
 # Install SQLite
@@ -131,7 +132,6 @@ install_sdks() {
 
 main() {
   install_ohmybash
-  install_neovim
   install_nvm
   install_sqlite
   install_go
@@ -139,5 +139,5 @@ main() {
   install_sdks
 }
 
-mian
+main
 
