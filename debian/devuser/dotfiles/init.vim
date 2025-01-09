@@ -48,7 +48,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
  "Plug 'fatih/vim-go'
-  Plug 'c.vim'
+ " Plug 'c.vim'
   Plug 'ray-x/go.nvim'
   Plug 'dracula/vim',{'name': 'dracula'} 
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
