@@ -122,18 +122,17 @@ install_sdkman() {
 install_sdks() {
   echo "Installing Java..."
   sdk install java
-  echo "Installing Kotlin..."
-  sdk install kotlin
-  echo "Installing Gradle..."
-  sdk install gradle
-  sdk current java && sdk current kotlin && sdk current gradle
+  # echo "Installing Kotlin..."
+  # sdk install kotlin
+  # echo "Installing Gradle..."
+  # sdk install gradle
+  sdk current java # && sdk current kotlin && sdk current gradle
 }
 
 main() {
   install_ohmybash
   install_neovim
   install_nvm
-  install_deno
   install_sqlite
   install_go
   install_sdkman
