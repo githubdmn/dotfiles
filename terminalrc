@@ -29,7 +29,7 @@ MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=TRUE
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 ColorForeground=#c6d0f5
-FontName=Monospace Bold 12
+FontName=Monospace Bold 11
 ColorBackground=#303446
 ColorCursor=#f2d5cf
 ColorPalette=#51576d;#e78284;#a6d189;#e5c890;#8caaee;#f4b8e4;#81c8be;#b5bfe2;#626880;#e78284;#a6d189;#e5c890;#8caaee;#f4b8e4;#81c8be;#a5adce
@@ -39,4 +39,5 @@ ColorSelection=#c6d0f5
 ColorSelectionBackground=#626880
 ColorSelectionUseDefault=FALSE
 TabActivityColor=#ef9f76
+FontUseSystem=TRUE
 
