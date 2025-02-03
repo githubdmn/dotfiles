@@ -15,12 +15,7 @@ services:
     networks:
       - debian_network
     ports:
-      # - "5000:5000" # Expose port 5000 from the container to 5000 on the host
-      - "5173:5173"   # Expose port 5173 from the container to 5173 on the host
-      - "5174:5174"
-      - "5175:5175"
-      - "5176:5176"
-      - "4200:5177"
+      - "5173:3000"  # Map host port 5173 to container port 3000 (assuming your Node.js app listens on port 3000) 
 
 networks:
   debian_network:
