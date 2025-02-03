@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: debian-cli-container
+    container_name: dev
     tty: true      # Allocates a terminal for interactive use
     stdin_open: true # Keeps the container open for interaction
     volumes:
@@ -17,6 +17,10 @@ services:
     ports:
       # - "5000:5000" # Expose port 5000 from the container to 5000 on the host
       - "5173:5173"   # Expose port 5173 from the container to 5173 on the host
+      - "5174:5174"
+      - "5175:5175"
+      - "5176:5176"
+      - "4200:5177"
 
 networks:
   debian_network:

@@ -1,11 +1,11 @@
 # Use a specific Debian version and a slim variant
-FROM debian:latest
+FROM ubuntu:latest
 
 # Set environment variables to prevent prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-	apt-get install -y \
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
 	sudo \
 	curl \
 	wget \
@@ -26,6 +26,7 @@ RUN apt-get update && \
 	&& apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 	
+	ENV LANG en_US.utf8
 
 # Create a non-root user with sudo privileges
 RUN useradd -ms /bin/bash devuser && \
