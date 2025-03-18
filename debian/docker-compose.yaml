@@ -15,8 +15,14 @@ services:
     networks:
       - debian_network
     ports:
-      - "5173:3000"  # Map host port 5173 to container port 3000 (assuming your Node.js app listens on port 3000) 
+      - "5173:3000"  # Map host port 5173 to container port 3000 (assuming your Node.js app listens on port 3000)
+      - "5174:3001"
+      - "5175:3002"
+      - "5176:3003"
 
 networks:
   debian_network:
     driver: bridge
+
+volumes:
+  devuser_data:
