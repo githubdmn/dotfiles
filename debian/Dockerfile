@@ -1,5 +1,5 @@
 # Use a specific Debian version and a slim variant
-FROM ubuntu:latest
+FROM debian:latest
 
 # Set environment variables to prevent prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,7 +21,6 @@ RUN apt-get update && apt-get install -y \
 	vim \
 	neovim \
 	git \
-	vim \
 	&& apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
