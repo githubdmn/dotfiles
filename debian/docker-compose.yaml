@@ -1,11 +1,11 @@
-# version: '3.8'
-
 services:
   debian-cli:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: dev
+    env_file:
+      - .env
     tty: true      # Allocates a terminal for interactive use
     stdin_open: true # Keeps the container open for interaction
     volumes:
@@ -20,9 +20,41 @@ services:
       - "5175:3002"
       - "5176:3003"
 
+  mysql:
+    env_file:
+      - .env
+    image: mysql:lts
+    container_name: devmysql
+    restart: always
+    networks:
+      - debian_network
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./scripts:/home/scripts:ro
+      - ./devuser/github/database/scripts:/scripts
+    user: "999:999"
+
 networks:
   debian_network:
     driver: bridge
 
 volumes:
-  devuser_data:
+    devuser:
+    mysql-db:
+        
+# docker exec -it learning_mysql mysql -u root -proot -h127.0.0.1 bank
+# docker exec -it learning_mysql mysql -u root -p
+# source /home/scripts/check.sql
+# USE bank;
+# source /home/scripts/01_learning_mysql/chapter
+# docker exec -it learning_mysql mysql -u root -proot -Dbank
+
