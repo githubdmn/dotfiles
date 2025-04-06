@@ -16,7 +16,7 @@ export OSH=/home/dmn/.oh-my-bash
 #OSH_THEME="brainy"
 OSH_THEME="lambda"
 #OSH_THEME="luan"
-#
+#OSH_THEME="nekolight"
 #
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
