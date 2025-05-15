@@ -64,7 +64,8 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 Plugin 'preservim/nerdtree'
 Plugin 'eslint/eslint'
-Plugin 'dracula/vim',{'name': 'dracula'} 
+Plugin 'dracula/vim',{'name': 'dracula'}
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
@@ -103,6 +104,7 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 "inoremap <C-w> <C-o>:wq<CR>
 "inoremap <C-s> <C-o>:w<CR>
 
+"colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 "colorscheme dracula
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
