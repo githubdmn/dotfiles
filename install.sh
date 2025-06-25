@@ -16,6 +16,15 @@ install_build_essential() {
   fi
 }
 
+install_unzip() {
+  if ! command -v unzip &>/dev/null; then
+    echo "Installing unzip..."
+    sudo apt install unzip -y
+  else
+    echo "unzip is already installed."
+  fi
+}
+
 install_curl() {
   if ! command -v curl &>/dev/null; then
     echo "Installing curl..."
@@ -486,14 +495,14 @@ install_sdks() {
   }
   echo "Java installed successfully."
 
-  # Install Kotlin
-  echo "Installing Kotlin..."
-  sdk install kotlin || {
-    echo "Failed to install Kotlin"
-    return 1
-  }
-  echo "Kotlin installed successfully."
-
+	# Install Kotlin
+	#  echo "Installing Kotlin..."
+	#  sdk install kotlin || {
+	#  echo "Failed to install Kotlin"
+	#    return 1
+	#  }
+	# echo "Kotlin installed successfully."
+	
   # Install Gradle
   echo "Installing Gradle..."
   sdk install gradle || {
@@ -590,111 +599,204 @@ install_mega_client() {
   echo "Installation complete. The package has been removed."
 }
 
-install_vscode() {
-  echo "Installing Visual Studio Code..."
-
-  # Define the URL and package name
-  local url="https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-  local package_name="vscode-linux-deb-x64.deb"
-
-  # Download the .deb package
-  echo "Downloading Visual Studio Code..."
-  if wget -q "$url" -O "$package_name"; then
-    echo "Download successful: $package_name"
-  else
-    echo "Failed to download Visual Studio Code package."
-    return 1
-  fi
-
-  # Install the package using apt
-  echo "Installing the Visual Studio Code package..."
-  if sudo apt install "./$package_name" -y; then
-    echo "Visual Studio Code installed successfully."
-  else
-    echo "Failed to install Visual Studio Code."
-    rm -f "$package_name" # Clean up the downloaded file if installation fails
-    return 1
-  fi
-
-  # Clean up the downloaded package
-  rm -f "$package_name"
-  echo "Installation complete. The package has been removed."
-}
-
-setup_vscode_xdg_open() {
-  echo "Setting up Visual Studio Code as the default application for text files..."
-
-  # Associate VS Code with common text and code files
-  xdg-mime default code.desktop text/plain
-  xdg-mime default code.desktop text/x-shellscript
-  xdg-mime default code.desktop application/json
-  xdg-mime default code.desktop text/x-python
-
-  # Update MIME database
-  update-desktop-database ~/.local/share/applications
-
-  echo "Setup complete. Test using 'xdg-open example.txt'."
-}
-
 install_vscode_headless() {
-  # Base URL for downloading VS Code tar.gz
+  # Configuration
   local vscode_url="https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
   local temp_dir=$(mktemp -d)
   local install_dir="$HOME/.vscode"
-
-  echo "Downloading the latest Visual Studio Code tar.gz..."
-  wget -O "$temp_dir/vscode.tar.gz" "$vscode_url" || {
-    echo "Download failed!"
-    return 1
-  }
-
-  echo "Extracting Visual Studio Code..."
-  mkdir -p "$install_dir"
-  tar -xzf "$temp_dir/vscode.tar.gz" -C "$install_dir" --strip-components=1 || {
-    echo "Extraction failed!"
-    return 1
-  }
-
-  # Clean up the temporary directory
-  rm -rf "$temp_dir"
-
-  # Create a symlink for easy access
   local bin_dir="$HOME/.local/bin"
-  mkdir -p "$bin_dir"
-  ln -sf "$install_dir/code" "$bin_dir/code"
+  local desktop_file="$HOME/.local/share/applications/code.desktop"
 
-  # Ensure $HOME/.local/bin is in PATH
-  if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >>~/.bashrc
-    export PATH="$HOME/.local/bin:$PATH"
+  # Cleanup function
+  cleanup() {
+    rm -rf "$temp_dir"
+    if [[ -d "$install_dir" && -z "$(ls -A "$install_dir")" ]]; then
+      rmdir "$install_dir"
+    fi
+  }
+  trap cleanup EXIT
+
+  # Check for existing installation
+  if [[ -d "$install_dir" ]]; then
+    echo "⚠️  Existing VS Code installation found at $install_dir"
+    read -p "Overwrite? [y/N] " -n 1 -r
+    echo
+    [[ ! $REPLY =~ ^[Yy]$ ]] && return 1
+    rm -rf "$install_dir"
   fi
 
-  # Set up file type associations using xdg-mime
-  echo "Setting up Visual Studio Code as the default application for specific file types..."
-  local vscode_desktop_file="$HOME/.local/share/applications/code.desktop"
-  mkdir -p "$(dirname "$vscode_desktop_file")"
+  echo "📦 Downloading Visual Studio Code..."
+  if ! wget --show-progress -q -O "$temp_dir/vscode.tar.gz" "$vscode_url"; then
+    echo "❌ Download failed! Check network connection or URL"
+    return 1
+  fi
 
-  cat >"$vscode_desktop_file" <<EOF
+  echo "📂 Extracting Visual Studio Code..."
+  mkdir -p "$install_dir"
+  if ! tar -xzf "$temp_dir/vscode.tar.gz" -C "$install_dir" --strip-components=1; then
+    echo "❌ Extraction failed! Corrupted download?"
+    return 1
+  fi
+
+  # Create executable symlink
+  mkdir -p "$bin_dir"
+  ln -sf "$install_dir/bin/code" "$bin_dir/code"
+
+  # Ensure PATH setup
+  if ! grep -q "\.local/bin" ~/.bashrc; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+    echo "➡️  Added ~/.local/bin to PATH in .bashrc"
+    export PATH="$bin_dir:$PATH"
+  fi
+
+  # GUI integration only if in desktop environment
+  if [ -n "$DISPLAY" ] && command -v xdg-mime &>/dev/null; then
+    echo "🖥️  Setting up GUI integration..."
+    mkdir -p "$(dirname "$desktop_file")"
+
+    # Create desktop entry with comprehensive MIME support
+    cat > "$desktop_file" <<EOF
 [Desktop Entry]
 Name=Visual Studio Code
 Comment=Code Editing. Redefined.
-Exec=$HOME/.local/bin/code %U
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/code_code.desktop $bin_dir/code --unity-launch %F
 Icon=$install_dir/resources/app/resources/linux/code.png
 Type=Application
 Terminal=false
 Categories=Development;IDE;TextEditor;
-
-MimeType=text/plain;text/x-shellscript;application/json;text/x-python;
 StartupNotify=true
-EOF
-  update-desktop-database ~/.local/share/applications
+StartupWMClass=Code
 
-  echo "Visual Studio Code installed and configured successfully."
-  echo "You can launch it using 'code' or test with 'xdg-open <file>'."
+# Supported MIME types
+MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
+EOF
+
+    # Set file associations
+    xdg-mime default code.desktop text/plain
+    xdg-mime default code.desktop application/json
+    xdg-mime default code.desktop text/x-python
+    xdg-mime default code.desktop text/markdown
+    xdg-mime default code.desktop text/x-shellscript
+    
+    update-desktop-database ~/.local/share/applications
+    echo "✅ GUI setup complete"
+  else
+    echo "⚠️  Skipping GUI setup (no display detected)"
+  fi
+
+  # Create uninstaller
+  cat > "$install_dir/uninstall.sh" <<EOF
+#!/bin/bash
+rm -f "$bin_dir/code"
+rm -f "$desktop_file"
+update-desktop-database ~/.local/share/applications
+sed -i '/.local\/bin/d' ~/.bashrc
+rm -rf "$install_dir"
+echo "✅ VS Code uninstalled"
+EOF
+  chmod +x "$install_dir/uninstall.sh"
+
+  # Post-install message
+  echo -e "\n✅ Visual Studio Code installed successfully!"
+  echo "Launch with: code"
+  echo "Uninstall with: $install_dir/uninstall.sh"
 }
+
+install_vscodium_headless() {
+  # Configuration - easy to update version
+  local version="1.100.33714"
+  local vscodium_url="https://github.com/VSCodium/vscodium/releases/download/$version/VSCodium-linux-x64-$version.tar.gz"
+  local temp_dir=$(mktemp -d)
+  local install_dir="$HOME/.vscodium"
+  local bin_dir="$HOME/.local/bin"
+
+  # Cleanup function for error handling
+  cleanup() {
+    rm -rf "$temp_dir"
+    if [[ -d "$install_dir" && -z "$(ls -A "$install_dir")" ]]; then
+      rmdir "$install_dir"
+    fi
+  }
+  trap cleanup EXIT
+
+  echo "Downloading VSCodium $version..."
+  if ! wget --progress=bar:force -O "$temp_dir/vscodium.tar.gz" "$vscodium_url"; then
+    echo "❌ Download failed! Please check the URL and version."
+    return 1
+  fi
+
+  echo "Extracting VSCodium..."
+  mkdir -p "$install_dir"
+  if ! tar -xzf "$temp_dir/vscodium.tar.gz" -C "$install_dir" --strip-components=1; then
+    echo "❌ Extraction failed! Corrupted download?"
+    return 1
+  fi
+
+  # Create executable symlink
+  mkdir -p "$bin_dir"
+  ln -sf "$install_dir/bin/codium" "$bin_dir/codium"
+
+  # Ensure PATH setup
+  if ! grep -q "\.local/bin" ~/.bashrc; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+    echo "➡️ Added ~/.local/bin to PATH in .bashrc"
+  fi
+
+  # Only set up GUI associations if in a desktop environment
+  if [ -n "$DISPLAY" ] && command -v xdg-mime &> /dev/null; then
+    echo "Setting up GUI integration..."
+    local vscodium_desktop_file="$HOME/.local/share/applications/vscodium.desktop"
+    mkdir -p "$(dirname "$vscodium_desktop_file")"
+
+    cat > "$vscodium_desktop_file" <<EOF
+[Desktop Entry]
+Name=VSCodium
+Comment=Code Editing. Redefined. (VSCodium)
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/codium_codium.desktop $bin_dir/codium --unity-launch %F
+Icon=$install_dir/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=codium
+
+# Supported MIME types
+MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
+EOF
+
+    # Associate with common text formats
+    xdg-mime default vscodium.desktop text/plain
+    xdg-mime default vscodium.desktop application/json
+    xdg-mime default vscodium.desktop text/x-python
+    xdg-mime default vscodium.desktop text/markdown
+    
+    update-desktop-database ~/.local/share/applications
+    echo "✅ GUI integration complete"
+  else
+    echo "⚠️ Skipping GUI setup (no display detected)"
+  fi
+
+  # Create uninstaller
+  cat > "$install_dir/uninstall.sh" <<EOF
+#!/bin/bash
+rm -f "$bin_dir/codium"
+rm -f ~/.local/share/applications/vscodium.desktop
+sed -i '/.local\/bin/d' ~/.bashrc
+rm -rf "$install_dir"
+echo "VSCodium uninstalled"
+EOF
+  chmod +x "$install_dir/uninstall.sh"
+
+  echo -e "\n✅ VSCodium $version installed successfully!"
+  echo "Launch with: codium"
+  echo "Uninstall with: $install_dir/uninstall.sh"
+}
+
+
 
 upgrade
 # install_build_essential
+# install_unzip
 # install_curl
 # install_wget
 # install_transport_https
@@ -712,14 +814,15 @@ upgrade
 # install_ffmpeg
 # install_sqlite
 # install_go
-# install_java    # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+# install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
 # install_gradle
 # install_sdkman
 # install_sdks
 # install_ohmybash
-install_dropbox_headless
+# install_dropbox_headless
 # install_mega_client
 # install_vscode_headless
+# install_vscodium_headless
 upgrade
 autoremove

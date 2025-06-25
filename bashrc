@@ -17,6 +17,7 @@ export OSH=/home/dmn/.oh-my-bash
 OSH_THEME="lambda"
 #OSH_THEME="luan"
 #OSH_THEME="nekolight"
+#OSH_THEME="lucky"
 #
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -130,7 +131,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH=$PATH:$HOME/sqlite
-export PATH="${PATH}:${HOME}/go/bin/"
+#export PATH="${PATH}:${HOME}/go/bin/"
+# let Go use its own GOROOT
+unset GOROOT
+
+# keep your module cache / installs under ~/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+
 # export PATH="${PATH}:${HOME}/gradle/bin/"
 # export JAVA_HOME=${HOME}/jdk-21
 # export PATH=$PATH:$JAVA_HOME/bin
@@ -141,8 +150,9 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 alias javaCompile="find src -name "*.java" | xargs javac -d bin"
+alias javaClean="rm -rf bin"
 
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# export DENO_INSTALL="$HOME/.deno"
+# export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/bin:$PATH"export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
