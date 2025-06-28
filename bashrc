@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/dmn/.oh-my-bash
+export OSH=/home/${USER}/.oh-my-bash
 
 # if command -v tmux &> /dev/null \
 # 	&& [ -n "$PS1" ] \
