@@ -38,6 +38,10 @@ update_oh_my_bash() {
         return 1
     fi
 
+    # Remove oh-my-bash/check_for_upgrade: Failed to get a lock.
+    echo "Remove oh-my-bash/check_for_upgrade: Failed to get a lock."
+    rm -rf "${OSH}/log/update.lock"
+
     local stash_created=false
     
     # Check for local changes
