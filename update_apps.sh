@@ -71,7 +71,112 @@ update_discord() {
     log_info "Discord has been successfully updated!"
 }
 
+
+update_postman() {
+
+  # --- Function to update Postman ---
+  # --- Configuration ---
+  POSTMAN_INSTALL_DIR="$HOME/.local/opt/Postman"
+  POSTMAN_APP_DIR="$HOME/.local/share/applications"
+  POSTMAN_ICON_DIR="$HOME/.local/share/icons"
+  POSTMAN_URL="https://dl.pstmn.io/download/latest/linux_64"
+
+    log_info "Updating Postman..."
+
+    # Check if Postman is installed
+    if [ ! -d "$POSTMAN_INSTALL_DIR" ]; then
+        log_info "Postman is not installed. Installing now..."
+        install_postman
+        return $?
+    fi
+
+    # Check dependencies
+    if ! command -v curl &> /dev/null; then
+        log_error "curl is required but not installed. Please install curl."
+        return 1
+    fi
+
+    # Create temp dir
+    local temp_dir
+    temp_dir=$(mktemp -d)
+
+    # Download
+    log_info "Downloading latest Postman package..."
+    if ! curl -sSLf -o "$temp_dir/postman.tar.gz" "$POSTMAN_URL"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to download Postman. Check your internet connection."
+        return 1
+    fi
+
+    # Check file is not empty
+    if [ ! -s "$temp_dir/postman.tar.gz" ]; then
+        rm -rf "$temp_dir"
+        log_error "Downloaded file is empty or corrupted."
+        return 1
+    fi
+
+    # Extract
+    log_info "Extracting package..."
+    if ! tar -xzf "$temp_dir/postman.tar.gz" -C "$temp_dir"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to extract the archive. The file may be corrupted."
+        return 1
+    fi
+
+    local extracted_dir="$temp_dir/Postman"
+    if [ ! -d "$extracted_dir" ]; then
+        rm -rf "$temp_dir"
+        log_error "Extracted directory 'Postman' not found."
+        return 1
+    fi
+
+    # Check if extracted directory has content
+    if [ -z "$(ls -A "$extracted_dir")" ]; then
+        rm -rf "$temp_dir"
+        log_error "Extracted directory is empty."
+        return 1
+    fi
+
+    # Stop any running Postman instances to prevent conflicts
+    log_info "Checking for running Postman instances..."
+    if pgrep -f "postman" > /dev/null; then
+        log_info "Stopping running Postman instances..."
+        pkill -f postman || log_warn "Could not stop Postman (process might have ended)"
+        sleep 2
+    fi
+
+    # Remove previous installation
+    log_info "Removing previous installation..."
+    rm -rf "$POSTMAN_INSTALL_DIR"
+    mkdir -p "$POSTMAN_INSTALL_DIR"
+
+    # Install
+    log_info "Installing new version..."
+    if ! mv "$extracted_dir"/* "$POSTMAN_INSTALL_DIR/"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to move files to installation directory."
+        return 1
+    fi
+
+    # Set executable permissions
+    if [ -f "$POSTMAN_INSTALL_DIR/Postman" ]; then
+        chmod +x "$POSTMAN_INSTALL_DIR/Postman" || log_warn "Failed to set executable permissions"
+    fi
+
+    # Update desktop entry
+    # create_postman_desktop_entry "$POSTMAN_INSTALL_DIR" "$POSTMAN_APP_DIR"
+
+    # Clean up temp directory
+    log_info "Cleaning up temporary files..."
+    rm -rf "$temp_dir"
+
+    log_info "Postman updated successfully!"
+    log_info "Installation directory: $POSTMAN_INSTALL_DIR"
+}
+
+
 # --- Call function if script is run directly ---
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     update_discord
+    update_postman
 fi

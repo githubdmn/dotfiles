@@ -599,199 +599,6 @@ install_mega_client() {
   echo "Installation complete. The package has been removed."
 }
 
-install_vscode_headless() {
-  # Configuration
-  local vscode_url="https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
-  local temp_dir=$(mktemp -d)
-  local install_dir="$HOME/.vscode"
-  local bin_dir="$HOME/.local/bin"
-  local desktop_file="$HOME/.local/share/applications/code.desktop"
-
-  # Cleanup function
-  cleanup() {
-    rm -rf "$temp_dir"
-    if [[ -d "$install_dir" && -z "$(ls -A "$install_dir")" ]]; then
-      rmdir "$install_dir"
-    fi
-  }
-  trap cleanup EXIT
-
-  # Check for existing installation
-  if [[ -d "$install_dir" ]]; then
-    echo "⚠️  Existing VS Code installation found at $install_dir"
-    read -p "Overwrite? [y/N] " -n 1 -r
-    echo
-    [[ ! $REPLY =~ ^[Yy]$ ]] && return 1
-    rm -rf "$install_dir"
-  fi
-
-  echo "📦 Downloading Visual Studio Code..."
-  if ! wget --show-progress -q -O "$temp_dir/vscode.tar.gz" "$vscode_url"; then
-    echo "❌ Download failed! Check network connection or URL"
-    return 1
-  fi
-
-  echo "📂 Extracting Visual Studio Code..."
-  mkdir -p "$install_dir"
-  if ! tar -xzf "$temp_dir/vscode.tar.gz" -C "$install_dir" --strip-components=1; then
-    echo "❌ Extraction failed! Corrupted download?"
-    return 1
-  fi
-
-  # Create executable symlink
-  mkdir -p "$bin_dir"
-  ln -sf "$install_dir/bin/code" "$bin_dir/code"
-
-  # Ensure PATH setup
-  if ! grep -q "\.local/bin" ~/.bashrc; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-    echo "➡️  Added ~/.local/bin to PATH in .bashrc"
-    export PATH="$bin_dir:$PATH"
-  fi
-
-  # GUI integration only if in desktop environment
-  if [ -n "$DISPLAY" ] && command -v xdg-mime &>/dev/null; then
-    echo "🖥️  Setting up GUI integration..."
-    mkdir -p "$(dirname "$desktop_file")"
-
-    # Create desktop entry with comprehensive MIME support
-    cat > "$desktop_file" <<EOF
-[Desktop Entry]
-Name=Visual Studio Code
-Comment=Code Editing. Redefined.
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/code_code.desktop $bin_dir/code --unity-launch %F
-Icon=$install_dir/resources/app/resources/linux/code.png
-Type=Application
-Terminal=false
-Categories=Development;IDE;TextEditor;
-StartupNotify=true
-StartupWMClass=Code
-
-# Supported MIME types
-MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
-EOF
-
-    # Set file associations
-    xdg-mime default code.desktop text/plain
-    xdg-mime default code.desktop application/json
-    xdg-mime default code.desktop text/x-python
-    xdg-mime default code.desktop text/markdown
-    xdg-mime default code.desktop text/x-shellscript
-    
-    update-desktop-database ~/.local/share/applications
-    echo "✅ GUI setup complete"
-  else
-    echo "⚠️  Skipping GUI setup (no display detected)"
-  fi
-
-  # Create uninstaller
-  cat > "$install_dir/uninstall.sh" <<EOF
-#!/bin/bash
-rm -f "$bin_dir/code"
-rm -f "$desktop_file"
-update-desktop-database ~/.local/share/applications
-sed -i '/.local\/bin/d' ~/.bashrc
-rm -rf "$install_dir"
-echo "✅ VS Code uninstalled"
-EOF
-  chmod +x "$install_dir/uninstall.sh"
-
-  # Post-install message
-  echo -e "\n✅ Visual Studio Code installed successfully!"
-  echo "Launch with: code"
-  echo "Uninstall with: $install_dir/uninstall.sh"
-}
-
-install_vscodium_headless() {
-  # Configuration - easy to update version
-  local version="1.100.33714"
-  local vscodium_url="https://github.com/VSCodium/vscodium/releases/download/$version/VSCodium-linux-x64-$version.tar.gz"
-  local temp_dir=$(mktemp -d)
-  local install_dir="$HOME/.vscodium"
-  local bin_dir="$HOME/.local/bin"
-
-  # Cleanup function for error handling
-  cleanup() {
-    rm -rf "$temp_dir"
-    if [[ -d "$install_dir" && -z "$(ls -A "$install_dir")" ]]; then
-      rmdir "$install_dir"
-    fi
-  }
-  trap cleanup EXIT
-
-  echo "Downloading VSCodium $version..."
-  if ! wget --progress=bar:force -O "$temp_dir/vscodium.tar.gz" "$vscodium_url"; then
-    echo "❌ Download failed! Please check the URL and version."
-    return 1
-  fi
-
-  echo "Extracting VSCodium..."
-  mkdir -p "$install_dir"
-  if ! tar -xzf "$temp_dir/vscodium.tar.gz" -C "$install_dir" --strip-components=1; then
-    echo "❌ Extraction failed! Corrupted download?"
-    return 1
-  fi
-
-  # Create executable symlink
-  mkdir -p "$bin_dir"
-  ln -sf "$install_dir/bin/codium" "$bin_dir/codium"
-
-  # Ensure PATH setup
-  if ! grep -q "\.local/bin" ~/.bashrc; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-    echo "➡️ Added ~/.local/bin to PATH in .bashrc"
-  fi
-
-  # Only set up GUI associations if in a desktop environment
-  if [ -n "$DISPLAY" ] && command -v xdg-mime &> /dev/null; then
-    echo "Setting up GUI integration..."
-    local vscodium_desktop_file="$HOME/.local/share/applications/vscodium.desktop"
-    mkdir -p "$(dirname "$vscodium_desktop_file")"
-
-    cat > "$vscodium_desktop_file" <<EOF
-[Desktop Entry]
-Name=VSCodium
-Comment=Code Editing. Redefined. (VSCodium)
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/codium_codium.desktop $bin_dir/codium --unity-launch %F
-Icon=$install_dir/resources/app/resources/linux/code.png
-Type=Application
-Terminal=false
-Categories=Development;IDE;TextEditor;
-StartupNotify=true
-StartupWMClass=codium
-
-# Supported MIME types
-MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
-EOF
-
-    # Associate with common text formats
-    xdg-mime default vscodium.desktop text/plain
-    xdg-mime default vscodium.desktop application/json
-    xdg-mime default vscodium.desktop text/x-python
-    xdg-mime default vscodium.desktop text/markdown
-    
-    update-desktop-database ~/.local/share/applications
-    echo "✅ GUI integration complete"
-  else
-    echo "⚠️ Skipping GUI setup (no display detected)"
-  fi
-
-  # Create uninstaller
-  cat > "$install_dir/uninstall.sh" <<EOF
-#!/bin/bash
-rm -f "$bin_dir/codium"
-rm -f ~/.local/share/applications/vscodium.desktop
-sed -i '/.local\/bin/d' ~/.bashrc
-rm -rf "$install_dir"
-echo "VSCodium uninstalled"
-EOF
-  chmod +x "$install_dir/uninstall.sh"
-
-  echo -e "\n✅ VSCodium $version installed successfully!"
-  echo "Launch with: codium"
-  echo "Uninstall with: $install_dir/uninstall.sh"
-}
-
 set -euo pipefail
 
 log_info()  { echo -e "\n[INFO]  $1"; }
@@ -896,6 +703,365 @@ install_discord() {
     log_info "  $install_dir/Discord"
 }
 
+# --- Function to create desktop entry ---
+create_postman_desktop_entry() {
+    local install_dir="$1"
+    local app_dir="$2"
+
+    log_info "Creating Postman desktop entry..."
+
+    cat > "$app_dir/postman.desktop" << EOF
+[Desktop Entry]
+Name=Postman
+Exec=$install_dir/Postman
+Icon=$install_dir/app/resources/app/assets/icon.png
+Type=Application
+Categories=Development;Network;
+StartupWMClass=postman
+Comment=API Development Environment
+Keywords=api;rest;http;testing;development;
+EOF
+
+    if command -v update-desktop-database &> /dev/null; then
+        update-desktop-database "$app_dir" || log_warn "Failed to update desktop database"
+    fi
+}
+
+# --- Function to install Postman ---
+install_postman() {
+    # --- Configuration ---
+    POSTMAN_INSTALL_DIR="$HOME/.local/opt/Postman"
+    POSTMAN_APP_DIR="$HOME/.local/share/applications"
+    POSTMAN_ICON_DIR="$HOME/.local/share/icons"
+    POSTMAN_URL="https://dl.pstmn.io/download/latest/linux_64"
+
+    log_info "Installing Postman..."
+
+    # Check dependencies
+    if ! command -v curl &> /dev/null; then
+        log_error "curl is required but not installed. Please install curl."
+        return 1
+    fi
+
+    if ! command -v tar &> /dev/null; then
+        log_error "tar is required but not installed. Please install tar."
+        return 1
+    fi
+
+    # Create necessary directories
+    mkdir -p "$POSTMAN_INSTALL_DIR" "$POSTMAN_APP_DIR" "$POSTMAN_ICON_DIR"
+
+    # Create temp dir
+    local temp_dir
+    temp_dir=$(mktemp -d)
+
+    # Download
+    log_info "Downloading Postman package..."
+    if ! curl -sSLf -o "$temp_dir/postman.tar.gz" "$POSTMAN_URL"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to download Postman. Check your internet connection."
+        return 1
+    fi
+
+    # Check file is not empty
+    if [ ! -s "$temp_dir/postman.tar.gz" ]; then
+        rm -rf "$temp_dir"
+        log_error "Downloaded file is empty or corrupted."
+        return 1
+    fi
+
+    # Extract
+    log_info "Extracting package..."
+    if ! tar -xzf "$temp_dir/postman.tar.gz" -C "$temp_dir"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to extract the archive. The file may be corrupted."
+        return 1
+    fi
+
+    local extracted_dir="$temp_dir/Postman"
+    if [ ! -d "$extracted_dir" ]; then
+        rm -rf "$temp_dir"
+        log_error "Extracted directory 'Postman' not found."
+        return 1
+    fi
+
+    # Check if extracted directory has content
+    if [ -z "$(ls -A "$extracted_dir")" ]; then
+        rm -rf "$temp_dir"
+        log_error "Extracted directory is empty."
+        return 1
+    fi
+
+    # Stop any running Postman instances to prevent conflicts
+    log_info "Checking for running Postman instances..."
+    if pgrep -f "postman" > /dev/null; then
+        log_info "Stopping running Postman instances..."
+        pkill -f postman || log_warn "Could not stop Postman (process might have ended)"
+        sleep 2
+    fi
+
+    # Remove previous installation if it exists
+    if [ -d "$POSTMAN_INSTALL_DIR" ]; then
+        log_info "Removing previous installation..."
+        rm -rf "$POSTMAN_INSTALL_DIR"
+    fi
+
+    # Create installation directory
+    mkdir -p "$POSTMAN_INSTALL_DIR"
+
+    # Install
+    log_info "Installing to $POSTMAN_INSTALL_DIR..."
+    if ! mv "$extracted_dir"/* "$POSTMAN_INSTALL_DIR/"; then
+        rm -rf "$temp_dir"
+        log_error "Failed to move files to installation directory."
+        return 1
+    fi
+
+    # Set executable permissions
+    if [ -f "$POSTMAN_INSTALL_DIR/Postman" ]; then
+        chmod +x "$POSTMAN_INSTALL_DIR/Postman" || log_warn "Failed to set executable permissions"
+    fi
+
+    # Create desktop entry
+    create_postman_desktop_entry "$POSTMAN_INSTALL_DIR" "$POSTMAN_APP_DIR"
+
+    # Clean up temp directory
+    log_info "Cleaning up temporary files..."
+    rm -rf "$temp_dir"
+
+    log_info "Postman installed successfully!"
+    log_info "Installation directory: $POSTMAN_INSTALL_DIR"
+    log_info "You can launch Postman from your application menu or by running:"
+    log_info "  $POSTMAN_INSTALL_DIR/Postman"
+}
+
+# --- Common functions ---
+add_to_path() {
+    local bin_dir="$1"
+    if ! echo "$PATH" | grep -q "$bin_dir"; then
+        echo "export PATH=\"$bin_dir:\$PATH\"" >> "$HOME/.bashrc"
+        export PATH="$bin_dir:$PATH"
+        log_info "Added $bin_dir to PATH in .bashrc"
+    fi
+}
+
+create_uninstaller() {
+    local install_dir="$1"
+    local bin_dir="$2"
+    local bin_name="$3"
+    local desktop_file="$4"
+
+    cat > "$install_dir/uninstall.sh" <<EOF
+#!/bin/bash
+set -e
+
+echo "Uninstalling..."
+rm -f "$bin_dir/$bin_name"
+rm -f "$desktop_file"
+update-desktop-database ~/.local/share/applications 2>/dev/null || true
+sed -i '/.local\/bin/d' ~/.bashrc
+rm -rf "$install_dir"
+echo "✅ Uninstallation complete"
+EOF
+    chmod +x "$install_dir/uninstall.sh"
+}
+
+# --- VS Code Installation ---
+install_vscode_headless() {
+    log_info "Installing Visual Studio Code..."
+
+    # Configuration
+    local vscode_url="https://code.visualstudio.com/sha/download?build=stable&os=linux-x64"
+    local temp_dir=$(mktemp -d)
+    local install_dir="$HOME/.vscode"
+    local bin_dir="$HOME/.local/bin"
+    local desktop_file="$HOME/.local/share/applications/code.desktop"
+
+     # Cleanup function - defined after temp_dir is assigned
+        cleanup() {
+            if [[ -n "${temp_dir:-}" && -d "$temp_dir" ]]; then
+                rm -rf "$temp_dir"
+            fi
+             # Only clean install_dir if it exists and is empty (safe cleanup)
+                    if [[ -n "${install_dir:-}" && -d "$install_dir" && -z "$(ls -A "$install_dir" 2>/dev/null)" ]]; then
+                        rmdir "$install_dir" 2>/dev/null || true
+                    fi
+        }
+    trap cleanup EXIT
+
+    # Check for existing installation
+    if [[ -d "$install_dir" ]]; then
+        log_warn "Existing VS Code installation found at $install_dir"
+        read -p "Overwrite? [y/N] " -n 1 -r
+        echo
+        [[ ! $REPLY =~ ^[Yy]$ ]] && return 1
+        rm -rf "$install_dir"
+    fi
+
+    # Download
+    log_info "Downloading Visual Studio Code..."
+    if ! curl -sSLf -o "$temp_dir/vscode.tar.gz" "$vscode_url"; then
+        log_error "Download failed! Check network connection or URL"
+        return 1
+    fi
+
+    # Verify download
+    if [ ! -s "$temp_dir/vscode.tar.gz" ]; then
+        log_error "Downloaded file is empty or corrupted"
+        return 1
+    fi
+
+    # Extract
+    log_info "Extracting Visual Studio Code..."
+    mkdir -p "$install_dir"
+    if ! tar -xzf "$temp_dir/vscode.tar.gz" -C "$install_dir" --strip-components=1; then
+        log_error "Extraction failed! Corrupted download?"
+        return 1
+    fi
+
+    # Create executable symlink
+    mkdir -p "$bin_dir"
+    ln -sf "$install_dir/bin/code" "$bin_dir/code"
+
+    # Ensure PATH setup
+    add_to_path "$bin_dir"
+
+    # GUI integration only if in desktop environment
+    if [ -n "$DISPLAY" ] && command -v xdg-mime &>/dev/null; then
+        log_info "Setting up GUI integration..."
+        mkdir -p "$(dirname "$desktop_file")"
+
+        # Create desktop entry
+        cat > "$desktop_file" <<EOF
+[Desktop Entry]
+Name=Visual Studio Code
+Comment=Code Editing. Redefined.
+Exec=$bin_dir/code --unity-launch %F
+Icon=$install_dir/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=Code
+MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
+EOF
+
+        # Set file associations
+        xdg-mime default code.desktop text/plain application/json text/x-python text/markdown text/x-shellscript 2>/dev/null || true
+
+        update-desktop-database ~/.local/share/applications
+        log_info "GUI setup complete"
+    else
+        log_warn "Skipping GUI setup (no display detected)"
+    fi
+
+    # Create uninstaller
+    create_uninstaller "$install_dir" "$bin_dir" "code" "$desktop_file"
+
+    log_info "Visual Studio Code installed successfully!"
+    log_info "Launch with: code"
+    log_info "Uninstall with: $install_dir/uninstall.sh"
+}
+
+# --- VSCodium Installation ---
+install_vscodium_headless() {
+    log_info "Installing VSCodium..."
+
+    # Configuration
+    local version="1.100.33714"
+    local vscodium_url="https://github.com/VSCodium/vscodium/releases/download/$version/VSCodium-linux-x64-$version.tar.gz"
+    local temp_dir=$(mktemp -d)
+    local install_dir="$HOME/.vscodium"
+    local bin_dir="$HOME/.local/bin"
+    local desktop_file="$HOME/.local/share/applications/vscodium.desktop"
+
+     # Cleanup function - defined after temp_dir is assigned
+        cleanup() {
+            if [[ -n "${temp_dir:-}" && -d "$temp_dir" ]]; then
+                rm -rf "$temp_dir"
+            fi
+             # Only clean install_dir if it exists and is empty (safe cleanup)
+                    if [[ -n "${install_dir:-}" && -d "$install_dir" && -z "$(ls -A "$install_dir" 2>/dev/null)" ]]; then
+                        rmdir "$install_dir" 2>/dev/null || true
+                    fi
+        }
+    trap cleanup EXIT
+
+    # Check for existing installation
+    if [[ -d "$install_dir" ]]; then
+        log_warn "Existing VSCodium installation found at $install_dir"
+        read -p "Overwrite? [y/N] " -n 1 -r
+        echo
+        [[ ! $REPLY =~ ^[Yy]$ ]] && return 1
+        rm -rf "$install_dir"
+    fi
+
+    # Download
+    log_info "Downloading VSCodium $version..."
+    if ! curl -sSLf -o "$temp_dir/vscodium.tar.gz" "$vscodium_url"; then
+        log_error "Download failed! Please check the URL and version."
+        return 1
+    fi
+
+    # Verify download
+    if [ ! -s "$temp_dir/vscodium.tar.gz" ]; then
+        log_error "Downloaded file is empty or corrupted"
+        return 1
+    fi
+
+    # Extract
+    log_info "Extracting VSCodium..."
+    mkdir -p "$install_dir"
+    if ! tar -xzf "$temp_dir/vscodium.tar.gz" -C "$install_dir" --strip-components=1; then
+        log_error "Extraction failed! Corrupted download?"
+        return 1
+    fi
+
+    # Create executable symlink
+    mkdir -p "$bin_dir"
+    ln -sf "$install_dir/bin/codium" "$bin_dir/codium"
+
+    # Ensure PATH setup
+    add_to_path "$bin_dir"
+
+    # GUI integration only if in desktop environment
+    if [ -n "$DISPLAY" ] && command -v xdg-mime &>/dev/null; then
+        log_info "Setting up GUI integration..."
+        mkdir -p "$(dirname "$desktop_file")"
+
+        # Create desktop entry
+        cat > "$desktop_file" <<EOF
+[Desktop Entry]
+Name=VSCodium
+Comment=Code Editing. Redefined. (VSCodium)
+Exec=$bin_dir/codium --unity-launch %F
+Icon=$install_dir/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=codium
+MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
+EOF
+
+        # Set file associations
+        xdg-mime default vscodium.desktop text/plain application/json text/x-python text/markdown 2>/dev/null || true
+
+        update-desktop-database ~/.local/share/applications
+        log_info "GUI setup complete"
+    else
+        log_warn "Skipping GUI setup (no display detected)"
+    fi
+
+    # Create uninstaller
+    create_uninstaller "$install_dir" "$bin_dir" "codium" "$desktop_file"
+
+    log_info "VSCodium $version installed successfully!"
+    log_info "Launch with: codium"
+    log_info "Uninstall with: $install_dir/uninstall.sh"
+}
+
+
 upgrade
 # install_build_essential
 # install_unzip
@@ -927,5 +1093,6 @@ upgrade
 # install_vscode_headless
 # install_vscodium_headless
 # install_discord
+# install_postman
 upgrade
 autoremove
