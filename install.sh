@@ -792,7 +792,109 @@ EOF
   echo "Uninstall with: $install_dir/uninstall.sh"
 }
 
+set -euo pipefail
 
+log_info()  { echo -e "\n[INFO]  $1"; }
+log_warn()  { echo -e "\n[WARN]  $1"; }
+log_error() { echo -e "\n[ERROR] $1" >&2; }
+
+install_discord() {
+    local install_dir="$HOME/.local/opt/Discord"
+    local app_dir="$HOME/.local/share/applications"
+    local icon_dir="$HOME/.local/share/icons"
+    local discord_url="https://discord.com/api/download?platform=linux&format=tar.gz"
+
+    log_info "Installing Discord..."
+
+    # Check dependencies
+    if ! command -v curl &> /dev/null; then
+        log_error "curl is required but not installed. Please install curl."
+        return 1
+    fi
+
+    if ! command -v tar &> /dev/null; then
+        log_error "tar is required but not installed. Please install tar."
+        return 1
+    fi
+
+    # Create necessary directories
+    mkdir -p "$install_dir" "$app_dir" "$icon_dir"
+
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    trap 'if [ -n "${temp_dir-}" ] && [ -d "$temp_dir" ]; then rm -rf "$temp_dir"; fi' EXIT
+
+    # Download
+    log_info "Downloading Discord package..."
+    if ! curl -sSLf -o "$temp_dir/discord.tar.gz" "$discord_url"; then
+        log_error "Failed to download Discord. Check your internet connection."
+        return 1
+    fi
+
+    # Verify download
+    if [ ! -s "$temp_dir/discord.tar.gz" ]; then
+        log_error "Downloaded file is empty or corrupted."
+        return 1
+    fi
+
+    # Extract
+    log_info "Extracting package..."
+    if ! tar -xzf "$temp_dir/discord.tar.gz" -C "$temp_dir"; then
+        log_error "Failed to extract the archive. The file may be corrupted."
+        return 1
+    fi
+
+    local extracted_dir="$temp_dir/Discord"
+    if [ ! -d "$extracted_dir" ]; then
+        log_error "Extracted 'Discord' directory not found."
+        return 1
+    fi
+
+    # Check if extracted directory has content
+    if [ -z "$(ls -A "$extracted_dir")" ]; then
+        log_error "Extracted directory is empty."
+        return 1
+    fi
+
+    # Stop any running Discord instances to prevent conflicts
+    log_info "Checking for running Discord instances..."
+    if pgrep -x "discord" > /dev/null; then
+        log_info "Stopping running Discord instances..."
+        pkill -x discord || log_warn "Could not stop Discord (process might have ended)"
+        sleep 2
+    fi
+
+    # Install
+    log_info "Installing to $install_dir..."
+    rm -rf "$install_dir"
+    mkdir -p "$install_dir"
+    if ! mv "$extracted_dir"/* "$install_dir/"; then
+        log_error "Failed to move files to installation directory."
+        return 1
+    fi
+
+    # Set executable permissions
+    if [ -f "$install_dir/Discord" ]; then
+        chmod +x "$install_dir/Discord" || log_warn "Failed to set executable permissions"
+    fi
+    
+     # Desktop integration (optional)
+    if [ -f "$install_dir/discord.desktop" ]; then
+        log_info "Updating desktop entry..."
+        cp "$install_dir/discord.desktop" "$HOME/.local/share/applications/"
+        update-desktop-database "$HOME/.local/share/applications/" || true
+    fi
+    
+    # Copy icon to standard location for easier access
+    if [ -f "$install_dir/discord.png" ]; then
+        cp "$install_dir/discord.png" "$icon_dir/discord.png" 2>/dev/null || true
+    fi
+
+    log_info "Discord installed successfully!"
+    log_info "Installation directory: $install_dir"
+    log_info "You can launch Discord from your application menu or by running:"
+    log_info "  $install_dir/Discord"
+}
 
 upgrade
 # install_build_essential
@@ -824,5 +926,6 @@ upgrade
 # install_mega_client
 # install_vscode_headless
 # install_vscodium_headless
+# install_discord
 upgrade
 autoremove
