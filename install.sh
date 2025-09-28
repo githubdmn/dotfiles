@@ -1156,7 +1156,7 @@ upgrade
 # install_vscodium_headless
 # install_discord
 # install_postman
-install_kate
+# install_kate
 
 upgrade
 autoremove
