@@ -1,0 +1,105 @@
+{
+  // ===== Editor Basics =====
+  "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "bold",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.autoIndent": "brackets",
+  "editor.tabSize": 4, // more standard for teams
+  "editor.insertSpaces": true, // avoids tab vs space issues
+  "editor.rulers": [
+    { "column": 80, "color": "#00FF0010" },
+    { "column": 100, "color": "#BDB76B15" },
+    { "column": 120, "color": "#FA807219" }
+  ],
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // ===== Language-Specific =====
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+
+  // ===== ESLint / Prettier =====
+  "eslint.validate": ["javascript", "typescript"],
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "prettier.trailingComma": "es5",
+
+  // ===== UI & Layout =====
+  "explorer.openEditors.visible": 1,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 5,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.sideBar.location": "right",
+  "workbench.panel.defaultLocation": "right",
+  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "workbench.iconTheme": "vscode-icons",
+
+  // ===== Terminal =====
+  "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold',  monospace, 'Droid Sans Mono'",
+  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.defaultProfile.linux": "JavaSE-21 LTS",
+  "terminal.integrated.defaultProfile.windows": "JavaSE-23",
+
+  // ===== Java Config =====
+  "java.configuration.runtimes": [
+    { "name": "JavaSE-1.8", "path": "/home/dmn/.config/.../java/8" },
+    { "name": "JavaSE-11", "path": "/home/dmn/.config/.../java/11" },
+    { "name": "JavaSE-17", "path": "/home/dmn/.config/.../java/17" },
+    {
+      "name": "JavaSE-21",
+      "path": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
+    },
+    {
+      "name": "JavaSE-23",
+      "path": "/home/dmn/.config/.../java/latest",
+      "default": true
+    }
+  ],
+  "java.import.gradle.java.home": "/home/dmn/.sdkman/candidates/java/21.0.5-tem",
+  "maven.executable.path": "/home/dmn/.config/.../maven/latest/bin/mvn",
+  "java.import.gradle.home": "/home/dmn/.config/.../gradle/latest",
+
+  // ===== Git =====
+  "git.autofetch": true,
+  "git.enableSmartCommit": false, // safer (avoid accidental commits)
+  "git.confirmSync": true, // safer sync confirmation
+  "scm.showIncomingChanges": "always",
+  "scm.showOutgoingChanges": "always",
+
+  // ===== Security & Privacy =====
+  "telemetry.telemetryLevel": "off",
+  "security.workspace.trust.untrustedFiles": "prompt", // safer than "open"
+
+  // ===== Misc =====
+  "files.eol": "\n",
+  "cSpell.diagnosticLevel": "Hint",
+  "trailing-spaces.backgroundColor": "rgba(255,0,0,0.1)",
+  "trailing-spaces.includeEmptyLines": false,
+  "emmet.variables": { "lang": "en" }
+}

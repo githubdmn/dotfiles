@@ -1,88 +1,117 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Log file (user-writable)
+LOG_FILE="$HOME/custom-update.log"
+
+
+log() {
+    local msg="$1"
+    echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] $msg" | tee -a "$LOG_FILE"
+}
 
 # Function to update the package index
 update() {
-    echo "Updating package index..."
-    sudo apt update
+    log "Updating package index..."
+    sudo apt update | tee -a "$LOG_FILE"
 }
 
-# Function to upgrade installed packages
+# Function to upgrade installed packages safely
 upgrade() {
-    echo "Upgrading installed packages..."
+    log "Upgrading installed packages..."
     update
-    sudo apt full-upgrade -y
+    sudo apt upgrade -y | tee -a "$LOG_FILE"
 }
 
 # Function to remove unnecessary packages
 autoremove() {
-    echo "Removing unnecessary packages..."
-    sudo apt autoremove -y
+    log "Removing unnecessary packages..."
+    sudo apt autoremove -y | tee -a "$LOG_FILE"
 }
 
-# Function to update Oh My Bash
+# Function to update Oh My Bash safely
 update_oh_my_bash() {
-    # Set Oh My Bash directory
     local OSH="${OSH:-$HOME/.oh-my-bash}"
-    
-    # Check if Oh My Bash is installed
+
     if [[ ! -d "$OSH" ]]; then
-        echo "Oh My Bash not found. Skipping update."
+        log "Oh My Bash not found at $OSH. Skipping update."
         return 0
     fi
 
-    echo "Checking for Oh My Bash updates..."
-    
-    # Navigate to Oh My Bash directory
-    if ! cd "$OSH"; then
-        echo "Failed to enter Oh My Bash directory"
-        return 1
-    fi
+    log "Updating Oh My Bash..."
 
-    # Remove oh-my-bash/check_for_upgrade: Failed to get a lock.
-    echo "Remove oh-my-bash/check_for_upgrade: Failed to get a lock."
-    rm -rf "${OSH}/log/update.lock"
+    # Remove stale lock file
+    rm -f "${OSH}/log/update.lock"
 
     local stash_created=false
-    
-    # Check for local changes
+
+    pushd "$OSH" > /dev/null
+
+    # Check for local modifications
     if ! git diff-index --quiet HEAD --; then
-        echo "Stashing local Oh My Bash modifications..."
+        log "Stashing local Oh My Bash modifications..."
         git stash push -m "Oh My Bash update stash $(date +%Y-%m-%d)"
         stash_created=true
     fi
 
-    # Perform the update
-    if git pull; then
+    if git pull | tee -a "$LOG_FILE"; then
         if [[ "$stash_created" == true ]]; then
-            echo "Applying stashed changes..."
-            if ! git stash pop; then
-                echo "Conflict detected! Manual resolution required in: $OSH"
+            log "Applying stashed changes..."
+            if ! git stash pop | tee -a "$LOG_FILE"; then
+                log "Conflict detected! Manual resolution required in $OSH"
+                popd > /dev/null
                 return 1
             fi
         fi
-        echo "Oh My Bash updated successfully."
-        # Source the updated version
-        source "$OSH"/oh-my-bash.sh
+        log "Oh My Bash updated successfully."
+        source "$OSH/oh-my-bash.sh"
     else
-        echo "Failed to update Oh My Bash"
+        log "Failed to update Oh My Bash"
+        popd > /dev/null
         return 1
     fi
+
+    popd > /dev/null
 }
+
+
+# CLEAR CACHE
+# sudo rm -rf /var/lib/apt/lists/*
+
 
 # Main function to manage updates and upgrades
 main() {
-    # echo "This script will update and upgrade your system."
-    # read -p "Do you want to proceed? (y/n): " answer
 
-    # if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
-        upgrade
-        autoremove
-        update_oh_my_bash
-        echo "Update and upgrade completed successfully."
-    # else
-    #   echo "Operation canceled."
-    # fi
+    log "⚠️ #Clear cache sudo rm -rf /var/lib/apt/lists/*"
+
+    log "Starting system and Oh My Bash update (auto-confirmed)..."
+
+    local status=0
+
+    if ! upgrade; then
+        log "Package upgrade failed!"
+        status=1
+    fi
+
+    if ! autoremove; then
+        log "Autoremove failed!"
+        status=1
+    fi
+
+    if ! update_oh_my_bash; then
+        log "Oh My Bash update failed!"
+        status=1
+    fi
+
+    if [[ $status -eq 0 ]]; then
+        log "✅ All updates completed successfully."
+    else
+        log "⚠️ Some steps failed. Check the log at $LOG_FILE."
+        exit 1
+    fi
 }
 
-# Execute the main function
-main
+# Execute main if script is run directly
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

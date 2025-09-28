@@ -1061,6 +1061,68 @@ EOF
     log_info "Uninstall with: $install_dir/uninstall.sh"
 }
 
+install_kate() {
+  : "${DEVROOT:=$HOME/projects/kde}"         
+  : "${SRC_DIR:=$DEVROOT/src}"
+  : "${BUILD_DIR:=$DEVROOT/build}"
+  : "${INSTALL_DIR:=$DEVROOT/usr}"
+  : "${KDESRC_BUILD_REPO:=https://invent.kde.org/sdk/kdesrc-build.git}"
+  : "${BRANCH_GROUP:=kf6-qt6}"
+  : "${CMAKE_OPTS:=-G Ninja -DBUILD_WITH_QT6=ON -DQT_MAJOR_VERSION=6 -DPHONON_BUILD_QT5=OFF -DBUILD_QT5=OFF}"
+
+  mkdir -p "$SRC_DIR" "$BUILD_DIR" "$INSTALL_DIR"
+
+  if [ ! -d "$SRC_DIR/kdesrc-build" ]; then
+    echo "Cloning kdesrc-build..."
+    git clone "$KDESRC_BUILD_REPO" "$SRC_DIR/kdesrc-build"
+  else
+    echo "Updating existing kdesrc-build..."
+    (cd "$SRC_DIR/kdesrc-build" && git pull)
+  fi
+
+  if [ -d "$HOME/bin" ] && [ ! -e "$HOME/bin/kdesrc-build" ]; then
+    ln -s "$SRC_DIR/kdesrc-build/kdesrc-build" "$HOME/bin/kdesrc-build"
+    echo "Symlinked kdesrc-build to ~/bin"
+  fi
+
+  KDE_CONF="$HOME/.config/kdesrc-buildrc"
+  if [ ! -f "$KDE_CONF" ]; then
+    mkdir -p "$(dirname "$KDE_CONF")"
+    cat > "$KDE_CONF" <<EOF
+global
+    branch-group $BRANCH_GROUP
+    cmake-options $CMAKE_OPTS
+    compile-commands-export yes
+    compile-commands-linking yes
+    directory-layout flat
+    install-dir $INSTALL_DIR
+    source-dir $SRC_DIR
+    build-dir $BUILD_DIR
+end global
+
+include \${module-definitions-dir}/kf6-qt6.ksb
+EOF
+    echo "Created kdesrc-build configuration at $KDE_CONF"
+  else
+    echo "$KDE_CONF already exists; not overwriting"
+  fi
+
+  echo "Running kdesrc-build initial setup..."
+  "$SRC_DIR/kdesrc-build/kdesrc-build" --initial-setup
+
+  echo "Building Kate..."
+  "$SRC_DIR/kdesrc-build/kdesrc-build" --include-dependencies kate
+
+  echo "Building integration modules..."
+  "$SRC_DIR/kdesrc-build/kdesrc-build" --include-dependencies breeze plasma-integration kwayland-integration konsole kate
+
+  echo
+  echo "✅ Kate build complete."
+  echo "To run your locally built Kate:"
+  echo "    source $BUILD_DIR/kate/prefix.sh"
+  echo "    kate"
+}
+
 
 upgrade
 # install_build_essential
@@ -1094,5 +1156,7 @@ upgrade
 # install_vscodium_headless
 # install_discord
 # install_postman
+install_kate
+
 upgrade
 autoremove
