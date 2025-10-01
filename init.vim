@@ -48,7 +48,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
  "Plug 'fatih/vim-go'
-  Plug 'c.vim'
+ "Plug 'c.vim'
   Plug 'ray-x/go.nvim'
   Plug 'dracula/vim',{'name': 'dracula'}
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
@@ -56,7 +56,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'gosukiwi/vim-atom-dark'
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'b4b4r07/vim-sqlfmt'
- 
+  Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+  Plug 'shaunsingh/nord.nvim' 
 call plug#end()
 
 "Config Section
@@ -74,5 +75,8 @@ let g:sqlfmt_options = "-r -k upper"
 "colorscheme onehalfdark
 "colorscheme onehalflight
 "colorscheme dracula
-
-
+"colorscheme catppuccin-latte
+colorscheme catppuccin-frappe
+"colorscheme catppuccin-macchiato
+"colorscheme catppuccin-mocha
+"colorscheme nord
