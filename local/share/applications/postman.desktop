@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Postman
+Exec=/home/dmn/.local/opt/Postman/Postman
+Icon=/home/dmn/.local/opt/Postman/app/resources/app/assets/icon.png
+Type=Application
+Categories=Development;Network;
+StartupWMClass=postman
+Comment=API Development Environment
+Keywords=api;rest;http;testing;development;

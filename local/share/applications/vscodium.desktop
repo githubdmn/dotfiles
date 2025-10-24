@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=VSCodium
+Comment=Code Editing. Redefined. (VSCodium)
+Exec=/home/dmn/.local/bin/codium --unity-launch %F
+Icon=/home/dmn/.vscodium/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=codium
+MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
