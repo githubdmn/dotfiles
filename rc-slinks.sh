@@ -10,7 +10,6 @@ function create_links() {
 	ln -sv ${HOME}/dotfiles/bashrc ${HOME}/.bashrc
 	ln -sv ${HOME}/dotfiles/tmux.conf ${HOME}/.tmux.conf
 	ln -sv ${HOME}/dotfiles/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
-	ln -sv ${HOME}/dotfiles/xfce4-panel/netload-7.rc ${HOME}/.config/xfce4/panel/netload-7.rc
 	ln -sv ${HOME}/dotfiles/xfce4-panel/xfce4-clipman-actions.xml ${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml
 
 	# Ensure that your custom lambda.theme.sh is used, even after git pull
@@ -47,8 +46,6 @@ function prepare_mousepad_theme() {
 	mkdir -p ${HOME}/.local/share/gtksourceview-4/styles
 	ln -s -v ${HOME}/dotfiles/mousepad-themes/* ${HOME}/.local/share/gtksourceview-4/styles/
 }
-
-#!/bin/bash
 
 function link_autostart_entries() {
 	echo "Linking autostart .desktop files..."
