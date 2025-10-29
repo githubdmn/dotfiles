@@ -116,7 +116,7 @@ source $OSH/oh-my-bash.sh
 alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"githubdmn\""
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
 alias upgrade="~/dotfiles/upgrade.sh"
-alias update_apps="~/dotfiles/update_app.sh"
+alias update_apps="~/dotfiles/update_apps.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 
 nvimbash() {

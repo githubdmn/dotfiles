@@ -333,25 +333,31 @@ EOF
 # Robust VSCodium installer with comprehensive error handling
 install_vscodium() {
     set -euo pipefail  # Exit on error, undefined variable, or pipe failure
-    
+    #set +u 
     local version="${1:-1.105.17075}"  # Allow version override, default to 1.105.17075
     local install_dir="$HOME/.local/opt/VSCodium"
     local codium_url="https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz"
     local temp_dir=""
+    #set -u  # Re-enable unbound variable check
 
+ 		# Create temp directory
+    temp_dir=$(mktemp -d)
+    
+    # Use a separate variable for cleanup to avoid unbound variable issues
+    local cleanup_dir="$temp_dir"
+    
     # Cleanup function
     cleanup() {
-        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
-            rm -rf "$temp_dir"
+        if [[ -n "$cleanup_dir" ]] && [[ -d "$cleanup_dir" ]]; then
+            echo "[INFO] Cleaning up temporary files..."
+            rm -rf "$cleanup_dir"
         fi
     }
+    
     trap cleanup EXIT INT TERM
 
     echo "[INFO] Starting VSCodium installation/update..."
     echo "[INFO] Version: $version"
-    
-    # Create temp directory
-    temp_dir=$(mktemp -d)
 
     # Download
     echo "[INFO] Downloading VSCodium..."
