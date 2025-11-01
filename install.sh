@@ -659,6 +659,220 @@ generate_rsa_key() {
   fi
 }
 
+
+
+install_bruno() {
+    set -e  # Exit on any error
+    
+    echo "Installing Bruno..."
+    
+    # Update package list
+    if ! sudo apt update; then
+        echo "Error: Failed to update package lists" >&2
+        return 1
+    fi
+    
+    # Install dependencies
+    if ! sudo apt install -y gpg curl; then
+        echo "Error: Failed to install dependencies" >&2
+        return 1
+    fi
+    
+    # Create keyrings directory if it doesn't exist
+    sudo mkdir -p /etc/apt/keyrings
+    
+    # Download and add GPG key
+    if ! curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9FA6017ECABE0266" \
+        | gpg --dearmor \
+        | sudo tee /etc/apt/keyrings/bruno.gpg > /dev/null; then
+        echo "Error: Failed to download and add GPG key" >&2
+        return 1
+    fi
+    
+    # Set appropriate permissions
+    sudo chmod 644 /etc/apt/keyrings/bruno.gpg
+    
+    # Add Bruno repository
+    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable" \
+        | sudo tee /etc/apt/sources.list.d/bruno.list
+    
+    # Update package list with new repository
+    if ! sudo apt update; then
+        echo "Error: Failed to update package lists after adding Bruno repository" >&2
+        return 1
+    fi
+    
+    # Install Bruno
+    if sudo apt install -y bruno; then
+        echo "✅ Bruno installed successfully!"
+    else
+        echo "Error: Failed to install Bruno" >&2
+        return 1
+    fi
+}
+
+
+# ==========================
+# VSCodium
+# ==========================
+
+# Robust VSCodium installer with comprehensive error handling
+install_vscodium() {
+    set -euo pipefail  # Exit on error, undefined variable, or pipe failure
+    #set +u 
+    local version="${1:-1.105.17075}"  # Allow version override, default to 1.105.17075
+    local install_dir="$HOME/.local/opt/VSCodium"
+    local codium_url="https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz"
+    local temp_dir=""
+    #set -u  # Re-enable unbound variable check
+
+ 		# Create temp directory
+    temp_dir=$(mktemp -d)
+    
+    # Use a separate variable for cleanup to avoid unbound variable issues
+    local cleanup_dir="$temp_dir"
+    
+    # Cleanup function
+    cleanup() {
+        if [[ -n "$cleanup_dir" ]] && [[ -d "$cleanup_dir" ]]; then
+            echo "[INFO] Cleaning up temporary files..."
+            rm -rf "$cleanup_dir"
+        fi
+    }
+    
+    trap cleanup EXIT INT TERM
+
+    echo "[INFO] Starting VSCodium installation/update..."
+    echo "[INFO] Version: $version"
+
+    # Download
+    echo "[INFO] Downloading VSCodium..."
+    if ! wget -q --show-progress -O "$temp_dir/vscodium.tar.gz" "$codium_url"; then
+        echo "[ERROR] Failed to download VSCodium."
+        echo "[ERROR] URL: $codium_url"
+        return 1
+    fi
+
+    # Verify download
+    if [[ ! -s "$temp_dir/vscodium.tar.gz" ]]; then
+        echo "[ERROR] Downloaded file is empty"
+        return 1
+    fi
+
+    # Extract with --strip-components to remove top-level directory
+    echo "[INFO] Extracting archive..."
+    if ! tar -xzf "$temp_dir/vscodium.tar.gz" -C "$temp_dir" --strip-components=1; then
+        echo "[ERROR] Failed to extract VSCodium archive."
+        return 1
+    fi
+
+    # Verify extraction - VSCodium binary should be at bin/codium
+    if [[ ! -f "$temp_dir/bin/codium" ]] && [[ ! -f "$temp_dir/codium" ]]; then
+        echo "[ERROR] VSCodium binary not found after extraction"
+        echo "[ERROR] Contents of extracted directory:"
+        ls -la "$temp_dir" | head -20
+        return 1
+    fi
+
+    # Stop running instances
+    echo "[INFO] Stopping running VSCodium instances..."
+    pkill -x codium 2>/dev/null || true
+    sleep 1
+
+    # Install
+    echo "[INFO] Installing VSCodium..."
+    rm -rf "$install_dir"
+    mkdir -p "$install_dir"
+    cp -r "$temp_dir"/* "$install_dir/"
+
+    # Create symlink
+    mkdir -p "$HOME/.local/bin"
+    if [[ -f "$install_dir/bin/codium" ]]; then
+        ln -sf "$install_dir/bin/codium" "$HOME/.local/bin/codium"
+    else
+        ln -sf "$install_dir/codium" "$HOME/.local/bin/codium"
+    fi
+    chmod +x "$HOME/.local/bin/codium"
+
+    # Desktop integration
+    echo "[INFO] Creating desktop entry..."
+    mkdir -p "$HOME/.local/share/applications"
+    
+    # VSCodium uses the same icon as VS Code
+    local icon_path="$install_dir/resources/app/resources/linux/code.png"
+    if [[ ! -f "$icon_path" ]]; then
+        icon_path="vscodium"  # Fallback to system icon
+    fi
+    
+    cat > "$HOME/.local/share/applications/vscodium.desktop" <<EOF
+[Desktop Entry]
+Name=VSCodium
+Comment=Code Editing. Redefined. (Open Source)
+Exec=$HOME/.local/bin/codium %F
+Icon=$icon_path
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=VSCodium
+MimeType=text/plain;application/json;text/x-python;text/markdown;text/x-markdown;application/x-shellscript;application/javascript;text/x-yaml;application/x-yaml;text/x-typescript;text/x-rust;text/x-go;text/css;text/html;
+EOF
+
+    if command -v update-desktop-database >/dev/null 2>&1; then
+        update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+    fi
+
+    echo "[SUCCESS] VSCodium installed successfully!"
+    echo "          Version: $version"
+    echo "          Installation directory: $install_dir"
+    echo "          Launch with: codium"
+    
+    # Verify installation
+    if command -v codium >/dev/null 2>&1; then
+        echo "          ✓ 'codium' command is available"
+    else
+        echo "          ⚠ Add ~/.local/bin to your PATH if not already done"
+        echo "          export PATH=\"\$HOME/.local/bin:\$PATH\""
+    fi
+}
+
+# Auto-fetch latest version installer
+install_vscodium_latest() {
+    set -euo pipefail
+    
+    local temp_dir=""
+    
+    # Cleanup function
+    cleanup() {
+        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
+            rm -rf "$temp_dir"
+        fi
+    }
+    trap cleanup EXIT INT TERM
+    
+    echo "[INFO] Fetching latest VSCodium version..."
+    
+    # Get latest version from GitHub API
+    local latest_version
+    if command -v jq >/dev/null 2>&1; then
+        latest_version=$(curl -fsSL https://api.github.com/repos/VSCodium/vscodium/releases/latest | jq -r '.tag_name')
+    else
+        latest_version=$(curl -fsSL https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
+    fi
+    
+    if [[ -z "$latest_version" ]]; then
+        echo "[ERROR] Could not determine latest version"
+        echo "[INFO] Falling back to version 1.105.17075"
+        latest_version="1.105.17075"
+    else
+        echo "[INFO] Latest version: $latest_version"
+    fi
+    
+    # Call the main installer with the detected version
+    install_vscodium_robust "$latest_version"
+}
+
+
 upgrade
 # install_build_essential
 # install_unzip
@@ -687,10 +901,8 @@ upgrade
 # install_ohmybash
 # install_dropbox_headless
 # install_mega_client
-# install_vscode_headless
-# install_vscodium_headless
-# install_discord
-# install_postman
+# install_bruno
+# install_vscodium_latest
 
 upgrade
 autoremove

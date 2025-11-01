@@ -343,14 +343,11 @@ install_vscodium() {
  		# Create temp directory
     temp_dir=$(mktemp -d)
     
-    # Use a separate variable for cleanup to avoid unbound variable issues
-    local cleanup_dir="$temp_dir"
-    
     # Cleanup function
     cleanup() {
-        if [[ -n "$cleanup_dir" ]] && [[ -d "$cleanup_dir" ]]; then
+        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
             echo "[INFO] Cleaning up temporary files..."
-            rm -rf "$cleanup_dir"
+            rm -rf "$temp_dir"
         fi
     }
     
@@ -483,7 +480,7 @@ install_vscodium_latest() {
     fi
     
     # Call the main installer with the detected version
-    install_vscodium_robust "$latest_version"
+    install_vscodium "$latest_version"
 }
 
 # Combined installer with version options
@@ -567,7 +564,7 @@ main() {
             update_discord
             update_postman
             install_vscode
-            install_vscodium
+            install_vscodium_latest
             ;;
         *)
             log_error "Unknown command: $cmd"
