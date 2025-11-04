@@ -9,7 +9,7 @@
   "editor.tabSize": 4, // more standard for teams
   "editor.insertSpaces": true, // avoids tab vs space issues
   "editor.rulers": [
-    { "column": 80, "color": "#00FF0010" },
+    { "column": 80, "color": "#00ff5510" },
     { "column": 100, "color": "#BDB76B15" },
     { "column": 120, "color": "#FA807219" }
   ],
@@ -58,32 +58,21 @@
   "workbench.iconTheme": "vscode-icons",
 
   // ===== Terminal =====
-  "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold',  monospace, 'Droid Sans Mono'",
+  "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold', monospace, 'Droid Sans Mono'",
   "terminal.integrated.fontWeight": "bold",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.cursorStyle": "underline",
   "terminal.integrated.enablePersistentSessions": true,
-  "terminal.integrated.defaultProfile.linux": "JavaSE-21 LTS",
-  "terminal.integrated.defaultProfile.windows": "JavaSE-23",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "terminal-bash",
+      "args": ["--login"]  // This loads your profile scripts
+    },
+  },
 
   // ===== Java Config =====
-  "java.configuration.runtimes": [
-    { "name": "JavaSE-1.8", "path": "/home/dmn/.config/.../java/8" },
-    { "name": "JavaSE-11", "path": "/home/dmn/.config/.../java/11" },
-    { "name": "JavaSE-17", "path": "/home/dmn/.config/.../java/17" },
-    {
-      "name": "JavaSE-21",
-      "path": "/home/dmn/.sdkman/candidates/java/21.0.5-tem"
-    },
-    {
-      "name": "JavaSE-23",
-      "path": "/home/dmn/.config/.../java/latest",
-      "default": true
-    }
-  ],
-  "java.import.gradle.java.home": "/home/dmn/.sdkman/candidates/java/21.0.5-tem",
-  "maven.executable.path": "/home/dmn/.config/.../maven/latest/bin/mvn",
-  "java.import.gradle.home": "/home/dmn/.config/.../gradle/latest",
 
   // ===== Git =====
   "git.autofetch": true,

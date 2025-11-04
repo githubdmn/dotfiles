@@ -7,7 +7,7 @@ set -euo pipefail  # Exit on error, undefined variables, pipe failures
 
 readonly USER="dmn"
 readonly DOTFILES_DIR="${HOME}/dotfiles"
-readonly BACKUP_DIR="${HOME}/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
+readonly BACKUP_DIR="${HOME}/dotfiles/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 
 # Color codes for output
 readonly RED='\033[0;31m'
