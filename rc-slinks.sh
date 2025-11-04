@@ -11,6 +11,9 @@ function create_links() {
 	ln -sv ${HOME}/dotfiles/tmux.conf ${HOME}/.tmux.conf
 	ln -sv ${HOME}/dotfiles/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
 	ln -sv ${HOME}/dotfiles/xfce4-panel/xfce4-clipman-actions.xml ${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml
+	ln -sv ${HOME}/dotfiles/vscode-backup/settings.json ${HOME}/.config/Code/User/settings.json
+	ln -sv ${HOME}/dotfiles/vscode-backup/settings.json ${HOME}/.config/VSCodium/User/settings.json
+	
 
 	# Ensure that your custom lambda.theme.sh is used, even after git pull
 	echo "Ensuring custom theme is used..."
@@ -33,6 +36,8 @@ function remove_files() {
 	rm -rv ${HOME}/.tmux.conf
 	rm -rv ${HOME}/.config/xfce4/terminal/terminalrc
 	rm -rv ${HOME}/.config/xfce4/panel
+	rm -rv ${HOME}/.config/Code/User/settings.json
+	rm -rv ${HOME}/.config/VSCodium/User/settings.json
 }
 
 function prepare_terminal_theme() {

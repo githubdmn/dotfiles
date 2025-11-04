@@ -1,3 +1,0 @@
-#EXTM3U
-#EXTVLCOPT:network-caching=1000
-http://radio.talkradio.co.uk/stream?awparams=platform:ts-web&amsparams=playerid:ts-web
