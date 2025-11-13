@@ -1,0 +1,1 @@
+/home/dmn/dotfiles/config/rc/bashrc

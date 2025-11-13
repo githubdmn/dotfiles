@@ -86,15 +86,15 @@ create_links() {
     
     # Array of source -> destination mappings
     local link_mappings=(
-        "${DOTFILES_DIR}/nanorc:${HOME}/.nanorc"
-        "${DOTFILES_DIR}/vimrc:${HOME}/.config/nvim/init.vim"
-        "${DOTFILES_DIR}/bashrc:${HOME}/.bashrc"
-        "${DOTFILES_DIR}/tmux.conf:${HOME}/.tmux.conf"
-        "${DOTFILES_DIR}/terminalrc:${HOME}/.config/xfce4/terminal/terminalrc"
-        "${DOTFILES_DIR}/xfce4-panel/xfce4-clipman-actions.xml:${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml"
+        "${DOTFILES_DIR}/config/rc/nanorc:${HOME}/.nanorc"
+        "${DOTFILES_DIR}/config/rc/vimrc:${HOME}/.config/nvim/init.vim"
+        "${DOTFILES_DIR}/config/rc/bashrc:${HOME}/.bashrc"
+        "${DOTFILES_DIR}/config/rc/tmux.conf:${HOME}/.tmux.conf"
+        "${DOTFILES_DIR}/config/rc/terminalrc:${HOME}/.config/xfce4/terminal/terminalrc"
+        "${DOTFILES_DIR}/config/rc/xfce4-panel/xfce4-clipman-actions.xml:${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml"
         "${DOTFILES_DIR}/vscode-backup/settings.json:${HOME}/.config/Code/User/settings.json"
         "${DOTFILES_DIR}/vscode-backup/settings.json:${HOME}/.config/VSCodium/User/settings.json"
-        "${DOTFILES_DIR}/lambda.theme.sh:${HOME}/.oh-my-bash/themes/lambda/lambda.theme.sh"
+        "${DOTFILES_DIR}/config/rc/lambda.theme.sh:${HOME}/.oh-my-bash/themes/lambda/lambda.theme.sh"
     )
     
     for mapping in "${link_mappings[@]}"; do

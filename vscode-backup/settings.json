@@ -90,5 +90,7 @@
   "cSpell.diagnosticLevel": "Hint",
   "trailing-spaces.backgroundColor": "rgba(255,0,0,0.1)",
   "trailing-spaces.includeEmptyLines": false,
-  "emmet.variables": { "lang": "en" }
+  "emmet.variables": {
+    "lang": "en"
+  }
 }

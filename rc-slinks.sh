@@ -5,12 +5,12 @@ user=dmn
 function create_links() {
 	echo "Creating symbolic links..."
 	# Create symlinks for configuration files
-	ln -sv ${HOME}/dotfiles/nanorc ${HOME}/.nanorc
-	ln -sv ${HOME}/dotfiles/vimrc ${HOME}/.config/nvim/init.vim
-	ln -sv ${HOME}/dotfiles/bashrc ${HOME}/.bashrc
-	ln -sv ${HOME}/dotfiles/tmux.conf ${HOME}/.tmux.conf
-	ln -sv ${HOME}/dotfiles/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
-	ln -sv ${HOME}/dotfiles/xfce4-panel/xfce4-clipman-actions.xml ${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml
+	ln -sv ${HOME}/dotfiles/config/rc/nanorc ${HOME}/.nanorc
+	ln -sv ${HOME}/dotfiles/config/rc/vimrc ${HOME}/.config/nvim/init.vim
+	ln -sv ${HOME}/dotfiles/config/rc/bashrc ${HOME}/.bashrc
+	ln -sv ${HOME}/dotfiles/config/rc/tmux.conf ${HOME}/.tmux.conf
+	ln -sv ${HOME}/dotfiles/config/rc/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
+	ln -sv ${HOME}/dotfiles/config/rc/xfce4-panel/xfce4-clipman-actions.xml ${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml
 	ln -sv ${HOME}/dotfiles/vscode-backup/settings.json ${HOME}/.config/Code/User/settings.json
 	ln -sv ${HOME}/dotfiles/vscode-backup/settings.json ${HOME}/.config/VSCodium/User/settings.json
 	
@@ -25,7 +25,7 @@ function create_links() {
 
 	# Create a symlink to your dotfiles theme
 	echo "Creating symlink for lambda.theme.sh..."
-	ln -sf ~/dotfiles/lambda.theme.sh ~/.oh-my-bash/themes/lambda/lambda.theme.sh
+	ln -sf ~/dotfiles/config/rc/lambda.theme.sh ~/.oh-my-bash/themes/lambda/lambda.theme.sh
 }
 
 function remove_files() {
