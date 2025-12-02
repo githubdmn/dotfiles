@@ -6,7 +6,7 @@ function create_links() {
 	echo "Creating symbolic links..."
 	# Create symlinks for configuration files
 	ln -sv ${HOME}/dotfiles/config/rc/nanorc ${HOME}/.nanorc
-	ln -sv ${HOME}/dotfiles/config/rc/vimrc ${HOME}/.config/nvim/init.vim
+	ln -sv ${HOME}/dotfiles/config/rc/init.vim ${HOME}/.config/nvim/init.vim
 	ln -sv ${HOME}/dotfiles/config/rc/bashrc ${HOME}/.bashrc
 	ln -sv ${HOME}/dotfiles/config/rc/tmux.conf ${HOME}/.tmux.conf
 	ln -sv ${HOME}/dotfiles/config/rc/terminalrc ${HOME}/.config/xfce4/terminal/terminalrc
@@ -34,6 +34,7 @@ function remove_files() {
 	rm -rv ${HOME}/.vimrc
 	rm -rv ${HOME}/.bashrc
 	rm -rv ${HOME}/.tmux.conf
+	rm -rv ${HOME}/.config/nvim/init.vim
 	rm -rv ${HOME}/.config/xfce4/terminal/terminalrc
 	rm -rv ${HOME}/.config/xfce4/panel
 	rm -rv ${HOME}/.config/Code/User/settings.json

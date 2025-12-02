@@ -32,6 +32,7 @@ backup_files() {
         "${HOME}/.vimrc"
         "${HOME}/.bashrc"
         "${HOME}/.tmux.conf"
+        "${HOME}/.config/nvim/init.vim"
         "${HOME}/.config/xfce4/terminal/terminalrc"
         "${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml"
         "${HOME}/.config/Code/User/settings.json"
@@ -59,6 +60,7 @@ remove_files() {
         "${HOME}/.vimrc"
         "${HOME}/.bashrc"
         "${HOME}/.tmux.conf"
+        "${HOME}/.config/nvim/init.vim"
         "${HOME}/.config/xfce4/terminal/terminalrc"
         "${HOME}/.config/xfce4/panel/xfce4-clipman-actions.xml"
         "${HOME}/.config/Code/User/settings.json"
@@ -86,8 +88,9 @@ create_links() {
     
     # Array of source -> destination mappings
     local link_mappings=(
-        "${DOTFILES_DIR}/config/rc/nanorc:${HOME}/.nanorc"
-        "${DOTFILES_DIR}/config/rc/vimrc:${HOME}/.config/nvim/init.vim"
+        "${DOTFILES_DIR}/config/rc/nanorc:${HOME}/.nanorc"        
+        "${DOTFILES_DIR}/config/rc/vimrc:${HOME}/.vimrc"
+        "${DOTFILES_DIR}/config/rc/init.vim:${HOME}/.config/nvim/init.vim"
         "${DOTFILES_DIR}/config/rc/bashrc:${HOME}/.bashrc"
         "${DOTFILES_DIR}/config/rc/tmux.conf:${HOME}/.tmux.conf"
         "${DOTFILES_DIR}/config/rc/terminalrc:${HOME}/.config/xfce4/terminal/terminalrc"
