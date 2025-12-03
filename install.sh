@@ -335,6 +335,68 @@ install_go() {
   go version
 }
 
+
+install_python() {
+  PYTHON_VERSION="3.12.1" 
+  echo "--- Running pyenv installer script ---"
+  curl https://pyenv.run | bash
+
+  ### bashrc ####
+    # export PYENV_ROOT="$HOME/.pyenv"
+    # export PATH="$PYENV_ROOT/bin:$PATH"
+    # eval "$(pyenv init --path)
+  ##############
+
+  # pyenv install --list
+  # pyenv install 3.11.2
+  # Set the New Version as Your Default
+  # pyenv global 3.11.2
+
+
+   echo "--- Adding pyenv configuration to ~/.bashrc ---"
+    # Append the necessary environment variables to the user's bash profile
+    cat <<EOF >> ~/.bashrc
+      # --- Added by install_python_env.sh script ---
+      export PYENV_ROOT="\$HOME/.pyenv"
+      export PATH="\$PYENV_ROOT/bin:\$PATH"
+      eval "\$(pyenv init --path)"
+      # ---------------------------------------------
+EOF
+    echo "Configuration added to ~/.bashrc"
+
+    # The current shell needs to be reloaded to recognize 'pyenv' commands immediately
+    echo "--- Reloading shell configuration (source ~/.bashrc) ---"
+    # Use 'source' to apply changes to the current script's environment
+    source ~/.bashrc
+
+    # Verify pyenv installation
+    if command -v pyenv > /dev/null; then
+        echo "pyenv installed successfully. Version: $(pyenv --version)"
+    else
+        echo "Error: pyenv command not found after install. Please check ~/.bashrc manually."
+        exit 1
+    fi
+
+    echo "--- Installing Python $PYTHON_VERSION via pyenv ---"
+    # This step will download and compile Python locally. It may take some time.
+    # Note: This might still throw a tkinter warning if system libs are missing, but it installs Python core.
+    pyenv install $PYTHON_VERSION
+
+    if [ $? -eq 0 ]; then
+        echo "Python $PYTHON_VERSION installed successfully."
+        echo "--- Setting Python $PYTHON_VERSION as global default ---"
+        pyenv global $PYTHON_VERSION
+        echo "Default Python version set to $PYTHON_VERSION."
+    else
+        echo "Error installing Python $PYTHON_VERSION. Compilation failed."
+        exit 1
+    fi
+
+    echo "--- Installation Complete ---"
+    echo "Please close and reopen your terminal session for changes to take full effect."
+    echo "You can verify the installation with: which python"
+}
+
 install_java() {
   # Set default version values if not provided
   version=${1:-21}      # Default version is 21
@@ -893,6 +955,7 @@ upgrade
 # install_ffmpeg
 # install_sqlite
 # install_go
+# install_python
 # install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
 # install_docker_debian
 # install_gradle
