@@ -68,8 +68,8 @@
     "bash": {
       "path": "/bin/bash",
       "icon": "terminal-bash",
-      "args": ["--login"]  // This loads your profile scripts
-    },
+      "args": ["--login"] // This loads your profile scripts
+    }
   },
 
   // ===== Java Config =====
@@ -92,5 +92,10 @@
   "trailing-spaces.includeEmptyLines": false,
   "emmet.variables": {
     "lang": "en"
-  }
+  },
+  "claudeCode.preferredLocation": "panel",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
