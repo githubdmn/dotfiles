@@ -4,10 +4,10 @@ Version=0.9.4
 Type=Application
 Name=Telegram
 Comment=
-Exec=/home/dmn/Downloads/appimage/Telegram
+Exec=/home/dmn/Downloads/appimage/Telegram -startintray
 OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
 Terminal=false
-Hidden=true
+Hidden=false
 

@@ -9,3 +9,5 @@ Categories=Development;IDE;TextEditor;
 StartupNotify=true
 StartupWMClass=Code
 MimeType=text/plain;text/x-c;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;application/x-designer;application/x-desktop;application/x-m4;application/x-perl;application/x-php;application/x-python;application/x-ruby;application/x-scheme;application/x-javascript;application/xml;text/x-mxml;text/x-sql;text/x-diff;text/x-patch;application/json;text/markdown;text/x-yaml;text/x-toml;
+Hidden=true
+
