@@ -125,7 +125,7 @@ install_neovim() {
 
   # Create symbolic link for init.vim
   if [ ! -L "${conf}/nvim/init.vim" ]; then
-    ln -sv "${HOME}/dotfiles/init.vim" "${conf}/nvim/init.vim"
+    ln -sv "${HOME}/dotfiles/config/rc/init.vim" "${conf}/nvim/init.vim"
     echo "Configured Neovim with init.vim from dotfiles."
   else
     echo "Neovim configuration file already linked."
@@ -141,13 +141,19 @@ install_neovim() {
   fi
 }
 
-# TODO: finish
-###
 install_bundle() {
    sudo apt install -y \
   build-essential \
   wget \
   curl \
+  unzip \
+  apt-transport-https \
+  git \
+  ssh \
+  nano \
+  tmux \
+  vim \
+  nvim \
   libssl-dev \
   zlib1g-dev \
   libbz2-dev \
@@ -961,7 +967,8 @@ install_vscodium_latest() {
 
 
 upgrade
-# install_build_essential
+### isntall_bundle -> 
+# install_build_essential 
 # install_unzip
 # install_curl
 # install_wget
@@ -972,6 +979,8 @@ upgrade
 # install_tmux
 # install_vim
 # install_neovim
+###
+# install_bundle
 # install_nvm
 # install_deno
 # install_vlc
