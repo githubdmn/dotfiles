@@ -141,6 +141,31 @@ install_neovim() {
   fi
 }
 
+# TODO: finish
+###
+install_bundle() {
+   sudo apt install -y \
+  build-essential \
+  wget \
+  curl \
+  libssl-dev \
+  zlib1g-dev \
+  libbz2-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  llvm \
+  libncurses5-dev \
+  libncursesw5-dev \
+  xz-utils \
+  tk-dev \
+  libxml2-dev \
+  libxmlsec1-dev \
+  libffi-dev \
+  liblzma-dev 
+}
+
+###
+
 install_nvm() {
   version=${1:-0.40.1} # Default nvm version is set to 0.40.1
   NVM_DIR="$HOME/.nvm"
