@@ -168,7 +168,14 @@ install_bundle() {
   libxmlsec1-dev \
   libffi-dev \
   liblzma-dev \
-  libfuse2
+  libfuse2 \
+  jq \
+  ripgrep \
+  fd-find \
+  htop \
+  tree \
+  bat \
+  fzf 
 }
 
 ###
@@ -472,7 +479,7 @@ install_java() {
   java -version
 }
 
-install_docker_debian() {
+install_docker_debian_old() {
   # Remove older versions of Docker and related packages if they exist
   echo "Removing older versions of Docker and related packages..."
   for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
@@ -509,9 +516,53 @@ install_docker_debian() {
   # Verify Docker installation
   echo "Verifying Docker installation by running hello-world container..."
   sudo docker run hello-world
+  sudo usermod -aG docker $USER
 
   # Print success message
   echo "Docker has been installed successfully on your Debian system."
+}
+
+install_docker_debian() {
+  echo "[INFO] Installing Docker..."
+
+  # Remove old versions
+  for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
+    sudo apt-get remove -y $pkg 2>/dev/null || true
+  done
+
+  # Install dependencies
+  sudo apt-get update
+  sudo apt-get install -y ca-certificates curl gnupg
+
+  # Add Docker GPG key
+  sudo install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/debian/gpg | \
+    sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+  # Add repository
+  echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo $VERSION_CODENAME) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+  sudo apt-get update
+
+  # Install Docker
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # Enable Docker service
+  sudo systemctl enable docker
+  sudo systemctl start docker
+
+  # Add current user to docker group
+  sudo usermod -aG docker "$USER"
+
+  echo "[INFO] Docker installed successfully."
+
+  echo "[INFO] To use docker without sudo run:"
+  echo "       newgrp docker"
 }
 
 install_gradle() {
@@ -964,7 +1015,7 @@ install_vscodium_latest() {
     fi
     
     # Call the main installer with the detected version
-    install_vscodium_robust "$latest_version"
+    install_vscodium "$latest_version"
 }
 
 
