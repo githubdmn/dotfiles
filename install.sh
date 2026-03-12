@@ -982,26 +982,27 @@ upgrade
 	# install_vim
 	# install_neovim
 ###
-# install_bundle
-# install_nvm
-# install_deno
-# install_vlc
-# install_brave
-# install_dropbox
-# install_ffmpeg
-# install_sqlite
-# install_go
-# install_python
-# install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
-# install_docker_debian
-# install_gradle
-# install_sdkman
-# install_sdks
-# install_ohmybash
-# install_dropbox_headless
-# install_mega_client
-# install_bruno
-# install_vscodium_latest
+  # install_deno
+  # install_dropbox
+  # install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+  # install_gradle
+  # install_sdks
+  # install_vscodium_latest
+###
+
+install_bundle
+install_nvm
+install_vlc
+install_brave
+install_ffmpeg
+install_sqlite
+install_go
+install_python
+install_docker_debian
+install_ohmybash
+install_dropbox_headless
+install_mega_client
+install_bruno
 
 upgrade
 autoremove
