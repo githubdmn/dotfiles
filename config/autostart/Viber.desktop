@@ -3,6 +3,7 @@ Encoding=UTF-8
 Version=0.9.4
 Type=Application
 Name=Viber
+Categories=Chat;Network;InstantMessaging;Qt;
 Comment=
 Exec=/home/dmn/Downloads/appimage/viber.AppImage StartInBackground --no-sandbox
 OnlyShowIn=XFCE;
@@ -10,4 +11,6 @@ RunHook=0
 StartupNotify=false
 Terminal=false
 Hidden=false
+Icon=/home/dmn/Downloads/appimage/viber.png
+Path=
 
