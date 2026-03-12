@@ -9,9 +9,18 @@
   "editor.tabSize": 4, // more standard for teams
   "editor.insertSpaces": true, // avoids tab vs space issues
   "editor.rulers": [
-    { "column": 80, "color": "#00ff5510" },
-    { "column": 100, "color": "#BDB76B15" },
-    { "column": 120, "color": "#FA807219" }
+    {
+      "column": 80,
+      "color": "#00ff5510"
+    },
+    {
+      "column": 100,
+      "color": "#BDB76B15"
+    },
+    {
+      "column": 120,
+      "color": "#FA807219"
+    }
   ],
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -19,16 +28,15 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-
   // ===== Language-Specific =====
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -39,13 +47,14 @@
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
-
   // ===== ESLint / Prettier =====
-  "eslint.validate": ["javascript", "typescript"],
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
   "eslint.alwaysShowStatus": true,
   "eslint.lintTask.enable": true,
   "prettier.trailingComma": "es5",
-
   // ===== UI & Layout =====
   "explorer.openEditors.visible": 1,
   "workbench.editor.limit.enabled": true,
@@ -56,7 +65,6 @@
   "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "Catppuccin Macchiato",
   "workbench.iconTheme": "vscode-icons",
-
   // ===== Terminal =====
   "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold', monospace, 'Droid Sans Mono'",
   "terminal.integrated.fontWeight": "bold",
@@ -68,23 +76,21 @@
     "bash": {
       "path": "/bin/bash",
       "icon": "terminal-bash",
-      "args": ["--login"] // This loads your profile scripts
+      "args": [
+        "--login"
+      ] // This loads your profile scripts
     }
   },
-
   // ===== Java Config =====
-
   // ===== Git =====
   "git.autofetch": true,
   "git.enableSmartCommit": false, // safer (avoid accidental commits)
   "git.confirmSync": false, // safer sync confirmation
   "scm.showIncomingChanges": "always",
   "scm.showOutgoingChanges": "always",
-
   // ===== Security & Privacy =====
   "telemetry.telemetryLevel": "off",
   "security.workspace.trust.untrustedFiles": "prompt", // safer than "open"
-
   // ===== Misc =====
   "files.eol": "\n",
   "cSpell.diagnosticLevel": "Hint",
@@ -98,5 +104,18 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "workbench.secondarySideBar.defaultVisibility": "hidden",
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://biomejs.dev": true
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "biome.suggestInstallingGlobally": false
 }

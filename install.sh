@@ -153,7 +153,7 @@ install_bundle() {
   nano \
   tmux \
   vim \
-  nvim \
+  neovim \
   libssl-dev \
   zlib1g-dev \
   libbz2-dev \
@@ -167,7 +167,8 @@ install_bundle() {
   libxml2-dev \
   libxmlsec1-dev \
   libffi-dev \
-  liblzma-dev 
+  liblzma-dev \
+  libfuse2
 }
 
 ###
@@ -180,6 +181,7 @@ install_nvm() {
   if [ -s "$NVM_DIR/nvm.sh" ]; then
     echo "nvm is already installed."
   else
+  	mkdir ${NVM_DIR}
     echo "Installing nvm..."
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v${version}/install.sh | bash
 
@@ -968,17 +970,17 @@ install_vscodium_latest() {
 
 upgrade
 ### isntall_bundle -> 
-# install_build_essential 
-# install_unzip
-# install_curl
-# install_wget
-# install_transport_https
-# install_git
-# install_ssh
-# install_nano
-# install_tmux
-# install_vim
-# install_neovim
+	# install_build_essential 
+	# install_unzip
+	# install_curl
+	# install_wget
+	# install_transport_https
+	# install_git
+	# install_ssh
+	# install_nano
+	# install_tmux
+	# install_vim
+	# install_neovim
 ###
 # install_bundle
 # install_nvm

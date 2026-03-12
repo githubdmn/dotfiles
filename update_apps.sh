@@ -121,12 +121,7 @@ update_postman() {
 
     log_info "Updating Postman..."
 
-    # Check if Postman is installed
-    if [ ! -d "$POSTMAN_INSTALL_DIR" ]; then
-        log_info "Postman is not installed. Installing now..."
-        install_postman
-        return $?
-    fi
+    
 
     # Check dependencies
     if ! command -v curl &> /dev/null; then
@@ -561,7 +556,7 @@ main() {
         vscodium) update_vscodium ;;
         update-all)
             log_info "No command specified. Running update-all..."
-            update_discord
+            # update_discord
             update_postman
             install_vscode
             install_vscodium_latest
