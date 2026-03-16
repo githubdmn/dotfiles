@@ -654,7 +654,7 @@ install_sdks() {
   }
   echo "Java installed successfully."
 
-	# Install Kotlin
+	# Install Kotlin && sdk current kotlin
 	#  echo "Installing Kotlin..."
 	#  sdk install kotlin || {
 	#  echo "Failed to install Kotlin"
@@ -672,7 +672,7 @@ install_sdks() {
 
   # Check versions of all installed SDKs
   echo "Installed SDK versions:"
-  sdk current java && sdk current kotlin && sdk current gradle
+  sdk current java && sdk current gradle
 }
 
 install_dropbox_headless() {
@@ -1027,10 +1027,11 @@ install_vscodium_latest() {
 
 install_dev_basic() {
 	install_nvm
-	install_sqlite
 	install_go
 	install_python
+	install_sdkman
 	install_docker_debian
+	install_sqlite
 	install_dropbox_headless
 	install_mega_client
 	install_bruno
@@ -1039,12 +1040,15 @@ install_dev_basic() {
 install_dev_additional() {
 	install_deno
 	install_dropbox
-	install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
-	install_gradle
-	install_sdks
+	# install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+	# install_gradle
+	# install_sdkman
+	# install_sdks
 	install_vscodium_latest
 }
 
+
+### MAIN EXECUTION
 
 upgrade
 
@@ -1053,7 +1057,7 @@ install_vlc
 install_brave_one_command
 install_ffmpeg
 install_ohmybash
-install_dev_basic
+# install_dev_basic
 # install_dev_additional
 
 upgrade
