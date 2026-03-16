@@ -264,12 +264,19 @@ install_brave() {
   if ! command -v brave-browser &>/dev/null; then
     echo "Installing Brave browser..."
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+    sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources
+    
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
     update
-    sudo apt install brave-browser
+    sudo apt install -y brave-browser
   else
     echo "Brave browser is already installed."
   fi
+}
+
+install_brave_one_command() {
+  curl -fsS https://dl.brave.com/install.sh | sh
 }
 
 install_dropbox() {
@@ -1044,7 +1051,7 @@ upgrade
 install_bundle
 install_nvm
 install_vlc
-install_brave
+install_brave_one_command
 install_ffmpeg
 install_sqlite
 install_go
