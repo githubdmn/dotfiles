@@ -1025,42 +1025,36 @@ install_vscodium_latest() {
     install_vscodium "$latest_version"
 }
 
+install_dev_basic() {
+	install_nvm
+	install_sqlite
+	install_go
+	install_python
+	install_docker_debian
+	install_dropbox_headless
+	install_mega_client
+	install_bruno
+}
+
+install_dev_additional() {
+	install_deno
+	install_dropbox
+	install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+	install_gradle
+	install_sdks
+	install_vscodium_latest
+}
+
 
 upgrade
-### isntall_bundle -> 
-	# install_build_essential 
-	# install_unzip
-	# install_curl
-	# install_wget
-	# install_transport_https
-	# install_git
-	# install_ssh
-	# install_nano
-	# install_tmux
-	# install_vim
-	# install_neovim
-###
-  # install_deno
-  # install_dropbox
-  # install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
-  # install_gradle
-  # install_sdks
-  # install_vscodium_latest
-###
 
 install_bundle
-install_nvm
 install_vlc
 install_brave_one_command
 install_ffmpeg
-install_sqlite
-install_go
-install_python
-install_docker_debian
 install_ohmybash
-install_dropbox_headless
-install_mega_client
-install_bruno
+install_dev_basic
+# install_dev_additional
 
 upgrade
 autoremove
