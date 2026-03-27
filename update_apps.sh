@@ -553,7 +553,7 @@ main() {
         discord) update_discord ;;
         postman) update_postman ;;
         vscode|code) install_vscode ;;
-        vscodium) update_vscodium ;;
+        vscodium|codium) install_vscodium_latest ;;
         update-all)
             log_info "No command specified. Running update-all..."
             update_discord
