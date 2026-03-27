@@ -238,7 +238,7 @@ install_vscode() {
 
     # Cleanup function
     cleanup() {
-        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
+        if [[ -n "${temp_dir:-}" ]] && [[ -d "${temp_dir:-}" ]]; then
             rm -rf "$temp_dir"
         fi
     }
@@ -340,7 +340,7 @@ install_vscodium() {
     
     # Cleanup function
     cleanup() {
-        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
+        if [[ -n "${temp_dir:-}" ]] && [[ -d "${temp_dir:-}" ]]; then
             echo "[INFO] Cleaning up temporary files..."
             rm -rf "$temp_dir"
         fi
@@ -450,7 +450,7 @@ install_vscodium_latest() {
     
     # Cleanup function
     cleanup() {
-        if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
+        if [[ -n "${temp_dir:-}" ]] && [[ -d "${temp_dir:-}" ]]; then
             rm -rf "$temp_dir"
         fi
     }
@@ -556,7 +556,7 @@ main() {
         vscodium) update_vscodium ;;
         update-all)
             log_info "No command specified. Running update-all..."
-            # update_discord
+            update_discord
             update_postman
             install_vscode
             install_vscodium_latest
