@@ -118,6 +118,7 @@ alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user
 alias upgrade="~/dotfiles/upgrade.sh"
 alias update_apps="~/dotfiles/update_apps.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
+alias iris="~/dotfiles/iris/iris-micro.sh"
 
 nvimbash() {
   touch "$1" && chmod +x "$1" && nvim "$1"

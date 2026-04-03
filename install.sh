@@ -175,7 +175,8 @@ install_bundle() {
   htop \
   tree \
   bat \
-  fzf 
+  fzf \
+  fastfetch
 }
 
 ###

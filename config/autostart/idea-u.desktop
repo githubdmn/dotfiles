@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Idea Ultimate
 Comment=IDE
-Exec=/home/dmn/Downloads/appimage/idea-IU/bin/idea
-Icon=/home/dmn/Downloads/appimage/idea-IU/bin/idea.png
+Exec=/home/dmn/Downloads/appimage/idea/bin/idea
+Icon=/home/dmn/Downloads/appimage/idea/bin/idea.png
 Type=Application
 Terminal=false
 Categories=Development;IDE;TextEditor;
