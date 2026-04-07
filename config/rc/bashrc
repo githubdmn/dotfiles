@@ -128,6 +128,45 @@ nanobash() {
   touch "$1" && chmod +x "$1" && nano "$1"
 }
 
+# Compile: Specifically targets the Maven-style src/main/java root
+jcompile() {
+    # 1. Clean and setup the bin directory
+    mkdir -p bin
+    
+    # 2. Find all .java files under the package root
+    # We use -sourcepath to tell javac where the 'com' package actually starts
+    find src/main/java -name "*.java" > .sources.txt
+    
+    if [ -s .sources.txt ]; then
+        javac -d bin -sourcepath src/main/java @.sources.txt
+        echo "Successfully compiled to ./bin"
+    else
+        echo "Error: No .java files found in src/main/java"
+    fi
+    rm .sources.txt
+}
+
+# Run: Automatically identifies the main class based on the 'bin' structure
+jrun() {
+    if [ ! -d "bin" ]; then
+        echo "Error: No 'bin' directory found. Run jcompile first."
+        return 1
+    fi
+
+    # This logic finds the App.class and strips 'bin/' to get the true package name
+    # e.g., bin/com/example/app/App.class -> com.example.app.App
+    local main_class=$(find bin -name "App.class" | sed 's|bin/||' | sed 's|\.class||' | tr '/' '.')
+
+    if [ -z "$main_class" ]; then
+        echo "Error: Could not find App.class in bin/"
+        return 1
+    fi
+
+    echo "Running: $main_class"
+    java -cp bin "$main_class"
+}
+
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
