@@ -8,7 +8,7 @@ syntax enable
 set wrap
 set guicursor=n-v-c:block-Cursor
 set cursorline
-set cursorcolumn
+"set cursorcolumn
 set ruler
 set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M\%p')}\ %5l,%-6(%c%V%)\ %P%)
 set showcmd
@@ -76,7 +76,7 @@ let g:sqlfmt_options = "-r -k upper"
 "colorscheme onehalflight
 "colorscheme dracula
 "colorscheme catppuccin-latte
-colorscheme catppuccin-frappe
-"colorscheme catppuccin-macchiato
+"colorscheme catppuccin-frappe
+colorscheme catppuccin-macchiato
 "colorscheme catppuccin-mocha
 "colorscheme nord
