@@ -4,7 +4,7 @@ set wrap
 set cursorline
 set cursorcolumn
 set ruler
-set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M %p')}\ %5l,%-6(%c%V%)\ %P)
+set rulerformat=%50(%{strftime('%A\ %e.%B\ %I:%M\%p')}\ %5l,%-6(%c%V%)\ %P%)
 "show incomplite commands
 set showcmd
 "show completion tab as a menue
@@ -27,7 +27,7 @@ set lbr
 set ai
 set si
 set expandtab
-set tabstop=2                                                                                                        
+set tabstop=2
 set shiftwidth=2
 set backspace=indent,eol,start
 set autoread
@@ -65,7 +65,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'preservim/nerdtree'
 Plugin 'eslint/eslint'
 Plugin 'dracula/vim',{'name': 'dracula'}
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plugin 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
@@ -104,7 +104,11 @@ inoremap <C-a> <C-o>:NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>
 "inoremap <C-w> <C-o>:wq<CR>
 "inoremap <C-s> <C-o>:w<CR>
 
-"colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+"colorscheme catppuccin 
+	"catppuccin-latte
+	"catppuccin-frappe
+	"catppuccin-macchiato
+	"catppuccin-mocha
 "colorscheme dracula
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1

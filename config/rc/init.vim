@@ -50,7 +50,7 @@ call plug#begin("~/.vim/plugged")
  "Plug 'fatih/vim-go'
  "Plug 'c.vim'
   Plug 'ray-x/go.nvim'
-  Plug 'dracula/vim',{'name': 'dracula'}
+  Plug 'dracula/vim',{'as': 'dracula'}
   Plug 'sonph/onehalf', { 'rtp': 'vim' }
   Plug 'chriskempson/base16-vim'
   Plug 'gosukiwi/vim-atom-dark'
