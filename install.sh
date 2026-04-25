@@ -147,6 +147,7 @@ install_bundle() {
   wget \
   curl \
   unzip \
+  7zip \
   apt-transport-https \
   git \
   ssh \
@@ -182,6 +183,45 @@ install_bundle() {
 }
 
 ###
+install_media_cli() {
+  echo "--- Installing Media CLI tools ---"
+  # in bundle 7zip jq fd-find ripgrep fzf curl
+  echo "---  in bundle 7zip jq fd-find ripgrep fzf curl ---"
+  sudo apt install -y ffmpeg poppler-utils imagemagick zoxide
+  
+  # Initialize zoxide for the current session
+  eval "$(zoxide init bash)"
+}
+
+install_yazi() {
+
+    echo "--- Downloading and installing Yazi (Pre-compiled Binary) ---"
+    # Detect architecture (usually x86_64)
+    ARCH=$(uname -m)
+    
+    # Fetch the latest release URL from GitHub API
+    DOWNLOAD_URL=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest \
+        | grep "browser_download_url.*yazi-$ARCH-unknown-linux-gnu.zip" \
+        | cut -d '"' -f 4)
+
+    if [ -z "$DOWNLOAD_URL" ]; then
+        echo "Error: Could not find a matching Yazi release for $ARCH."
+        return 1
+    fi
+
+    # Download and extract
+    curl -L "$DOWNLOAD_URL" -o /tmp/yazi.zip
+    unzip -q /tmp/yazi.zip -d /tmp/yazi_extracted
+    
+    # Move binaries to local bin
+    sudo mv /tmp/yazi_extracted/yazi-*/yazi /usr/local/bin/
+    sudo mv /tmp/yazi_extracted/yazi-*/ya /usr/local/bin/
+    
+    # Clean up
+    rm -rf /tmp/yazi.zip /tmp/yazi_extracted
+    
+    echo "--- Yazi installation complete! Try running 'yazi' ---"
+}
 
 install_nvm() {
   version=${1:-0.40.1} # Default nvm version is set to 0.40.1
