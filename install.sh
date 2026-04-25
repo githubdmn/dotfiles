@@ -176,6 +176,8 @@ install_bundle() {
   tree \
   bat \
   fzf \
+  mc \
+  nnn \
   fastfetch
 }
 
