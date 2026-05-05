@@ -42,7 +42,7 @@ install_curl() {
 
 install_wget() {
   echo "Checking if wget is installed..."
-  
+
   # Check if wget is available
   if ! command -v wget &> /dev/null; then
     echo "wget is not installed. Installing wget..."
@@ -179,6 +179,7 @@ install_bundle() {
   fzf \
   mc \
   nnn \
+  rsync \
   fastfetch
 }
 
@@ -188,7 +189,7 @@ install_media_cli() {
   # in bundle 7zip jq fd-find ripgrep fzf curl
   echo "---  in bundle 7zip jq fd-find ripgrep fzf curl ---"
   sudo apt install -y ffmpeg poppler-utils imagemagick zoxide
-  
+
   # Initialize zoxide for the current session
   eval "$(zoxide init bash)"
 }
@@ -198,7 +199,7 @@ install_yazi() {
     echo "--- Downloading and installing Yazi (Pre-compiled Binary) ---"
     # Detect architecture (usually x86_64)
     ARCH=$(uname -m)
-    
+
     # Fetch the latest release URL from GitHub API
     DOWNLOAD_URL=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest \
         | grep "browser_download_url.*yazi-$ARCH-unknown-linux-gnu.zip" \
@@ -212,15 +213,35 @@ install_yazi() {
     # Download and extract
     curl -L "$DOWNLOAD_URL" -o /tmp/yazi.zip
     unzip -q /tmp/yazi.zip -d /tmp/yazi_extracted
-    
+
     # Move binaries to local bin
     sudo mv /tmp/yazi_extracted/yazi-*/yazi /usr/local/bin/
     sudo mv /tmp/yazi_extracted/yazi-*/ya /usr/local/bin/
-    
+
     # Clean up
     rm -rf /tmp/yazi.zip /tmp/yazi_extracted
-    
+
     echo "--- Yazi installation complete! Try running 'yazi' ---"
+}
+
+install_zed() {
+    echo "Checking dependencies for Zed..."
+        # Ensure curl is installed first
+        if ! command -v curl &> /dev/null; then
+            echo "curl is missing. Installing..."
+            sudo apt update && sudo apt install -y curl
+        fi
+
+        echo "Installing Zed Editor..."
+        ### curl -f https://zed.dev/install.sh | sh
+        # Using -f (fail) and -s (silent) but showing errors if they happen
+        if curl -fsSL https://zed.dev/install.sh | sh; then
+            echo "Zed installed successfully."
+            echo "Note: You may need to restart your terminal or add ~/.local/bin to your PATH."
+        else
+            echo "Zed installation failed."
+            return 1
+        fi
 }
 
 install_nvm() {
@@ -309,7 +330,7 @@ install_brave() {
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 
     sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources
-    
+
     echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
     update
     sudo apt install -y brave-browser
@@ -427,7 +448,7 @@ install_go() {
 
 
 install_python() {
-  PYTHON_VERSION="3.12.1" 
+  PYTHON_VERSION="3.12.1"
   echo "--- Running pyenv installer script ---"
   curl https://pyenv.run | bash
 
@@ -704,7 +725,7 @@ install_sdks() {
 	#    return 1
 	#  }
 	# echo "Kotlin installed successfully."
-	
+
   # Install Gradle
   echo "Installing Gradle..."
   sdk install gradle || {
@@ -859,24 +880,24 @@ generate_rsa_key() {
 
 install_bruno() {
     set -e  # Exit on any error
-    
+
     echo "Installing Bruno..."
-    
+
     # Update package list
     if ! sudo apt update; then
         echo "Error: Failed to update package lists" >&2
         return 1
     fi
-    
+
     # Install dependencies
     if ! sudo apt install -y gpg curl; then
         echo "Error: Failed to install dependencies" >&2
         return 1
     fi
-    
+
     # Create keyrings directory if it doesn't exist
     sudo mkdir -p /etc/apt/keyrings
-    
+
     # Download and add GPG key
     if ! curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x9FA6017ECABE0266" \
         | gpg --dearmor \
@@ -884,20 +905,20 @@ install_bruno() {
         echo "Error: Failed to download and add GPG key" >&2
         return 1
     fi
-    
+
     # Set appropriate permissions
     sudo chmod 644 /etc/apt/keyrings/bruno.gpg
-    
+
     # Add Bruno repository
     echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable" \
         | sudo tee /etc/apt/sources.list.d/bruno.list
-    
+
     # Update package list with new repository
     if ! sudo apt update; then
         echo "Error: Failed to update package lists after adding Bruno repository" >&2
         return 1
     fi
-    
+
     # Install Bruno
     if sudo apt install -y bruno; then
         echo "✅ Bruno installed successfully!"
@@ -915,7 +936,7 @@ install_bruno() {
 # Robust VSCodium installer with comprehensive error handling
 install_vscodium() {
     set -euo pipefail  # Exit on error, undefined variable, or pipe failure
-    #set +u 
+    #set +u
     local version="${1:-1.105.17075}"  # Allow version override, default to 1.105.17075
     local install_dir="$HOME/.local/opt/VSCodium"
     local codium_url="https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz"
@@ -924,10 +945,10 @@ install_vscodium() {
 
  		# Create temp directory
     temp_dir=$(mktemp -d)
-    
+
     # Use a separate variable for cleanup to avoid unbound variable issues
     local cleanup_dir="$temp_dir"
-    
+
     # Cleanup function
     cleanup() {
         if [[ -n "$cleanup_dir" ]] && [[ -d "$cleanup_dir" ]]; then
@@ -935,7 +956,7 @@ install_vscodium() {
             rm -rf "$cleanup_dir"
         fi
     }
-    
+
     trap cleanup EXIT INT TERM
 
     echo "[INFO] Starting VSCodium installation/update..."
@@ -993,13 +1014,13 @@ install_vscodium() {
     # Desktop integration
     echo "[INFO] Creating desktop entry..."
     mkdir -p "$HOME/.local/share/applications"
-    
+
     # VSCodium uses the same icon as VS Code
     local icon_path="$install_dir/resources/app/resources/linux/code.png"
     if [[ ! -f "$icon_path" ]]; then
         icon_path="vscodium"  # Fallback to system icon
     fi
-    
+
     cat > "$HOME/.local/share/applications/vscodium.desktop" <<EOF
 [Desktop Entry]
 Name=VSCodium
@@ -1022,7 +1043,7 @@ EOF
     echo "          Version: $version"
     echo "          Installation directory: $install_dir"
     echo "          Launch with: codium"
-    
+
     # Verify installation
     if command -v codium >/dev/null 2>&1; then
         echo "          ✓ 'codium' command is available"
@@ -1035,9 +1056,9 @@ EOF
 # Auto-fetch latest version installer
 install_vscodium_latest() {
     set -euo pipefail
-    
+
     local temp_dir=""
-    
+
     # Cleanup function
     cleanup() {
         if [[ -n "$temp_dir" ]] && [[ -d "$temp_dir" ]]; then
@@ -1045,9 +1066,9 @@ install_vscodium_latest() {
         fi
     }
     trap cleanup EXIT INT TERM
-    
+
     echo "[INFO] Fetching latest VSCodium version..."
-    
+
     # Get latest version from GitHub API
     local latest_version
     if command -v jq >/dev/null 2>&1; then
@@ -1055,7 +1076,7 @@ install_vscodium_latest() {
     else
         latest_version=$(curl -fsSL https://api.github.com/repos/VSCodium/vscodium/releases/latest | grep '"tag_name"' | cut -d'"' -f4)
     fi
-    
+
     if [[ -z "$latest_version" ]]; then
         echo "[ERROR] Could not determine latest version"
         echo "[INFO] Falling back to version 1.105.17075"
@@ -1063,7 +1084,7 @@ install_vscodium_latest() {
     else
         echo "[INFO] Latest version: $latest_version"
     fi
-    
+
     # Call the main installer with the detected version
     install_vscodium "$latest_version"
 }
