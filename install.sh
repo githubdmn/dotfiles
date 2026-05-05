@@ -1099,6 +1099,7 @@ install_dev_basic() {
 	install_dropbox_headless
 	install_mega_client
 	install_bruno
+	install_zed
 }
 
 install_dev_additional() {
