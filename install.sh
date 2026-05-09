@@ -141,6 +141,28 @@ install_neovim() {
   fi
 }
 
+install_fastfetch() {
+    echo "Updating package lists..."
+    sudo apt update
+
+    # 1. Install software-properties-common if add-apt-repository is missing
+    if ! command -v add-apt-repository &> /dev/null; then
+        echo "Installing software-properties-common to enable PPAs..."
+        sudo apt install -y software-properties-common
+    fi
+
+    # 2. Add the Fastfetch PPA
+    echo "Adding Fastfetch PPA..."
+    sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
+
+    # 3. Update and Install
+    sudo apt update
+    sudo apt install -y fastfetch
+
+    echo "Installation complete! Running fastfetch..."
+    fastfetch
+}
+
 install_bundle() {
    sudo apt install -y \
   build-essential \
@@ -1118,10 +1140,11 @@ install_dev_additional() {
 upgrade
 
 install_bundle
-install_vlc
-install_brave_one_command
-install_ffmpeg
-install_ohmybash
+install_fastfetch
+# install_vlc
+# install_brave_one_command
+# install_ffmpeg
+# install_ohmybash
 # install_dev_basic
 # install_dev_additional
 
