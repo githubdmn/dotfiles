@@ -10,7 +10,7 @@ OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
 Terminal=false
-Hidden=false
+Hidden=true
 Icon=/home/dmn/Downloads/appimage/viber.png
 Path=
 

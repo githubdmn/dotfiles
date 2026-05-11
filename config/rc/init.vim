@@ -27,6 +27,8 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
+set endofline
+set fixendofline
 set linebreak
 set signcolumn=yes
 set colorcolumn=80

@@ -141,68 +141,54 @@ install_neovim() {
   fi
 }
 
-install_fastfetch() {
-    echo "Updating package lists..."
-    sudo apt update
-
-    # 1. Install software-properties-common if add-apt-repository is missing
-    if ! command -v add-apt-repository &> /dev/null; then
-        echo "Installing software-properties-common to enable PPAs..."
-        sudo apt install -y software-properties-common
-    fi
-
-    # 2. Add the Fastfetch PPA
-    echo "Adding Fastfetch PPA..."
-    sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
-
-    # 3. Update and Install
-    sudo apt update
-    sudo apt install -y fastfetch
-
-    echo "Installation complete! Running fastfetch..."
-    fastfetch
-}
-
 install_bundle() {
-   sudo apt install -y \
-  build-essential \
-  wget \
-  curl \
-  unzip \
-  7zip \
-  apt-transport-https \
-  git \
-  ssh \
-  nano \
-  tmux \
-  vim \
-  neovim \
-  libssl-dev \
-  zlib1g-dev \
-  libbz2-dev \
-  libreadline-dev \
-  libsqlite3-dev \
-  llvm \
-  libncurses5-dev \
-  libncursesw5-dev \
-  xz-utils \
-  tk-dev \
-  libxml2-dev \
-  libxmlsec1-dev \
-  libffi-dev \
-  liblzma-dev \
-  libfuse2 \
-  jq \
-  ripgrep \
-  fd-find \
-  htop \
-  tree \
-  bat \
-  fzf \
-  mc \
-  nnn \
-  rsync \
-  fastfetch
+    echo "Updating package repositories..."
+    sudo apt update
+
+    echo "Installing Debian Trixie package bundle..."
+    sudo apt install -y \
+      build-essential \
+      wget \
+      curl \
+      unzip \
+      7zip \
+      wl-clipboard \
+      apt-transport-https \
+      git \
+      ssh \
+      nano \
+      tmux \
+      vim \
+      neovim \
+      libssl-dev \
+      zlib1g-dev \
+      libbz2-dev \
+      libreadline-dev \
+      libsqlite3-dev \
+      llvm \
+      libncurses-dev \
+      libfuse2t64 \
+      xz-utils \
+      tk-dev \
+      libxml2-dev \
+      libxmlsec1-dev \
+      libffi-dev \
+      liblzma-dev \
+      jq \
+      ripgrep \
+      fd-find \
+      htop \
+      tree \
+      bat \
+      fzf \
+      mc \
+      nnn \
+      rsync \
+      inxi \
+      lshw \
+      hardinfo \
+      usbutils \
+      fastfetch
 }
 
 ###
@@ -334,6 +320,15 @@ install_ohmybash() {
     bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
   else
     echo "oh-my-bash is already installed."
+  fi
+}
+
+install_hardinfo() {
+  if ! command -v hardinfo &>/dev/null; then
+    echo "Installing HardInfo..."
+    sudo apt install hardinfo -y
+  else
+    echo "HardInfo is already installed."
   fi
 }
 
@@ -658,6 +653,27 @@ install_docker_debian() {
   echo "       newgrp docker"
 }
 
+install_podman() {
+    if [ "$(id -u)" -ne 0 ]; then
+        echo "Error: This function must be run as root or with sudo." >&2
+        return 1
+    fi
+
+    echo "Updating system package lists..."
+    apt-get update -y
+
+    echo "Installing Podman and dependencies..."
+    apt-get install -y podman podman-compose
+
+    if command -v podman &> /dev/null; then
+        echo "Podman successfully installed!"
+        podman --version
+    else
+        echo "Error: Podman installation failed." >&2
+        return 1
+    fi
+}
+
 install_gradle() {
   # Set the version and direct download URL for Gradle
   version=${1:-8.10.2}
@@ -731,7 +747,7 @@ install_sdkman() {
   sdk version
 }
 
-install_sdks() {
+install_sdkman_java_gradle() {
   # Install Java (default version)
   echo "Installing Java..."
   sdk install java || {
@@ -1116,24 +1132,22 @@ install_dev_basic() {
 	install_go
 	install_python
 	install_sdkman
+	  # install_sdkman_java_gradle
+    install_podman
 	install_docker_debian
 	install_sqlite
 	install_dropbox_headless
 	install_mega_client
 	install_bruno
 	install_zed
-}
-
-install_dev_additional() {
-	install_deno
 	install_dropbox
-	# install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
-	# install_gradle
+  # install_deno
 	# install_sdkman
-	# install_sdks
-	install_vscodium_latest
+	  # install_sdkman_java_gradle
+	  # install_java # Installs OpenJDK 21+35 ## install_java 17 30  # Installs OpenJDK 17+30
+	  # install_gradle
+	# install_vscodium_latest
 }
-
 
 ### MAIN EXECUTION
 
@@ -1146,7 +1160,6 @@ install_fastfetch
 # install_ffmpeg
 # install_ohmybash
 # install_dev_basic
-# install_dev_additional
 
 upgrade
 autoremove
