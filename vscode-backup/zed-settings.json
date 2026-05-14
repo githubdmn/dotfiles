@@ -21,14 +21,14 @@
         "font_size": 11.0,
         "font_family": ".ZedMono",
         "font_fallbacks": ["Noto Mono"],
-        "cursor_shape": "underline",
+        "cursor_shape": "underline"
     },
     "telemetry": {
         "diagnostics": true,
-        "metrics": true,
+        "metrics": true
     },
     "minimap": {
-        "show": "never",
+        "show": "never"
     },
     "max_tabs": 5,
     "buffer_font_fallbacks": ["Noto Sans Mono"],
@@ -40,8 +40,8 @@
     "tab_size": 4,
     "agent_servers": {
         "claude-acp": {
-            "type": "registry",
-        },
+            "type": "registry"
+        }
     },
     "base_keymap": "VSCode",
     "buffer_font_weight": 550.0,
@@ -51,6 +51,6 @@
     "theme": {
         "mode": "light",
         "light": "Catppuccin Latte",
-        "dark": "Catppuccin Macchiato",
-    },
+        "dark": "Catppuccin Macchiato"
+    }
 }
