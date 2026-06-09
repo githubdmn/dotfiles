@@ -170,6 +170,7 @@ install_bundle() {
   curl \
   unzip \
   7zip \
+  wl-clipboard \
   apt-transport-https \
   git \
   ssh \

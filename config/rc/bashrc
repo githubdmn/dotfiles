@@ -202,3 +202,14 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
+# OLD Xorg
+# alias xcopy='xclip -selection clipboard'
+# alias xpaste='xclip -selection clipboard -o'
+# Wayland-Safe Alternative
+# alias xcopy='wl-copy'
+# alias xpaste='wl-paste'
+
+
+
+
+
