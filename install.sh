@@ -203,6 +203,10 @@ install_bundle() {
   mc \
   nnn \
   rsync \
+  inix \
+  lshw \
+  hardinfo \
+  usbutils \
   fastfetch
 }
 
