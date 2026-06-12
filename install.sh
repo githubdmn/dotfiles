@@ -342,6 +342,15 @@ install_ohmybash() {
   fi
 }
 
+install_hardinfo() {
+  if ! command -v hardinfo &>/dev/null; then
+    echo "Installing HardInfo..."
+    sudo apt install hardinfo -y
+  else
+    echo "HardInfo is already installed."
+  fi
+}
+
 install_vlc() {
   if ! command -v vlc &>/dev/null; then
     echo "Installing VLC..."
