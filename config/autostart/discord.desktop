@@ -7,6 +7,6 @@ Exec=/home/dmn/.local/opt/Discord/Discord --start-minimized
 Icon=discord
 Type=Application
 Categories=Network;InstantMessaging;
-Path=/usr/bin
+Path=/home/dmn/.local/opt/Discord
 Terminal=false
 StartupNotify=false
