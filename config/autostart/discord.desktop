@@ -1,12 +1,9 @@
 [Desktop Entry]
-Name=Discord
-StartupWMClass=discord
-Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
-GenericName=Internet Messenger
-Exec=/home/dmn/.local/opt/Discord/Discord --start-minimized
-Icon=discord
 Type=Application
-Categories=Network;InstantMessaging;
-Path=/home/dmn/.local/opt/Discord
-Terminal=false
-StartupNotify=false
+Exec=/home/dmn/.config/discord/app-1.0.149/Discord
+Hidden=false
+NoDisplay=false
+Name=Discord
+Icon=/home/dmn/.config/discord/app-1.0.149/discord.png
+Comment=Text and voice chat for gamers.
+X-GNOME-Autostart-enabled=true

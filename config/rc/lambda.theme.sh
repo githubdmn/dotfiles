@@ -38,6 +38,7 @@ GIT_THEME_PROMPT_SUFFIX=""
 # ICONS =======================================================================
 
 icon_start="╭─"
+icon_mid="│ " 
 icon_user=" 💁 "
 icon_host=" at 💻 "
 icon_directory=" in 📁 "
@@ -66,8 +67,8 @@ function winname {
 function _omb_theme_PROMPT_COMMAND() {
   PS1=$icon_start$(_omb_prompt_print_python_venv)
   PS1+=$icon_user$_omb_prompt_bold_brown'\u'
-  PS1+=$_omb_prompt_normal$icon_host$_omb_prompt_bold_teal'\h'$time
-  PS1+=$_omb_prompt_normal$icon_directory$_omb_prompt_bold_purple'\w'
+  PS1+=$_omb_prompt_normal$icon_host$_omb_prompt_bold_teal'\h'$time$_omb_prompt_normal'\n'
+  PS1+=$icon_mid$_omb_prompt_normal$icon_directory$_omb_prompt_bold_purple'\w'
   PS1+=$_omb_prompt_normal$([[ -n $(_omb_prompt_git branch 2> /dev/null) ]] && _omb_util_print " on (${icon_branch} ")
   PS1+=$_omb_prompt_white$(scm_prompt_info)$_omb_prompt_normal'\n'$icon_end
   PS2=$icon_end
