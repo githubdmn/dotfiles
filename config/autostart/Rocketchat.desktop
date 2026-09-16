@@ -1,0 +1,15 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=Rocketchat
+Comment=Rocket.Chat Official Desktop Application
+Exec=/home/dmn/Downloads/appimage/rocketchat.AppImage
+OnlyShowIn=XFCE;
+RunHook=0
+StartupNotify=false
+Terminal=false
+Hidden=false
+Categories=Network;InstantMessaging;
+Icon=/home/dmn/Downloads/appimage/.icon-set/icon_64.png
+Path=
