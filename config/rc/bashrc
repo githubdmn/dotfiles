@@ -1,6 +1,7 @@
 # Path to your oh-my-bash installation.
 export OSH=/home/${USER}/.oh-my-bash
 
+rm -rf ~/.oh-my-bash/log/update.lock
 # if command -v tmux &> /dev/null \
 # 	&& [ -n "$PS1" ] \
 # 	&& [[ ! "$TERM" =~ screen ]] \
@@ -117,6 +118,7 @@ alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
 alias upgrade="~/dotfiles/upgrade.sh"
 alias update_apps="~/dotfiles/update_apps.sh"
+alias codebash="~/dotfiles/codebash_v2.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 alias iris="~/dotfiles/iris/iris-micro.sh"
 
@@ -174,11 +176,11 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=$PATH:$HOME/sqlite
 #export PATH="${PATH}:${HOME}/go/bin/"
 # let Go use its own GOROOT
-unset GOROOT
+#unset GOROOT
 
 # keep your module cache / installs under ~/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+#export GOPATH=$HOME/go
+#export PATH=$PATH:$GOPATH/bin
 
 
 # export PATH="${PATH}:${HOME}/gradle/bin/"
@@ -209,7 +211,15 @@ eval "$(pyenv init --path)"
 # alias xcopy='wl-copy'
 # alias xpaste='wl-paste'
 
+## aider
 
+# export OPENROUTER_API_KEY="sk-or-v1-your-actual-api-key"
+# alias aider-architect='aider --architect-model openrouter/deepseek/deepseek-chat --editor-model openrouter/qwen/qwen-2.5-coder-72b-instruct'
 
+# Load AI API keys securely from local backup (ignored by git)
+if [ -f "$HOME/dotfiles/.dotfiles_backup_ai_keys/api_keys_format.md" ]; then
+    source "$HOME/dotfiles/.dotfiles_backup_ai_keys/api_keys_format.md"
+fi
 
-
+# Convenience alias for launching Aider with DeepSeek + Qwen
+alias aider-architect='aider --architect --model deepseek/deepseek-chat --editor-model dashscope/qwen3-vl-32b-instruct'

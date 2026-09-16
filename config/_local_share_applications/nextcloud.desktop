@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Nextcloud
+Comment=Nextcloud Official Desktop Client
+Exec=/home/dmn/Downloads/appimage/Nextcloud.AppImage
+Icon=/home/dmn/Downloads/appimage/nextcloud.png
+Categories=Network;Cloud;
+Terminal=false
+StartupNotify=true
+Path=

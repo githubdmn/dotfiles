@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=AnyDesk
+GenericName=AnyDesk
+X-GNOME-FullName=AnyDesk
+Exec=/home/dmn/Downloads/appimage/anydesk-8.0.0/anydesk
+Icon=/home/dmn/Downloads/appimage/anydesk-8.0.0/icons/hicolor/32x32/apps/anydesk.png
+Terminal=false
+TryExec=anydesk
+Categories=Network;GTK;
+MimeType=x-scheme-handler/anydesk;
+Name[de_DE]=AnyDesk
+Comment=
+Path=/home/dmn/Downloads/appimage/anydesk-8.0.0
+StartupNotify=false

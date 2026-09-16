@@ -5,12 +5,12 @@ Type=Application
 Name=Viber
 Categories=Chat;Network;InstantMessaging;Qt;
 Comment=
-Exec=/home/dmn/Downloads/appimage/viber.AppImage StartInBackground --no-sandbox
+Exec=/home/dmn/Downloads/appimage/viber.AppImage --appimage-extract-and-run
 OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
 Terminal=false
-Hidden=true
+Hidden=false
 Icon=/home/dmn/Downloads/appimage/viber.png
 Path=
 
