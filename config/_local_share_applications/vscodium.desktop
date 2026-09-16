@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=VSCodium
+Comment=Code Editing. Redefined. (Open Source)
+Exec=/home/dmn/.local/bin/codium %F
+Icon=/home/dmn/.local/opt/VSCodium/resources/app/resources/linux/code.png
+Type=Application
+Terminal=false
+Categories=Development;IDE;TextEditor;
+StartupNotify=true
+StartupWMClass=VSCodium
+MimeType=text/plain;application/json;text/x-python;text/markdown;text/x-markdown;application/x-shellscript;application/javascript;text/x-yaml;application/x-yaml;text/x-typescript;text/x-rust;text/x-go;text/css;text/html;

@@ -172,9 +172,11 @@ update_postman() {
 
     # Stop any running Postman instances to prevent conflicts
     log_info "Checking for running Postman instances..."
-    if pgrep -f "postman" > /dev/null; then
+    # Match the install path, not the bare word "postman": that also appears in
+    # this script's own argv and would kill the updater itself.
+    if pgrep -f "$POSTMAN_INSTALL_DIR/" > /dev/null; then
         log_info "Stopping running Postman instances..."
-        pkill -f postman || log_warn "Could not stop Postman (process might have ended)"
+        pkill -f "$POSTMAN_INSTALL_DIR/" || log_warn "Could not stop Postman (process might have ended)"
         sleep 2
     fi
 
@@ -205,23 +207,6 @@ update_postman() {
 
     log_info "Postman updated successfully!"
     log_info "Installation directory: $POSTMAN_INSTALL_DIR"
-}
-
-# ==========================
-# Utility Functions
-# ==========================
-
-log_info() { echo -e "[INFO]  $*"; }
-log_error() { echo -e "[ERROR] $*" >&2; }
-download_and_extract() {
-    local url="$1"
-    local temp_dir
-    temp_dir=$(mktemp -d)
-    log_info "Downloading from $url ..."
-    wget -qO "$temp_dir/archive.tar.gz" "$url"
-    log_info "Extracting package..."
-    tar -xzf "$temp_dir/archive.tar.gz" -C "$temp_dir" || true
-    echo "$temp_dir"
 }
 
 # ==========================
@@ -274,6 +259,7 @@ install_vscode() {
         echo "[ERROR] VS Code binary not found after extraction"
         return 1
     fi
+    rm -f "$temp_dir/vscode.tar.gz"
 
     # Stop running instances
     echo "[INFO] Stopping running VS Code instances..."
@@ -379,6 +365,7 @@ install_vscodium() {
         ls -la "$temp_dir" | head -20
         return 1
     fi
+    rm -f "$temp_dir/vscodium.tar.gz"
 
     # Stop running instances
     echo "[INFO] Stopping running VSCodium instances..."
@@ -503,7 +490,7 @@ install_vscodium_installer() {
                     echo "[ERROR] Version cannot be empty"
                     return 1
                 fi
-                install_vscodium_robust "$custom_version"
+                install_vscodium "$custom_version"
                 ;;
             *)
                 echo "[ERROR] Invalid choice"
@@ -515,7 +502,7 @@ install_vscodium_installer() {
         if [[ "$version" == "latest" ]]; then
             install_vscodium_latest
         else
-            install_vscodium_robust "$version"
+            install_vscodium "$version"
         fi
     fi
 }
@@ -546,6 +533,26 @@ uninstall_vscodium() {
 # =====================
 # --- Dispatcher ---
 # =====================
+FAILED_APPS=()
+
+# Run one app update in a subshell so `set -e` is active inside it, and a
+# failure in one app doesn't stop the others.
+run_app() {
+    local label="$1" rc
+    shift
+
+    set +e
+    ( set -e; "$@" )
+    rc=$?
+    set -e
+
+    if (( rc != 0 )); then
+        log_error "${label} update failed (exit ${rc})."
+        FAILED_APPS+=("$label")
+    fi
+    return 0
+}
+
 main() {
     local cmd="${1:-update-all}"
 
@@ -556,10 +563,14 @@ main() {
         vscodium|codium) install_vscodium_latest ;;
         update-all)
             log_info "No command specified. Running update-all..."
-            update_discord
-            update_postman
-            install_vscode
-            install_vscodium_latest
+            run_app "Discord" update_discord
+            run_app "Postman" update_postman
+            run_app "VS Code" install_vscode
+            run_app "VSCodium" install_vscodium_latest
+            if (( ${#FAILED_APPS[@]} > 0 )); then
+                log_error "Failed: ${FAILED_APPS[*]}"
+                exit 1
+            fi
             ;;
         *)
             log_error "Unknown command: $cmd"
