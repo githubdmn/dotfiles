@@ -39,7 +39,7 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
@@ -63,7 +63,7 @@
   "workbench.sideBar.location": "right",
   "workbench.panel.defaultLocation": "right",
   "workbench.activityBar.location": "hidden",
-  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.colorTheme": "Dark+",
   "workbench.iconTheme": "vscode-icons",
   // ===== Terminal =====
   "terminal.integrated.fontFamily": "'monospace', 'Droid Sans Mono Bold', monospace, 'Droid Sans Mono'",

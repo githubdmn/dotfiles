@@ -209,6 +209,19 @@ link_autostart() {
             "${HOME}/.config/autostart" '*.desktop' "Autostart"
 }
 
+link_applications() {
+  log_info "Linking application launchers..."
+  local dest="${HOME}/.local/share/applications"
+
+  link_tree "${DOTFILES_DIR}/config/_local_share_applications" \
+            "$dest" '*.desktop' "Applications"
+
+  # Refresh the desktop MIME/launcher cache so new entries show up in menus.
+  if (( ! DRY_RUN )) && (( N_LINKED > 0 )) && command -v update-desktop-database >/dev/null 2>&1; then
+    update-desktop-database "$dest" 2>/dev/null || true
+  fi
+}
+
 # Oh My Bash looks for themes in $OSH_CUSTOM/<name>/ and $OSH_CUSTOM/themes/<name>/
 # BEFORE $OSH/themes/<name>/, so a custom theme overrides the stock one without
 # touching the git checkout.
@@ -280,6 +293,7 @@ main() {
   link_core_configs
   link_themes
   link_autostart
+  link_applications
   link_oh_my_bash_theme
   print_summary
 }

@@ -7,5 +7,3 @@ Categories=Development;Network;
 StartupWMClass=postman
 Comment=API Development Environment
 Keywords=api;rest;http;testing;development;
-Hidden=true
-

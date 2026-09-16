@@ -1,6 +1,7 @@
 # Path to your oh-my-bash installation.
 export OSH=/home/${USER}/.oh-my-bash
 
+rm -rf ~/.oh-my-bash/log/update.lock
 # if command -v tmux &> /dev/null \
 # 	&& [ -n "$PS1" ] \
 # 	&& [[ ! "$TERM" =~ screen ]] \
@@ -117,6 +118,7 @@ alias githubdmn="git config user.email \"dmninbox@gmail.com\" && git config user
 alias gitlabdmn="git config user.email \"dmninbox@gmail.com\" && git config user.name \"gitlabdmn\""
 alias upgrade="~/dotfiles/upgrade.sh"
 alias update_apps="~/dotfiles/update_apps.sh"
+alias codebash="~/dotfiles/codebash_v2.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 alias iris="~/dotfiles/iris/iris-micro.sh"
 
@@ -174,11 +176,11 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=$PATH:$HOME/sqlite
 #export PATH="${PATH}:${HOME}/go/bin/"
 # let Go use its own GOROOT
-unset GOROOT
+#unset GOROOT
 
 # keep your module cache / installs under ~/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+#export GOPATH=$HOME/go
+#export PATH=$PATH:$GOPATH/bin
 
 
 # export PATH="${PATH}:${HOME}/gradle/bin/"
