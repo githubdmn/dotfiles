@@ -121,6 +121,7 @@ alias update_apps="~/dotfiles/update_apps.sh"
 alias codebash="~/dotfiles/codebash_v2.sh"
 alias tor="~/Downloads/tor-browser/Browser/start-tor-browser"
 alias iris="~/dotfiles/iris/iris-micro.sh"
+alias bluetooth_restart="sudo systemctl restart bluetooth"
 
 nvimbash() {
   touch "$1" && chmod +x "$1" && nvim "$1"
