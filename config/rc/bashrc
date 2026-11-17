@@ -169,6 +169,7 @@ jrun() {
     java -cp bin "$main_class"
 }
 
+export EDITOR="nvim"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -223,4 +224,8 @@ if [ -f "$HOME/dotfiles/.dotfiles_backup_ai_keys/api_keys_format.md" ]; then
 fi
 
 # Convenience alias for launching Aider with DeepSeek + Qwen
-alias aider-architect='aider --architect --model deepseek/deepseek-chat --editor-model anthropic/claude-haiku-5-5 --no-show-model-warnings'
+# alias aider-architect='aider --architect --model deepseek/deepseek-chat --editor-model dashscope/qwen3-vl-32b-instruct'
+
+alias aider-deepseek="aider --architect --model deepseek/deepseek-chat --editor-model deepseek/deepseek-chat --no-show-model-warnings"
+
+alias aider-architect="aider --architect --model deepseek/deepseek-chat --editor-model anthropic/claude-haiku-5-5 --no-show-model-warnings"
