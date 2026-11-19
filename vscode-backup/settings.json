@@ -39,7 +39,7 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
@@ -123,5 +123,7 @@
   "vsicons.dontShowNewVersionMessage": true,
   "biome.suggestInstallingGlobally": false,
   "chat.disableAIFeatures": true,
-  "dateTime.use24HourClock": false
+  "dateTime.use24HourClock": false,
+  "prettier.proseWrap": "always",
+  "prettier.prettierPath": "100",
 }
